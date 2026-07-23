@@ -13,7 +13,7 @@ That was the signal.
 
 I called it *What's This in Kannada?* It is an iOS app with a library of words. It includes animals, fruits, family members, and relationships. It has flashcards and a little quiz. There is voice, so when she asks "what's this?", I can pull up the app and let it answer. For the design, I pulled from something I already knew worked. There is a picture book she is obsessed with, one with warm, leafy illustrations full of animals. She could stare at those pages for twenty minutes. So I borrowed that world. The mascot is a squirrel. The palette is soft greens and browns. I designed the app so she can play for five minutes and then stop. I did not want an addiction loop or autoplay. I wanted a small, warm learning moment and then back to the world.
 
-I am a product manager by trade. I have shipped developer tools, built API workflows, worked on agent tech. I know how to scope. But I had never built an iOS app solo before this one.
+I had never built an iOS app solo before this one.
 
 AI made it possible. I used AI in a specific way. I had a question at 10 p.m. after my daughter was asleep, and instead of waiting for the right tutorial or the right forum thread, I asked. I iterated. I got stuck. I asked again. The gap between "I have an idea" and something she can actually use keeps closing in a way it would not have a few years ago.
 
