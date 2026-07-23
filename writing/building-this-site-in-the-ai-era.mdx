@@ -1,9 +1,7 @@
 ---
 title: How this site came together
-description: I always wanted a personal website. Voice notes, Codex, Markdown, Astro, Blume, and a lot of editing finally made it feel possible.
+description: Voice notes, Codex, Markdown, Astro, Blume, and a lot of editing.
 ---
-
-I have always wanted to build a personal website.
 
 Not a resume dump. Not a perfect brand system. Just a place that felt like me. Somewhere I could publish when my mind was clear, not only when I happened to be at a desk.
 

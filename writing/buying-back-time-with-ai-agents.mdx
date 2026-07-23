@@ -1,11 +1,9 @@
 ---
 title: Buying back time with a fleet of AI agents
-description: What I am learning from building a small Slack fleet of agents to help me run my life.
+description: What a small Slack fleet is teaching me about time, presence, and imperfect systems.
 ---
 
-I have been building a small fleet of AI agents to help me run my life.
-
-That sounds more dramatic than it is. It started with a simple question. Where am I losing time, and what would I do with that time if I got it back?
+It started with a simple question. Where am I losing time, and what would I do with that time if I got it back?
 
 I spend a lot of time thinking about how AI is changing developer workflows — how to make complex APIs easier to use, how to reduce friction, and how to help someone get from zero to a working integration faster. That curiosity leaked into my personal life. I started looking at the places where I was spending time on planning, sorting, remembering, and deciding. The answers were easy. Dinner walks with my family. Stories at bedtime. Making up songs and singing them badly. Tinkering with new ideas. Being a parent, a partner, and a person who is still figuring things out.
 
