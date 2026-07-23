@@ -23,7 +23,7 @@ I use skills to grill me. I identify the architecture. I build prototypes. I eva
 
 All of that led me here.
 
-I started by trying to design the site with agents. I experimented with Design.md style prompts and a few structured design passes. That helped me think, but it did not give me the feeling I wanted. So I went back to the pen and paper way, in quotes. I looked at colors, made variations, and kept asking what felt like me.
+I started by trying to design the site with agents. I experimented with Design.md style prompts and a few structured design passes. That helped me think, but it did not give me the feeling I wanted. So I went back to the pen and paper way. I looked at colors, made variations, and kept asking what felt like me.
 
 That is how the calm theme came together. Soft color, enough movement to feel alive, and no giant resume energy. I also wanted a dark mode because I am a developer experience person. Yes, I know developers love dark mode.
 
