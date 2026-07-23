@@ -3,9 +3,7 @@ title: Buying back time with a fleet of AI agents
 description: What I am learning from building a small Slack fleet of agents to help me run my life.
 ---
 
-# Buying back time with a fleet of AI agents
-
-My name is Poornima Jagannath. I am a Group PM in developer experience for Visa Acceptance. I have been building a small fleet of AI agents to help me run my life.
+I have been building a small fleet of AI agents to help me run my life.
 
 That sounds more dramatic than it is. It started with a simple question. Where am I losing time, and what would I do with that time if I got it back?
 

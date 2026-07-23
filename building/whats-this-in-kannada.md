@@ -3,8 +3,6 @@ title: Building What's This in Kannada?
 description: A small iOS app I am building for my daughter, and what it taught me about language, product, and AI.
 ---
 
-# Building "What's This in Kannada?"
-
 My daughter asks "what's this?" about everything. The spoon. The dog on the street. The leaf that fell on the car. She is two. The world is a question.
 
 I wanted her to ask it in Kannada. Kannada is my mother tongue. It is the language I think in when I am tired. It carries the words my mother used. It is one of the ways my daughter will know where she comes from. I tried singing to her. I made hugs into songs. I read her books. She smiled and moved on. Then I noticed something. When she could match a word to an image, it stuck. She would say the word back. She would point. She would light up.
