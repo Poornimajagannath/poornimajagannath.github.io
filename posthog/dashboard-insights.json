@@ -1,0 +1,148 @@
+{
+  "dashboard": {
+    "name": "Personal site stats",
+    "description": "Traffic and feedback for poornimajagannath.github.io — pageviews, visitors, top pages, sources, and essay feedback.",
+    "pinned": true,
+    "tags": ["personal-site", "web-analytics"]
+  },
+  "insights": [
+    {
+      "name": "Pageviews (30d)",
+      "description": "Daily $pageview count for the last 30 days.",
+      "query": {
+        "kind": "InsightVizNode",
+        "source": {
+          "kind": "TrendsQuery",
+          "series": [
+            {
+              "kind": "EventsNode",
+              "event": "$pageview",
+              "name": "$pageview",
+              "math": "total"
+            }
+          ],
+          "interval": "day",
+          "dateRange": { "date_from": "-30d" },
+          "trendsFilter": { "display": "ActionsLineGraph" }
+        }
+      }
+    },
+    {
+      "name": "Unique visitors (30d)",
+      "description": "Daily unique visitors for the last 30 days.",
+      "query": {
+        "kind": "InsightVizNode",
+        "source": {
+          "kind": "TrendsQuery",
+          "series": [
+            {
+              "kind": "EventsNode",
+              "event": "$pageview",
+              "name": "$pageview",
+              "math": "dau"
+            }
+          ],
+          "interval": "day",
+          "dateRange": { "date_from": "-30d" },
+          "trendsFilter": { "display": "ActionsLineGraph" }
+        }
+      }
+    },
+    {
+      "name": "Top pages",
+      "description": "Most viewed paths in the last 30 days.",
+      "query": {
+        "kind": "InsightVizNode",
+        "source": {
+          "kind": "TrendsQuery",
+          "series": [
+            {
+              "kind": "EventsNode",
+              "event": "$pageview",
+              "name": "$pageview",
+              "math": "total"
+            }
+          ],
+          "interval": "day",
+          "dateRange": { "date_from": "-30d" },
+          "breakdownFilter": {
+            "breakdown": "$pathname",
+            "breakdown_type": "event"
+          },
+          "trendsFilter": { "display": "ActionsTable" }
+        }
+      }
+    },
+    {
+      "name": "Top referrers",
+      "description": "Where visitors came from in the last 30 days.",
+      "query": {
+        "kind": "InsightVizNode",
+        "source": {
+          "kind": "TrendsQuery",
+          "series": [
+            {
+              "kind": "EventsNode",
+              "event": "$pageview",
+              "name": "$pageview",
+              "math": "total"
+            }
+          ],
+          "interval": "day",
+          "dateRange": { "date_from": "-30d" },
+          "breakdownFilter": {
+            "breakdown": "$referring_domain",
+            "breakdown_type": "event"
+          },
+          "trendsFilter": { "display": "ActionsTable" }
+        }
+      }
+    },
+    {
+      "name": "Page feedback",
+      "description": "Helpful vs not-helpful feedback events from Blume page feedback.",
+      "query": {
+        "kind": "InsightVizNode",
+        "source": {
+          "kind": "TrendsQuery",
+          "series": [
+            {
+              "kind": "EventsNode",
+              "event": "feedback",
+              "name": "feedback",
+              "math": "total"
+            }
+          ],
+          "interval": "day",
+          "dateRange": { "date_from": "-30d" },
+          "breakdownFilter": {
+            "breakdown": "helpful",
+            "breakdown_type": "event"
+          },
+          "trendsFilter": { "display": "ActionsBarValue" }
+        }
+      }
+    },
+    {
+      "name": "Sessions (30d)",
+      "description": "Unique sessions over the last 30 days.",
+      "query": {
+        "kind": "InsightVizNode",
+        "source": {
+          "kind": "TrendsQuery",
+          "series": [
+            {
+              "kind": "EventsNode",
+              "event": "$pageview",
+              "name": "$pageview",
+              "math": "unique_session"
+            }
+          ],
+          "interval": "day",
+          "dateRange": { "date_from": "-30d" },
+          "trendsFilter": { "display": "ActionsLineGraph" }
+        }
+      }
+    }
+  ]
+}

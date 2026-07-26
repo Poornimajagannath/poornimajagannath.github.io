@@ -1,0 +1,31 @@
+{
+  "generatedAt": null,
+  "host": "https://us.posthog.com",
+  "projectId": null,
+  "dashboardUrl": null,
+  "lookbackDays": 7,
+  "setupComplete": false,
+  "summary": {
+    "visitors": null,
+    "visitorsChange": null,
+    "pageviews": null,
+    "pageviewsChange": null,
+    "sessions": null,
+    "sessionsChange": null,
+    "bounceRate": null,
+    "bounceRateChange": null,
+    "avgSessionDurationSeconds": null,
+    "avgSessionDurationChange": null
+  },
+  "topPages": [],
+  "topSources": [],
+  "feedback": {
+    "helpful": 0,
+    "notHelpful": 0,
+    "total": 0
+  },
+  "notes": [
+    "Add your PostHog project API key to /assets/posthog-config.js to start capturing pageviews.",
+    "Set GitHub secrets POSTHOG_PERSONAL_API_KEY and POSTHOG_PROJECT_ID, then run scripts/generate-posthog-report.mjs (or the weekly Action) to fill this report."
+  ]
+}

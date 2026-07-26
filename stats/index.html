@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Site stats · Poornima Jagannath</title>
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #5a667a;
+        --line: #1720331f;
+        --cream: #fffaf2;
+        --pink: #ffe3ef;
+        --blue: #dff0ff;
+        --lilac: #eee6ff;
+        --pink-strong: #d85a8a;
+        --blue-strong: #3f8fd9;
+        --panel: #ffffffd1;
+        --shadow: 0 24px 80px #43567829;
+        --ease: cubic-bezier(0.23, 1, 0.32, 1);
+        --display: "Lora", Georgia, serif;
+        --sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        color: var(--ink);
+        font-family: var(--sans);
+        background:
+          radial-gradient(circle at 12% 0%, #ffe3efd9, transparent 34%),
+          radial-gradient(circle at 88% 8%, #dff0ffe6, transparent 36%),
+          linear-gradient(160deg, #fffaf6, #f7fbff 50%, #fff7fb);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(960px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 2.5rem 0 4rem;
+      }
+
+      .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: rise 0.7s var(--ease) 0.05s forwards;
+      }
+
+      .top a {
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .top a:hover {
+        color: var(--ink);
+      }
+
+      h1 {
+        margin: 0 0 0.4rem;
+        font-family: var(--display);
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .lede {
+        margin: 0;
+        max-width: 36rem;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.55;
+      }
+
+      .meta {
+        margin: 1.25rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .hero-mark {
+        display: grid;
+        place-items: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 1rem;
+        background:
+          radial-gradient(circle at 30% 30%, var(--pink), transparent 55%),
+          radial-gradient(circle at 70% 70%, var(--blue), transparent 55%),
+          var(--lilac);
+        font-family: var(--display);
+        font-weight: 600;
+        box-shadow: var(--shadow);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+        margin-top: 2rem;
+      }
+
+      @media (min-width: 720px) {
+        .grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+      }
+
+      .metric {
+        padding: 1.15rem 1.2rem 1.25rem;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--panel);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(14px);
+        animation: rise 0.7s var(--ease) forwards;
+      }
+
+      .metric:nth-child(1) {
+        animation-delay: 0.12s;
+      }
+      .metric:nth-child(2) {
+        animation-delay: 0.18s;
+      }
+      .metric:nth-child(3) {
+        animation-delay: 0.24s;
+      }
+      .metric:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+
+      .metric .label {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .metric .value {
+        margin: 0.45rem 0 0;
+        font-family: var(--display);
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .metric .delta {
+        margin: 0.35rem 0 0;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .metric .delta.up {
+        color: #2f7a57;
+      }
+      .metric .delta.down {
+        color: var(--pink-strong);
+      }
+
+      .panels {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      @media (min-width: 800px) {
+        .panels {
+          grid-template-columns: 1.2fr 1fr;
+        }
+      }
+
+      .panel {
+        padding: 1.25rem 1.3rem 1.4rem;
+        border: 1px solid var(--line);
+        border-radius: 1.1rem;
+        background: #ffffffb8;
+        opacity: 0;
+        transform: translateY(16px);
+        animation: rise 0.75s var(--ease) 0.36s forwards;
+      }
+
+      .panel h2 {
+        margin: 0 0 0.85rem;
+        font-family: var(--display);
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .list li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+        align-items: baseline;
+        padding: 0.55rem 0;
+        border-top: 1px solid var(--line);
+        font-size: 0.98rem;
+      }
+
+      .list li:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .list .name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .list .count {
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .empty {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .setup {
+        margin-top: 1rem;
+        padding: 1.3rem 1.35rem;
+        border: 1px solid var(--line);
+        border-radius: 1.1rem;
+        background:
+          linear-gradient(135deg, #ffe3ef66, transparent 40%),
+          linear-gradient(225deg, #dff0ff88, transparent 45%),
+          #ffffffcc;
+        opacity: 0;
+        transform: translateY(16px);
+        animation: rise 0.75s var(--ease) 0.42s forwards;
+      }
+
+      .setup h2 {
+        margin: 0 0 0.5rem;
+        font-family: var(--display);
+        font-size: 1.3rem;
+      }
+
+      .setup ol {
+        margin: 0.75rem 0 0;
+        padding-left: 1.2rem;
+        color: var(--ink);
+        line-height: 1.55;
+      }
+
+      .setup code {
+        padding: 0.1rem 0.35rem;
+        border-radius: 0.35rem;
+        background: #1720330d;
+        font-size: 0.9em;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 1.1rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.5rem;
+        padding: 0.55rem 1rem;
+        border: 1px solid #17203324;
+        border-radius: 999px;
+        background: #ffffffb8;
+        color: var(--ink);
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          transform 0.25s var(--ease),
+          background 0.25s var(--ease);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        background: #fff;
+      }
+
+      .btn.primary {
+        border-color: transparent;
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .feedback {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+
+      .feedback .chip {
+        padding: 0.9rem 1rem;
+        border-radius: 0.9rem;
+        background: var(--mint, #def8ee);
+      }
+
+      .feedback .chip.no {
+        background: var(--pink);
+      }
+
+      .feedback .chip span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .feedback .chip strong {
+        display: block;
+        margin-top: 0.3rem;
+        font-family: var(--display);
+        font-size: 1.6rem;
+      }
+
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .top,
+        .metric,
+        .panel,
+        .setup {
+          animation: none;
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="top">
+        <div>
+          <h1>Site stats</h1>
+          <p class="lede">
+            A quiet PostHog report for this site — visitors, pages people read,
+            and where they came from.
+          </p>
+          <p class="meta" id="generated">Loading report…</p>
+        </div>
+        <div class="hero-mark" aria-hidden="true">P</div>
+      </div>
+
+      <section class="grid" aria-label="Summary metrics">
+        <article class="metric">
+          <p class="label">Visitors</p>
+          <p class="value" data-metric="visitors">—</p>
+          <p class="delta" data-change="visitorsChange"></p>
+        </article>
+        <article class="metric">
+          <p class="label">Pageviews</p>
+          <p class="value" data-metric="pageviews">—</p>
+          <p class="delta" data-change="pageviewsChange"></p>
+        </article>
+        <article class="metric">
+          <p class="label">Sessions</p>
+          <p class="value" data-metric="sessions">—</p>
+          <p class="delta" data-change="sessionsChange"></p>
+        </article>
+        <article class="metric">
+          <p class="label">Bounce rate</p>
+          <p class="value" data-metric="bounceRate">—</p>
+          <p class="delta" data-change="bounceRateChange"></p>
+        </article>
+      </section>
+
+      <section class="panels">
+        <article class="panel">
+          <h2>Top pages</h2>
+          <ul class="list" id="top-pages"></ul>
+        </article>
+        <article class="panel">
+          <h2>Top sources</h2>
+          <ul class="list" id="top-sources"></ul>
+        </article>
+      </section>
+
+      <section class="panels" style="margin-top: 1rem">
+        <article class="panel">
+          <h2>Page feedback</h2>
+          <div class="feedback" id="feedback"></div>
+        </article>
+        <article class="panel">
+          <h2>Session length</h2>
+          <p class="value" id="duration" style="font-family: var(--display); font-size: 2rem; margin: 0.2rem 0 0.4rem">
+            —
+          </p>
+          <p class="empty" id="duration-note">Average session duration for the lookback window.</p>
+        </article>
+      </section>
+
+      <section class="setup" id="setup">
+        <h2>Finish PostHog setup</h2>
+        <p class="empty">
+          Tracking and this report need your PostHog project once. Takes a couple
+          of minutes.
+        </p>
+        <ol>
+          <li>
+            Create a project at
+            <a href="https://us.posthog.com" target="_blank" rel="noopener"
+              >PostHog</a
+            >
+            and copy the project API key (<code>phc_…</code>).
+          </li>
+          <li>
+            Paste it into <code>/assets/posthog-config.js</code> so pageviews
+            start flowing.
+          </li>
+          <li>
+            Create a personal API key with
+            <code>dashboard:write</code>, <code>insight:write</code>, and
+            <code>web_analytics:read</code>.
+          </li>
+          <li>
+            Run
+            <code
+              >POSTHOG_PERSONAL_API_KEY=… POSTHOG_PROJECT_ID=…
+              node scripts/create-posthog-dashboard.mjs</code
+            >
+            to create the PostHog dashboard, then
+            <code>node scripts/generate-posthog-report.mjs</code> to refresh this
+            page.
+          </li>
+        </ol>
+        <div class="actions">
+          <a class="btn primary" id="dashboard-link" href="https://us.posthog.com" target="_blank" rel="noopener"
+            >Open PostHog</a
+          >
+          <a class="btn" href="/">Back home</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const fmt = new Intl.NumberFormat("en-US");
+      const pct = new Intl.NumberFormat("en-US", {
+        style: "percent",
+        maximumFractionDigits: 1,
+        signDisplay: "exceptZero",
+      });
+
+      function formatDuration(seconds) {
+        if (seconds == null || Number.isNaN(Number(seconds))) return "—";
+        const s = Math.round(Number(seconds));
+        const m = Math.floor(s / 60);
+        const r = s % 60;
+        if (m <= 0) return `${r}s`;
+        return `${m}m ${r}s`;
+      }
+
+      function setMetric(key, value, isPercent) {
+        const el = document.querySelector(`[data-metric="${key}"]`);
+        if (!el) return;
+        if (value == null) {
+          el.textContent = "—";
+          return;
+        }
+        el.textContent = isPercent
+          ? pct.format(Number(value)).replace("+", "")
+          : fmt.format(Number(value));
+      }
+
+      function setChange(key, value) {
+        const el = document.querySelector(`[data-change="${key}"]`);
+        if (!el) return;
+        if (value == null) {
+          el.textContent = "";
+          return;
+        }
+        el.textContent = `${pct.format(value)} vs prior period`;
+        el.classList.toggle("up", value > 0);
+        el.classList.toggle("down", value < 0);
+      }
+
+      function fillList(id, items, emptyText) {
+        const root = document.getElementById(id);
+        root.innerHTML = "";
+        if (!items || !items.length) {
+          const p = document.createElement("p");
+          p.className = "empty";
+          p.textContent = emptyText;
+          root.appendChild(p);
+          return;
+        }
+        for (const item of items) {
+          const li = document.createElement("li");
+          li.innerHTML = `<span class="name"></span><span class="count"></span>`;
+          li.querySelector(".name").textContent = item.name;
+          li.querySelector(".count").textContent = fmt.format(item.count || 0);
+          root.appendChild(li);
+        }
+      }
+
+      fetch("./stats-data.json", { cache: "no-store" })
+        .then((r) => r.json())
+        .then((data) => {
+          const s = data.summary || {};
+          setMetric("visitors", s.visitors);
+          setMetric("pageviews", s.pageviews);
+          setMetric("sessions", s.sessions);
+          setMetric(
+            "bounceRate",
+            s.bounceRate == null
+              ? null
+              : s.bounceRate > 1
+                ? s.bounceRate / 100
+                : s.bounceRate,
+            true
+          );
+          setChange("visitorsChange", s.visitorsChange);
+          setChange("pageviewsChange", s.pageviewsChange);
+          setChange("sessionsChange", s.sessionsChange);
+          setChange("bounceRateChange", s.bounceRateChange);
+
+          fillList(
+            "top-pages",
+            data.topPages,
+            "No page data yet. Capture starts after the project key is set."
+          );
+          fillList(
+            "top-sources",
+            data.topSources,
+            "No referrer data yet."
+          );
+
+          const fb = data.feedback || {};
+          document.getElementById("feedback").innerHTML = `
+            <div class="chip"><span>Helpful</span><strong>${fmt.format(fb.helpful || 0)}</strong></div>
+            <div class="chip no"><span>Not helpful</span><strong>${fmt.format(fb.notHelpful || 0)}</strong></div>
+          `;
+
+          document.getElementById("duration").textContent = formatDuration(
+            s.avgSessionDurationSeconds
+          );
+
+          const generated = document.getElementById("generated");
+          if (data.generatedAt) {
+            const when = new Date(data.generatedAt);
+            generated.textContent = `Last ${data.lookbackDays || 7} days · updated ${when.toLocaleString()}`;
+          } else {
+            generated.textContent = "Report not generated yet";
+          }
+
+          const setup = document.getElementById("setup");
+          const dash = document.getElementById("dashboard-link");
+          if (data.dashboardUrl) {
+            dash.href = data.dashboardUrl;
+            dash.textContent = "Open PostHog dashboard";
+          }
+          if (data.setupComplete) {
+            setup.querySelector("h2").textContent = "PostHog dashboard";
+            setup.querySelector(".empty").textContent =
+              "Live charts live in PostHog. This page is the lightweight snapshot refreshed by the report script or weekly Action.";
+            setup.querySelector("ol").hidden = true;
+          }
+        })
+        .catch(() => {
+          document.getElementById("generated").textContent =
+            "Could not load stats-data.json";
+        });
+    </script>
+    <script src="/assets/posthog-config.js"></script>
+    <script src="/assets/posthog-loader.js"></script>
+  </body>
+</html>

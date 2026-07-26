@@ -1,0 +1,44 @@
+name: PostHog weekly report
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Generate PostHog stats snapshot
+        env:
+          POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+          POSTHOG_HOST: ${{ vars.POSTHOG_HOST }}
+        run: |
+          export POSTHOG_HOST="${POSTHOG_HOST:-https://us.posthog.com}"
+          if [ -z "$POSTHOG_PERSONAL_API_KEY" ] || [ -z "$POSTHOG_PROJECT_ID" ]; then
+            echo "Missing POSTHOG_PERSONAL_API_KEY or POSTHOG_PROJECT_ID secrets"
+            exit 1
+          fi
+          node scripts/generate-posthog-report.mjs
+
+      - name: Commit updated report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add stats/stats-data.json
+          if git diff --staged --quiet; then
+            echo "No report changes"
+            exit 0
+          fi
+          git commit -m "Refresh PostHog stats report"
+          git push
