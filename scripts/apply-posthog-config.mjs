@@ -6,15 +6,21 @@
  *   POSTHOG_PROJECT_API_KEY  (phc_...)  required
  *   POSTHOG_API_HOST         optional, default https://us.i.posthog.com
  */
-import { writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { resolvePostHogEnv } from "./posthog-env.mjs";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const key = (process.env.POSTHOG_PROJECT_API_KEY || "").trim();
-const host = (
-  process.env.POSTHOG_API_HOST || "https://us.i.posthog.com"
-).replace(/\/$/, "");
+const { root, apiHost, projectApiKey: envKey } = resolvePostHogEnv();
+
+function keyFromConfigFile() {
+  const path = join(root, "assets/posthog-config.js");
+  if (!existsSync(path)) return "";
+  const m = readFileSync(path, "utf8").match(/key:\s*"((?:phc_)[^"]+)"/);
+  return m?.[1] || "";
+}
+
+const key = (envKey || keyFromConfigFile()).trim();
+const host = apiHost;
 
 if (!key || !key.startsWith("phc_")) {
   console.error(

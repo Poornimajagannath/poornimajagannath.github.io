@@ -18,36 +18,26 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Check secrets
+      - name: Check personal API key secret
         env:
           POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
-          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
-          POSTHOG_PROJECT_API_KEY: ${{ secrets.POSTHOG_PROJECT_API_KEY }}
         run: |
-          missing=0
-          for name in POSTHOG_PROJECT_API_KEY POSTHOG_PERSONAL_API_KEY POSTHOG_PROJECT_ID; do
-            if [ -z "${!name}" ]; then
-              echo "::error::Missing repository secret: $name"
-              missing=1
-            fi
-          done
-          if [ "$missing" -ne 0 ]; then
-            echo "Add free PostHog secrets under Settings → Secrets and variables → Actions."
-            echo "See posthog/README.md for the 3-minute setup."
+          if [ -z "$POSTHOG_PERSONAL_API_KEY" ]; then
+            echo "::error::Missing repository secret: POSTHOG_PERSONAL_API_KEY"
+            echo "Create one at PostHog → Settings → Personal API keys"
+            echo "(scopes: dashboard:write, insight:write, web_analytics:read, query:read)"
+            echo "Project ID is already in posthog/project.json; project API key is in assets/posthog-config.js."
             exit 1
           fi
 
       - name: Enable browser capture + create dashboard + refresh /stats
         env:
-          POSTHOG_PROJECT_API_KEY: ${{ secrets.POSTHOG_PROJECT_API_KEY }}
           POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+          POSTHOG_PROJECT_API_KEY: ${{ secrets.POSTHOG_PROJECT_API_KEY }}
           POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
           POSTHOG_HOST: ${{ vars.POSTHOG_HOST }}
           POSTHOG_API_HOST: ${{ vars.POSTHOG_API_HOST }}
         run: |
-          export POSTHOG_HOST="${POSTHOG_HOST:-https://us.posthog.com}"
-          export POSTHOG_API_HOST="${POSTHOG_API_HOST:-https://us.i.posthog.com}"
-
           node scripts/apply-posthog-config.mjs
 
           if [ ! -f posthog/dashboard-meta.json ]; then

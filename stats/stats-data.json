@@ -1,8 +1,8 @@
 {
   "generatedAt": null,
   "host": "https://us.posthog.com",
-  "projectId": null,
-  "dashboardUrl": null,
+  "projectId": 529079,
+  "dashboardUrl": "https://us.posthog.com/project/529079",
   "lookbackDays": 7,
   "setupComplete": false,
   "summary": {

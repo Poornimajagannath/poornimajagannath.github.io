@@ -2,44 +2,31 @@
 
 You do **not** need a paid plan. PostHog’s free cloud project is enough.
 
-## 3-minute setup (no local keys)
+## Status
 
-### 1. Create a free PostHog account
+Already saved in this repo:
 
-1. Open [https://us.posthog.com/signup](https://us.posthog.com/signup) (use EU if you prefer: [https://eu.posthog.com/signup](https://eu.posthog.com/signup)).
-2. Sign up with Google/GitHub/email — free tier is fine.
-3. Create a project (any name, e.g. `personal site`).
+- Project API key → `assets/posthog-config.js` (pageview capture)
+- Project ID `529079` → `posthog/project.json`
 
-### 2. Copy three values
+Still needed (one secret):
 
-| What | Where in PostHog | Looks like |
-| --- | --- | --- |
-| **Project API key** | Project settings → Project API key | `phc_…` |
-| **Project ID** | Project settings → Project ID (number in the URL `/project/12345`) | `12345` |
-| **Personal API key** | Account settings → Personal API keys → Create → enable `dashboard:write`, `insight:write`, `web_analytics:read`, `query:read` | `phx_…` |
+- **Personal API key** (`phx_…`) to create the dashboard and refresh `/stats`
 
-### 3. Paste them into GitHub secrets
+### Finish setup
 
-Repo → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**:
+1. In PostHog: **Settings → Personal API keys → Create**
+2. Enable scopes: `dashboard:write`, `insight:write`, `web_analytics:read`, `query:read`
+3. Add GitHub secret `POSTHOG_PERSONAL_API_KEY` = that `phx_…` value  
+   (Repo → Settings → Secrets and variables → Actions)
+4. Run **Actions → PostHog weekly report → Run workflow** once
 
-- `POSTHOG_PROJECT_API_KEY` = `phc_…`
-- `POSTHOG_PROJECT_ID` = `12345`
-- `POSTHOG_PERSONAL_API_KEY` = `phx_…`
-
-### 4. Run the Action once
-
-Repo → **Actions** → **PostHog weekly report** → **Run workflow**.
-
-That Action will:
-
-1. Turn on pageview capture on the site
-2. Create your PostHog dashboard
-3. Fill `/stats` with the latest numbers
+That Action will create your PostHog dashboard and fill `/stats`.
 
 Then open:
 
 - Site snapshot: `https://poornimajagannath.github.io/stats/`
-- Live charts: the dashboard URL printed in the Action log (also saved in `posthog/dashboard-meta.json`)
+- Project: [https://us.posthog.com/project/529079](https://us.posthog.com/project/529079)
 
 ## Optional (local)
 

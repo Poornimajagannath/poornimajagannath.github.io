@@ -428,52 +428,42 @@
       </section>
 
       <section class="setup" id="setup">
-        <h2>Get a free PostHog key</h2>
+        <h2>One key left</h2>
         <p class="empty">
-          You don’t need a paid plan. Create a free PostHog account, add three
-          GitHub secrets, and run one Action. That’s it.
+          Project <code>529079</code> and pageview capture are already wired.
+          Add a personal API key so this report and the PostHog dashboard can
+          refresh.
         </p>
         <ol>
           <li>
-            Sign up free at
-            <a href="https://us.posthog.com/signup" target="_blank" rel="noopener"
-              >us.posthog.com/signup</a
-            >
-            and create a project.
-          </li>
-          <li>
-            Copy three values:
-            <code>phc_…</code> project API key,
-            numeric project ID, and a personal API key (<code>phx_…</code>) with
+            In PostHog → Settings → Personal API keys, create a key with
             <code>dashboard:write</code>, <code>insight:write</code>,
             <code>web_analytics:read</code>, <code>query:read</code>.
           </li>
           <li>
-            In GitHub → Settings → Secrets → Actions, add
-            <code>POSTHOG_PROJECT_API_KEY</code>,
-            <code>POSTHOG_PROJECT_ID</code>, and
-            <code>POSTHOG_PERSONAL_API_KEY</code>.
+            Add GitHub secret <code>POSTHOG_PERSONAL_API_KEY</code> with that
+            <code>phx_…</code> value.
           </li>
           <li>
             Run the <strong>PostHog weekly report</strong> workflow once. It
-            turns on tracking, creates your dashboard, and fills this page.
+            creates your dashboard and fills this page.
           </li>
         </ol>
         <div class="actions">
           <a
             class="btn primary"
             id="dashboard-link"
-            href="https://us.posthog.com/signup"
+            href="https://us.posthog.com/project/529079"
             target="_blank"
             rel="noopener"
-            >Create free PostHog account</a
+            >Open PostHog project</a
           >
           <a
             class="btn"
             href="https://github.com/Poornimajagannath/poornimajagannath.github.io/settings/secrets/actions"
             target="_blank"
             rel="noopener"
-            >Add GitHub secrets</a
+            >Add personal API key secret</a
           >
           <a class="btn" href="/">Back home</a>
         </div>

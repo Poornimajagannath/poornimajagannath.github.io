@@ -11,24 +11,20 @@
  */
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
+import { resolvePostHogEnv } from "./posthog-env.mjs";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const root = join(__dirname, "..");
-
-const host = (process.env.POSTHOG_HOST || "https://us.posthog.com").replace(
-  /\/$/,
-  ""
-);
-const projectId = process.env.POSTHOG_PROJECT_ID;
-const apiKey = process.env.POSTHOG_PERSONAL_API_KEY;
+const { host, projectId, personalApiKey: apiKey, root } =
+  resolvePostHogEnv();
 
 if (!apiKey || !projectId) {
   console.error(
-    "Missing POSTHOG_PERSONAL_API_KEY or POSTHOG_PROJECT_ID.\n" +
+    "Missing POSTHOG_PERSONAL_API_KEY" +
+      (projectId ? "" : " or POSTHOG_PROJECT_ID") +
+      ".\n" +
       "Create a personal API key in PostHog → Settings → Personal API keys\n" +
-      "with scopes: dashboard:write, insight:write, project:read"
+      "with scopes: dashboard:write, insight:write, project:read\n" +
+      "Project ID can also live in posthog/project.json."
   );
   process.exit(1);
 }

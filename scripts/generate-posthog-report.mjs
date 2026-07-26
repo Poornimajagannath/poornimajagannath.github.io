@@ -12,24 +12,20 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
+import { resolvePostHogEnv } from "./posthog-env.mjs";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const root = join(__dirname, "..");
-
-const host = (process.env.POSTHOG_HOST || "https://us.posthog.com").replace(
-  /\/$/,
-  ""
-);
-const projectId = process.env.POSTHOG_PROJECT_ID;
-const apiKey = process.env.POSTHOG_PERSONAL_API_KEY;
+const { host, projectId, personalApiKey: apiKey, root } =
+  resolvePostHogEnv();
 const lookbackDays = Number(process.env.POSTHOG_LOOKBACK_DAYS || 7);
 
 if (!apiKey || !projectId) {
   console.error(
-    "Missing POSTHOG_PERSONAL_API_KEY or POSTHOG_PROJECT_ID.\n" +
-      "Needed scopes: web_analytics:read, query:read (or insight:read)"
+    "Missing POSTHOG_PERSONAL_API_KEY" +
+      (projectId ? "" : " or POSTHOG_PROJECT_ID") +
+      ".\n" +
+      "Needed scopes: web_analytics:read, query:read (or insight:read)\n" +
+      "Project ID can also live in posthog/project.json."
   );
   process.exit(1);
 }
