@@ -18,24 +18,51 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Generate PostHog stats snapshot
+      - name: Check secrets
         env:
           POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
           POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
-          POSTHOG_HOST: ${{ vars.POSTHOG_HOST }}
+          POSTHOG_PROJECT_API_KEY: ${{ secrets.POSTHOG_PROJECT_API_KEY }}
         run: |
-          export POSTHOG_HOST="${POSTHOG_HOST:-https://us.posthog.com}"
-          if [ -z "$POSTHOG_PERSONAL_API_KEY" ] || [ -z "$POSTHOG_PROJECT_ID" ]; then
-            echo "Missing POSTHOG_PERSONAL_API_KEY or POSTHOG_PROJECT_ID secrets"
+          missing=0
+          for name in POSTHOG_PROJECT_API_KEY POSTHOG_PERSONAL_API_KEY POSTHOG_PROJECT_ID; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing repository secret: $name"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Add free PostHog secrets under Settings → Secrets and variables → Actions."
+            echo "See posthog/README.md for the 3-minute setup."
             exit 1
           fi
+
+      - name: Enable browser capture + create dashboard + refresh /stats
+        env:
+          POSTHOG_PROJECT_API_KEY: ${{ secrets.POSTHOG_PROJECT_API_KEY }}
+          POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+          POSTHOG_HOST: ${{ vars.POSTHOG_HOST }}
+          POSTHOG_API_HOST: ${{ vars.POSTHOG_API_HOST }}
+        run: |
+          export POSTHOG_HOST="${POSTHOG_HOST:-https://us.posthog.com}"
+          export POSTHOG_API_HOST="${POSTHOG_API_HOST:-https://us.i.posthog.com}"
+
+          node scripts/apply-posthog-config.mjs
+
+          if [ ! -f posthog/dashboard-meta.json ]; then
+            node scripts/create-posthog-dashboard.mjs
+          else
+            echo "Dashboard already recorded in posthog/dashboard-meta.json"
+          fi
+
           node scripts/generate-posthog-report.mjs
 
-      - name: Commit updated report
+      - name: Commit tracking config + report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add stats/stats-data.json
+          git add assets/posthog-config.js stats/stats-data.json posthog/dashboard-meta.json
           if git diff --staged --quiet; then
             echo "No report changes"
             exit 0

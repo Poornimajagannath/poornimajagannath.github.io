@@ -1,44 +1,61 @@
 # PostHog report for this site
 
-This folder and `/stats` give you a simple way to see traffic for
-[poornimajagannath.github.io](https://poornimajagannath.github.io).
+You do **not** need a paid plan. PostHog’s free cloud project is enough.
 
-## What you get
+## 3-minute setup (no local keys)
 
-1. **Browser capture** via `/assets/posthog-loader.js` (pageviews + pageleave)
-2. **PostHog dashboard** created by `scripts/create-posthog-dashboard.mjs`
-   (pageviews, visitors, top pages, referrers, feedback, sessions)
-3. **Local snapshot** at `/stats/` refreshed by
-   `scripts/generate-posthog-report.mjs` or the weekly GitHub Action
+### 1. Create a free PostHog account
 
-## One-time setup
+1. Open [https://us.posthog.com/signup](https://us.posthog.com/signup) (use EU if you prefer: [https://eu.posthog.com/signup](https://eu.posthog.com/signup)).
+2. Sign up with Google/GitHub/email — free tier is fine.
+3. Create a project (any name, e.g. `personal site`).
 
-1. Create a PostHog project ([US](https://us.posthog.com) or [EU](https://eu.posthog.com)).
-2. Copy the **project API key** (`phc_…`) into `/assets/posthog-config.js`.
-3. Create a **personal API key** with scopes:
-   - `dashboard:write`
-   - `insight:write`
-   - `web_analytics:read`
-   - `query:read`
-4. Run:
+### 2. Copy three values
+
+| What | Where in PostHog | Looks like |
+| --- | --- | --- |
+| **Project API key** | Project settings → Project API key | `phc_…` |
+| **Project ID** | Project settings → Project ID (number in the URL `/project/12345`) | `12345` |
+| **Personal API key** | Account settings → Personal API keys → Create → enable `dashboard:write`, `insight:write`, `web_analytics:read`, `query:read` | `phx_…` |
+
+### 3. Paste them into GitHub secrets
+
+Repo → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**:
+
+- `POSTHOG_PROJECT_API_KEY` = `phc_…`
+- `POSTHOG_PROJECT_ID` = `12345`
+- `POSTHOG_PERSONAL_API_KEY` = `phx_…`
+
+### 4. Run the Action once
+
+Repo → **Actions** → **PostHog weekly report** → **Run workflow**.
+
+That Action will:
+
+1. Turn on pageview capture on the site
+2. Create your PostHog dashboard
+3. Fill `/stats` with the latest numbers
+
+Then open:
+
+- Site snapshot: `https://poornimajagannath.github.io/stats/`
+- Live charts: the dashboard URL printed in the Action log (also saved in `posthog/dashboard-meta.json`)
+
+## Optional (local)
 
 ```bash
+export POSTHOG_PROJECT_API_KEY=phc_...
 export POSTHOG_PERSONAL_API_KEY=phx_...
 export POSTHOG_PROJECT_ID=12345
-# export POSTHOG_HOST=https://eu.posthog.com   # only for EU cloud
 
-node scripts/create-posthog-dashboard.mjs
-node scripts/generate-posthog-report.mjs
+npm run posthog:config
+npm run posthog:dashboard
+npm run posthog:report
 ```
-
-5. Optional GitHub secrets for the weekly Action:
-   - `POSTHOG_PERSONAL_API_KEY`
-   - `POSTHOG_PROJECT_ID`
-   - optional repo variable `POSTHOG_HOST`
 
 ## Blume rebuilds
 
-If you rebuild the site from Blume source later, prefer first-party config:
+If you rebuild from Blume source later:
 
 ```ts
 analytics: {
@@ -49,6 +66,5 @@ analytics: {
 }
 ```
 
-Keep `/stats`, `/scripts`, and `/posthog` in the published repo so the report
-page and automation still work after a republish. Re-run
-`node scripts/inject-posthog.mjs` if HTML is regenerated without Blume analytics.
+Keep `/stats`, `/scripts`, and `/posthog` in the published repo. Re-run
+`npm run posthog:inject` if HTML is regenerated without Blume analytics.

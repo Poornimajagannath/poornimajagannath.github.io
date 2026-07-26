@@ -428,42 +428,52 @@
       </section>
 
       <section class="setup" id="setup">
-        <h2>Finish PostHog setup</h2>
+        <h2>Get a free PostHog key</h2>
         <p class="empty">
-          Tracking and this report need your PostHog project once. Takes a couple
-          of minutes.
+          You don’t need a paid plan. Create a free PostHog account, add three
+          GitHub secrets, and run one Action. That’s it.
         </p>
         <ol>
           <li>
-            Create a project at
-            <a href="https://us.posthog.com" target="_blank" rel="noopener"
-              >PostHog</a
+            Sign up free at
+            <a href="https://us.posthog.com/signup" target="_blank" rel="noopener"
+              >us.posthog.com/signup</a
             >
-            and copy the project API key (<code>phc_…</code>).
+            and create a project.
           </li>
           <li>
-            Paste it into <code>/assets/posthog-config.js</code> so pageviews
-            start flowing.
+            Copy three values:
+            <code>phc_…</code> project API key,
+            numeric project ID, and a personal API key (<code>phx_…</code>) with
+            <code>dashboard:write</code>, <code>insight:write</code>,
+            <code>web_analytics:read</code>, <code>query:read</code>.
           </li>
           <li>
-            Create a personal API key with
-            <code>dashboard:write</code>, <code>insight:write</code>, and
-            <code>web_analytics:read</code>.
+            In GitHub → Settings → Secrets → Actions, add
+            <code>POSTHOG_PROJECT_API_KEY</code>,
+            <code>POSTHOG_PROJECT_ID</code>, and
+            <code>POSTHOG_PERSONAL_API_KEY</code>.
           </li>
           <li>
-            Run
-            <code
-              >POSTHOG_PERSONAL_API_KEY=… POSTHOG_PROJECT_ID=…
-              node scripts/create-posthog-dashboard.mjs</code
-            >
-            to create the PostHog dashboard, then
-            <code>node scripts/generate-posthog-report.mjs</code> to refresh this
-            page.
+            Run the <strong>PostHog weekly report</strong> workflow once. It
+            turns on tracking, creates your dashboard, and fills this page.
           </li>
         </ol>
         <div class="actions">
-          <a class="btn primary" id="dashboard-link" href="https://us.posthog.com" target="_blank" rel="noopener"
-            >Open PostHog</a
+          <a
+            class="btn primary"
+            id="dashboard-link"
+            href="https://us.posthog.com/signup"
+            target="_blank"
+            rel="noopener"
+            >Create free PostHog account</a
+          >
+          <a
+            class="btn"
+            href="https://github.com/Poornimajagannath/poornimajagannath.github.io/settings/secrets/actions"
+            target="_blank"
+            rel="noopener"
+            >Add GitHub secrets</a
           >
           <a class="btn" href="/">Back home</a>
         </div>
