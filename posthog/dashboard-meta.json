@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-07-26T15:15:23.560Z",
+  "host": "https://us.posthog.com",
+  "projectId": 529079,
+  "dashboardId": 1907384,
+  "dashboardUrl": "https://us.posthog.com/project/529079/dashboard/1907384",
+  "insights": [
+    {
+      "id": 10463976,
+      "short_id": "of56Jkzz",
+      "name": "Pageviews (30d)",
+      "url": "https://us.posthog.com/project/529079/insights/of56Jkzz"
+    },
+    {
+      "id": 10463977,
+      "short_id": "bCcHmHmF",
+      "name": "Unique visitors (30d)",
+      "url": "https://us.posthog.com/project/529079/insights/bCcHmHmF"
+    },
+    {
+      "id": 10463978,
+      "short_id": "ZR87sMcm",
+      "name": "Top pages",
+      "url": "https://us.posthog.com/project/529079/insights/ZR87sMcm"
+    },
+    {
+      "id": 10463979,
+      "short_id": "FpdxEleA",
+      "name": "Top referrers",
+      "url": "https://us.posthog.com/project/529079/insights/FpdxEleA"
+    },
+    {
+      "id": 10463980,
+      "short_id": "oFVEmXSa",
+      "name": "Page feedback",
+      "url": "https://us.posthog.com/project/529079/insights/oFVEmXSa"
+    },
+    {
+      "id": 10463981,
+      "short_id": "b0uWrZAp",
+      "name": "Sessions (30d)",
+      "url": "https://us.posthog.com/project/529079/insights/b0uWrZAp"
+    }
+  ]
+}

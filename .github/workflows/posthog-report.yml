@@ -1,0 +1,61 @@
+name: PostHog weekly report
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check personal API key secret
+        env:
+          POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+        run: |
+          if [ -z "$POSTHOG_PERSONAL_API_KEY" ]; then
+            echo "::error::Missing repository secret: POSTHOG_PERSONAL_API_KEY"
+            echo "Create one at PostHog → Settings → Personal API keys"
+            echo "(scopes: dashboard:write, insight:write, web_analytics:read, query:read)"
+            echo "Project ID is already in posthog/project.json; project API key is in assets/posthog-config.js."
+            exit 1
+          fi
+
+      - name: Enable browser capture + create dashboard + refresh /stats
+        env:
+          POSTHOG_PERSONAL_API_KEY: ${{ secrets.POSTHOG_PERSONAL_API_KEY }}
+          POSTHOG_PROJECT_API_KEY: ${{ secrets.POSTHOG_PROJECT_API_KEY }}
+          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+          POSTHOG_HOST: ${{ vars.POSTHOG_HOST }}
+          POSTHOG_API_HOST: ${{ vars.POSTHOG_API_HOST }}
+        run: |
+          node scripts/apply-posthog-config.mjs
+
+          if [ ! -f posthog/dashboard-meta.json ]; then
+            node scripts/create-posthog-dashboard.mjs
+          else
+            echo "Dashboard already recorded in posthog/dashboard-meta.json"
+          fi
+
+          node scripts/generate-posthog-report.mjs
+
+      - name: Commit tracking config + report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/posthog-config.js stats/stats-data.json posthog/dashboard-meta.json
+          if git diff --staged --quiet; then
+            echo "No report changes"
+            exit 0
+          fi
+          git commit -m "Refresh PostHog stats report"
+          git push

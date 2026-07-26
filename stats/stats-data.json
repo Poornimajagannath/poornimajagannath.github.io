@@ -1,0 +1,39 @@
+{
+  "generatedAt": "2026-07-26T15:15:41.719Z",
+  "host": "https://us.posthog.com",
+  "projectId": 529079,
+  "dashboardUrl": "https://us.posthog.com/project/529079/dashboard/1907384",
+  "lookbackDays": 7,
+  "setupComplete": true,
+  "summary": {
+    "visitors": 0,
+    "visitorsChange": null,
+    "pageviews": 0,
+    "pageviewsChange": null,
+    "sessions": 0,
+    "sessionsChange": null,
+    "bounceRate": 0,
+    "bounceRateChange": null,
+    "avgSessionDurationSeconds": 0,
+    "avgSessionDurationChange": null
+  },
+  "topPages": [],
+  "topSources": [],
+  "feedback": {
+    "helpful": 0,
+    "notHelpful": 0,
+    "total": 0
+  },
+  "notes": [],
+  "rawDigestKeys": [
+    "visitors",
+    "pageviews",
+    "sessions",
+    "bounce_rate",
+    "avg_session_duration",
+    "top_pages",
+    "top_sources",
+    "goals",
+    "dashboard_url"
+  ]
+}
