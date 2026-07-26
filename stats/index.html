@@ -428,42 +428,43 @@
       </section>
 
       <section class="setup" id="setup">
-        <h2>One key left</h2>
+        <h2>Get this by email</h2>
         <p class="empty">
-          Project <code>529079</code> and pageview capture are already wired.
-          Add a personal API key so this report and the PostHog dashboard can
-          refresh.
+          PostHog can email you a weekly summary. Two quick options:
         </p>
         <ol>
           <li>
-            In PostHog → Settings → Personal API keys, create a key with
-            <code>dashboard:write</code>, <code>insight:write</code>,
-            <code>web_analytics:read</code>, <code>query:read</code>.
+            <strong>Web analytics digest</strong> —
+            <a
+              href="https://us.posthog.com/settings/user-notifications"
+              target="_blank"
+              rel="noopener"
+              >Notification settings</a
+            >
+            → turn on <em>Web analytics weekly digest</em> for project
+            <code>529079</code>.
           </li>
           <li>
-            Add GitHub secret <code>POSTHOG_PERSONAL_API_KEY</code> with that
-            <code>phx_…</code> value.
-          </li>
-          <li>
-            Run the <strong>PostHog weekly report</strong> workflow once. It
-            creates your dashboard and fills this page.
+            <strong>Dashboard charts</strong> — open the dashboard, click
+            <em>Subscribe</em> → Email → weekly, then optionally
+            <em>Test delivery</em>.
           </li>
         </ol>
         <div class="actions">
           <a
             class="btn primary"
             id="dashboard-link"
-            href="https://us.posthog.com/project/529079"
+            href="https://us.posthog.com/project/529079/dashboard/1907384"
             target="_blank"
             rel="noopener"
-            >Open PostHog project</a
+            >Open dashboard &amp; subscribe</a
           >
           <a
             class="btn"
-            href="https://github.com/Poornimajagannath/poornimajagannath.github.io/settings/secrets/actions"
+            href="https://us.posthog.com/settings/user-notifications"
             target="_blank"
             rel="noopener"
-            >Add personal API key secret</a
+            >Email notification settings</a
           >
           <a class="btn" href="/">Back home</a>
         </div>
@@ -580,17 +581,9 @@
             generated.textContent = "Report not generated yet";
           }
 
-          const setup = document.getElementById("setup");
           const dash = document.getElementById("dashboard-link");
           if (data.dashboardUrl) {
             dash.href = data.dashboardUrl;
-            dash.textContent = "Open PostHog dashboard";
-          }
-          if (data.setupComplete) {
-            setup.querySelector("h2").textContent = "PostHog dashboard";
-            setup.querySelector(".empty").textContent =
-              "Live charts live in PostHog. This page is the lightweight snapshot refreshed by the report script or weekly Action.";
-            setup.querySelector("ol").hidden = true;
           }
         })
         .catch(() => {

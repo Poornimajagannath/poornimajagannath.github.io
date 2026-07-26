@@ -11,9 +11,33 @@ Configured:
 - Dashboard → https://us.posthog.com/project/529079/dashboard/1907384
 - Snapshot page → `/stats` (`stats/stats-data.json`)
 
-### Optional: weekly auto-refresh
+### Get the report by email
 
-Add GitHub secret `POSTHOG_PERSONAL_API_KEY` (`phx_…`), then the
+**Easiest — Web analytics weekly digest (built into PostHog):**
+
+1. Open [Notification settings](https://us.posthog.com/settings/user-notifications)
+2. Turn on **Web analytics weekly digest**
+3. Select project `529079` if asked
+
+PostHog emails a Monday summary (visitors, pageviews, top pages/sources).
+
+**Dashboard charts by email:**
+
+1. Open [Personal site stats](https://us.posthog.com/project/529079/dashboard/1907384)
+2. Click **Subscribe** → **Email** → weekly (e.g. Monday)
+3. Use your address and save  
+   Optional: **Test delivery** to get one immediately
+
+Or, with a personal API key that includes `subscription:write`:
+
+```bash
+export POSTHOG_PERSONAL_API_KEY=phx_...
+npm run posthog:email
+```
+
+### Optional: weekly auto-refresh of `/stats`
+
+Add GitHub secret `POSTHOG_PERSONAL_API_KEY`, then the
 **PostHog weekly report** Action can refresh `/stats` every Monday.
 
 Open:

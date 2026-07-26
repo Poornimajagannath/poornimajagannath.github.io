@@ -6,6 +6,7 @@
     "posthog:inject": "node scripts/inject-posthog.mjs",
     "posthog:config": "node scripts/apply-posthog-config.mjs",
     "posthog:dashboard": "node scripts/create-posthog-dashboard.mjs",
-    "posthog:report": "node scripts/generate-posthog-report.mjs"
+    "posthog:report": "node scripts/generate-posthog-report.mjs",
+    "posthog:email": "node scripts/subscribe-posthog-email.mjs"
   }
 }
