@@ -55,24 +55,58 @@ async function api(path, { method = "GET", body } = {}) {
 
 function num(value) {
   if (value == null || value === "") return null;
+  if (typeof value === "object") {
+    if ("current" in value) return num(value.current);
+    return null;
+  }
+  if (typeof value === "string" && /[hms]/.test(value)) {
+    return parseDurationSeconds(value);
+  }
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
 }
 
-function change(current, previous) {
-  const c = num(current);
-  const p = num(previous);
-  if (c == null || p == null || p === 0) return null;
-  return (c - p) / p;
+function parseDurationSeconds(value) {
+  if (value == null || value === "") return null;
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  const text = String(value).trim();
+  if (!text || text === "0") return 0;
+  const asNumber = Number(text);
+  if (Number.isFinite(asNumber)) return asNumber;
+  let total = 0;
+  const re = /(\d+(?:\.\d+)?)\s*(h|m|s)/gi;
+  let match;
+  let found = false;
+  while ((match = re.exec(text))) {
+    found = true;
+    const amount = Number(match[1]);
+    const unit = match[2].toLowerCase();
+    if (unit === "h") total += amount * 3600;
+    else if (unit === "m") total += amount * 60;
+    else total += amount;
+  }
+  return found ? total : null;
 }
 
-function pickMetric(digest, keys) {
-  for (const key of keys) {
-    if (digest?.[key] != null) return digest[key];
-    if (digest?.metrics?.[key] != null) return digest.metrics[key];
-    if (digest?.summary?.[key] != null) return digest.summary[key];
+function metricParts(digest, key) {
+  const raw = digest?.[key] ?? digest?.metrics?.[key] ?? digest?.summary?.[key];
+  if (raw == null) return { current: null, previous: null, change: null };
+  if (typeof raw === "object" && ("current" in raw || "previous" in raw)) {
+    const current =
+      key.includes("duration") || key.includes("avg_session")
+        ? parseDurationSeconds(raw.current)
+        : num(raw.current);
+    const previous =
+      key.includes("duration") || key.includes("avg_session")
+        ? parseDurationSeconds(raw.previous)
+        : num(raw.previous);
+    let change = num(raw.change);
+    if (change == null && current != null && previous != null && previous !== 0) {
+      change = (current - previous) / previous;
+    }
+    return { current, previous, change };
   }
-  return null;
+  return { current: num(raw), previous: null, change: null };
 }
 
 function normalizeList(items, nameKeys, countKeys) {
@@ -98,43 +132,11 @@ try {
   );
 }
 
-const visitors = pickMetric(digest, [
-  "visitors",
-  "unique_visitors",
-  "uniqueVisitors",
-]);
-const visitorsPrev = pickMetric(digest, [
-  "visitors_previous",
-  "previous_visitors",
-  "unique_visitors_previous",
-]);
-const pageviews = pickMetric(digest, ["pageviews", "page_views", "views"]);
-const pageviewsPrev = pickMetric(digest, [
-  "pageviews_previous",
-  "previous_pageviews",
-  "page_views_previous",
-]);
-const sessions = pickMetric(digest, ["sessions", "unique_sessions"]);
-const sessionsPrev = pickMetric(digest, [
-  "sessions_previous",
-  "previous_sessions",
-]);
-const bounceRate = pickMetric(digest, ["bounce_rate", "bounceRate"]);
-const bounceRatePrev = pickMetric(digest, [
-  "bounce_rate_previous",
-  "previous_bounce_rate",
-]);
-const avgDuration = pickMetric(digest, [
-  "average_session_duration",
-  "avg_session_duration",
-  "avgSessionDuration",
-  "average_session_duration_seconds",
-]);
-const avgDurationPrev = pickMetric(digest, [
-  "average_session_duration_previous",
-  "previous_average_session_duration",
-  "avg_session_duration_previous",
-]);
+const visitors = metricParts(digest, "visitors");
+const pageviews = metricParts(digest, "pageviews");
+const sessions = metricParts(digest, "sessions");
+const bounceRate = metricParts(digest, "bounce_rate");
+const avgDuration = metricParts(digest, "avg_session_duration");
 
 const topPages = normalizeList(
   digest.top_pages || digest.topPages || digest.pages || [],
@@ -195,20 +197,21 @@ const report = {
   generatedAt: new Date().toISOString(),
   host,
   projectId: Number(projectId),
-  dashboardUrl,
+  dashboardUrl:
+    dashboardUrl || digest.dashboard_url || `${host}/project/${projectId}`,
   lookbackDays,
   setupComplete: true,
   summary: {
-    visitors: num(visitors),
-    visitorsChange: change(visitors, visitorsPrev),
-    pageviews: num(pageviews),
-    pageviewsChange: change(pageviews, pageviewsPrev),
-    sessions: num(sessions),
-    sessionsChange: change(sessions, sessionsPrev),
-    bounceRate: num(bounceRate),
-    bounceRateChange: change(bounceRate, bounceRatePrev),
-    avgSessionDurationSeconds: num(avgDuration),
-    avgSessionDurationChange: change(avgDuration, avgDurationPrev),
+    visitors: visitors.current,
+    visitorsChange: visitors.change,
+    pageviews: pageviews.current,
+    pageviewsChange: pageviews.change,
+    sessions: sessions.current,
+    sessionsChange: sessions.change,
+    bounceRate: bounceRate.current,
+    bounceRateChange: bounceRate.change,
+    avgSessionDurationSeconds: avgDuration.current,
+    avgSessionDurationChange: avgDuration.change,
   },
   topPages,
   topSources,

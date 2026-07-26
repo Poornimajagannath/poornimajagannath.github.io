@@ -1,20 +1,20 @@
 {
-  "generatedAt": null,
+  "generatedAt": "2026-07-26T15:15:41.719Z",
   "host": "https://us.posthog.com",
   "projectId": 529079,
-  "dashboardUrl": "https://us.posthog.com/project/529079",
+  "dashboardUrl": "https://us.posthog.com/project/529079/dashboard/1907384",
   "lookbackDays": 7,
-  "setupComplete": false,
+  "setupComplete": true,
   "summary": {
-    "visitors": null,
+    "visitors": 0,
     "visitorsChange": null,
-    "pageviews": null,
+    "pageviews": 0,
     "pageviewsChange": null,
-    "sessions": null,
+    "sessions": 0,
     "sessionsChange": null,
-    "bounceRate": null,
+    "bounceRate": 0,
     "bounceRateChange": null,
-    "avgSessionDurationSeconds": null,
+    "avgSessionDurationSeconds": 0,
     "avgSessionDurationChange": null
   },
   "topPages": [],
@@ -24,8 +24,16 @@
     "notHelpful": 0,
     "total": 0
   },
-  "notes": [
-    "Add your PostHog project API key to /assets/posthog-config.js to start capturing pageviews.",
-    "Set GitHub secrets POSTHOG_PERSONAL_API_KEY and POSTHOG_PROJECT_ID, then run scripts/generate-posthog-report.mjs (or the weekly Action) to fill this report."
+  "notes": [],
+  "rawDigestKeys": [
+    "visitors",
+    "pageviews",
+    "sessions",
+    "bounce_rate",
+    "avg_session_duration",
+    "top_pages",
+    "top_sources",
+    "goals",
+    "dashboard_url"
   ]
 }

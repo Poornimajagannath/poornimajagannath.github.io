@@ -4,29 +4,22 @@ You do **not** need a paid plan. PostHog’s free cloud project is enough.
 
 ## Status
 
-Already saved in this repo:
+Configured:
 
 - Project API key → `assets/posthog-config.js` (pageview capture)
 - Project ID `529079` → `posthog/project.json`
+- Dashboard → https://us.posthog.com/project/529079/dashboard/1907384
+- Snapshot page → `/stats` (`stats/stats-data.json`)
 
-Still needed (one secret):
+### Optional: weekly auto-refresh
 
-- **Personal API key** (`phx_…`) to create the dashboard and refresh `/stats`
+Add GitHub secret `POSTHOG_PERSONAL_API_KEY` (`phx_…`), then the
+**PostHog weekly report** Action can refresh `/stats` every Monday.
 
-### Finish setup
-
-1. In PostHog: **Settings → Personal API keys → Create**
-2. Enable scopes: `dashboard:write`, `insight:write`, `web_analytics:read`, `query:read`
-3. Add GitHub secret `POSTHOG_PERSONAL_API_KEY` = that `phx_…` value  
-   (Repo → Settings → Secrets and variables → Actions)
-4. Run **Actions → PostHog weekly report → Run workflow** once
-
-That Action will create your PostHog dashboard and fill `/stats`.
-
-Then open:
+Open:
 
 - Site snapshot: `https://poornimajagannath.github.io/stats/`
-- Project: [https://us.posthog.com/project/529079](https://us.posthog.com/project/529079)
+- Dashboard: [Personal site stats](https://us.posthog.com/project/529079/dashboard/1907384)
 
 ## Optional (local)
 
