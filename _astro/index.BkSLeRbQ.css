@@ -12,7 +12,8 @@
 :root[data-theme=dark] .bookshelf__stage{background:linear-gradient(180deg, #121923b3, #161e2a)}
 .bookshelf__track{display:flex;align-items:flex-end;gap:var(--bookshelf-gap);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:8px 4px 20px;outline:none;-webkit-overflow-scrolling:touch}
 .bookshelf__track::-webkit-scrollbar{display:none}
-.bookshelf__book{--book-w:112px;--book-h:168px;flex:0 0 auto;width:var(--book-w);height:var(--book-h);scroll-snap-align:start;position:relative;transform-origin:50% 100%;transform:translateY(12px) scale(0.96);opacity:0;transition:transform 260ms var(--ease-out), opacity 260ms var(--ease-out);touch-action:manipulation;cursor:pointer}
+.bookshelf__book{--book-w:112px;--book-h:168px;flex:0 0 auto;width:var(--book-w);height:var(--book-h);scroll-snap-align:start;position:relative;transform-origin:50% 100%;transform:translateY(0) scale(1);opacity:1;transition:transform 260ms var(--ease-out), opacity 260ms var(--ease-out);touch-action:manipulation;cursor:pointer}
+.bookshelf:not(.is-ready) .bookshelf__book{transform:translateY(12px) scale(0.96);opacity:0}
 .bookshelf.is-ready .bookshelf__book{transform:translateY(0) scale(1);opacity:1}
 .bookshelf.is-ready .bookshelf__book:nth-child(1){transition-delay:0ms}
 .bookshelf.is-ready .bookshelf__book:nth-child(2){transition-delay:45ms}
@@ -59,7 +60,8 @@
 .bookshelf__book--blue{--book-a:#dceaf7;--book-b:#b7d0e8;--book-fg:#172033}
 .bookshelf__book--cream{--book-a:#fff7ec;--book-b:#f0dfc8;--book-fg:#2a241c}
 .bookshelf__book--lilac{--book-a:#ebe4f8;--book-b:#d4c8eb;--book-fg:#241f33}
-.bookshelf__shelf{pointer-events:none;position:absolute;left:16px;right:16px;bottom:14px;height:1px;background:var(--calm-line);opacity:0;transform:scaleX(.96);transform-origin:center;transition:opacity 260ms var(--ease-out), transform 260ms var(--ease-out)}
+.bookshelf__shelf{pointer-events:none;position:absolute;left:16px;right:16px;bottom:14px;height:1px;background:var(--calm-line);opacity:1;transform:scaleX(1);transform-origin:center;transition:opacity 260ms var(--ease-out), transform 260ms var(--ease-out)}
+.bookshelf:not(.is-ready) .bookshelf__shelf{opacity:0;transform:scaleX(.96)}
 .bookshelf.is-ready .bookshelf__shelf{opacity:1;transform:scaleX(1);transition-delay:60ms}
 .bookshelf__shelf-top,.bookshelf__shelf-face{display:none}
 .bookshelf__nav{
