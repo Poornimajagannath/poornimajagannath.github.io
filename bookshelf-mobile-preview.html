@@ -52,80 +52,100 @@ body{
 .calm-eyebrow{color:var(--calm-muted);letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px;font-size:12px;font-weight:750}
 .home-section--bookshelf{padding-top:clamp(24px,5vw,40px);padding-bottom:clamp(48px,9vw,80px)}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.home-section--bookshelf{padding-top:clamp(32px,5vw,56px);padding-bottom:clamp(64px,9vw,96px);--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1)}
-.bookshelf{--bookshelf-gap:14px;align-items:center;gap:10px;display:grid;grid-template-columns:auto minmax(0,1fr) auto}
-.bookshelf__stage{position:relative;min-width:0;padding:8px 4px 0}
-.bookshelf__track{display:flex;align-items:flex-end;gap:var(--bookshelf-gap);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:18px 8px 22px;outline:none;-webkit-overflow-scrolling:touch}
+.home-section--bookshelf{padding-top:clamp(32px,5vw,56px);padding-bottom:clamp(64px,9vw,96px);--ease-out:cubic-bezier(0.23,1,0.32,1)}
+.bookshelf{--bookshelf-gap:12px;align-items:center;gap:12px;display:grid;grid-template-columns:auto minmax(0,1fr) auto}
+.bookshelf__stage{
+  position:relative;min-width:0;padding:20px 16px 18px;
+  border:1px solid var(--calm-line);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--calm-panel) 88%, transparent), color-mix(in srgb, var(--calm-cream, #fffaf6) 70%, transparent));
+  border-radius:28px;
+  box-shadow:0 12px 32px #43567814;
+}
+:root[data-theme=dark] .bookshelf__stage{background:linear-gradient(180deg, #121923b3, #161e2a)}
+.bookshelf__track{display:flex;align-items:flex-end;gap:var(--bookshelf-gap);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:8px 4px 20px;outline:none;-webkit-overflow-scrolling:touch}
 .bookshelf__track::-webkit-scrollbar{display:none}
-.bookshelf__book{--book-w:118px;--book-h:180px;flex:0 0 auto;width:var(--book-w);height:var(--book-h);scroll-snap-align:start;position:relative;transform-origin:50% 100%;transform:translateY(16px) scale(0.94);opacity:0;filter:drop-shadow(0 10px 14px #43567822);transition:transform 280ms var(--ease-out), opacity 280ms var(--ease-out);will-change:transform,opacity;touch-action:manipulation}
+.bookshelf__book{--book-w:112px;--book-h:168px;flex:0 0 auto;width:var(--book-w);height:var(--book-h);scroll-snap-align:start;position:relative;transform-origin:50% 100%;transform:translateY(12px) scale(0.96);opacity:0;transition:transform 260ms var(--ease-out), opacity 260ms var(--ease-out);touch-action:manipulation;cursor:pointer}
 .bookshelf.is-ready .bookshelf__book{transform:translateY(0) scale(1);opacity:1}
 .bookshelf.is-ready .bookshelf__book:nth-child(1){transition-delay:0ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(2){transition-delay:50ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(3){transition-delay:100ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(4){transition-delay:150ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(5){transition-delay:200ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(6){transition-delay:250ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(7){transition-delay:300ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(8){transition-delay:350ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(n+9){transition-delay:380ms}
-.bookshelf.is-ready .bookshelf__book:active{transform:translateY(-6px) scale(0.97);transition-duration:140ms;transition-delay:0ms}
+.bookshelf.is-ready .bookshelf__book:nth-child(2){transition-delay:45ms}
+.bookshelf.is-ready .bookshelf__book:nth-child(3){transition-delay:90ms}
+.bookshelf.is-ready .bookshelf__book:nth-child(4){transition-delay:135ms}
+.bookshelf.is-ready .bookshelf__book:nth-child(5){transition-delay:180ms}
+.bookshelf.is-ready .bookshelf__book:nth-child(6){transition-delay:225ms}
+.bookshelf.is-ready .bookshelf__book:nth-child(n+7){transition-delay:260ms}
+.bookshelf.is-ready .bookshelf__book:active{transform:translateY(-4px) scale(0.98);transition-duration:140ms;transition-delay:0ms}
 .bookshelf.is-ready .bookshelf__book.is-popping{
-  transform:translateY(-14px) scale(1.03) rotate(-2deg);
+  transform:translateY(-10px) scale(1.02);
   z-index:3;
   transition:transform 220ms var(--ease-out);
   transition-delay:0ms;
-  filter:drop-shadow(0 18px 20px #43567833);
-}
-.bookshelf.is-ready .bookshelf__book.is-popping:nth-child(even){
-  transform:translateY(-14px) scale(1.03) rotate(2deg);
 }
 @media (hover:hover) and (pointer:fine){
-  .bookshelf.is-ready .bookshelf__book:hover{transform:translateY(-8px) rotate(-1.2deg);z-index:2;transition-delay:0ms}
-  .bookshelf.is-ready .bookshelf__book:nth-child(even):hover{transform:translateY(-8px) rotate(1.1deg)}
-  .bookshelf.is-ready .bookshelf__book:hover:active{transform:translateY(-4px) scale(0.97) rotate(-0.6deg)}
-  .bookshelf.is-ready .bookshelf__book.is-popping,
-  .bookshelf.is-ready .bookshelf__book.is-popping:nth-child(even){
-    transform:translateY(-14px) scale(1.03) rotate(-2deg);
-  }
-  .bookshelf.is-ready .bookshelf__book.is-popping:nth-child(even){
-    transform:translateY(-14px) scale(1.03) rotate(2deg);
-  }
+  .bookshelf.is-ready .bookshelf__book:hover{transform:translateY(-6px);z-index:2;transition-delay:0ms}
+  .bookshelf.is-ready .bookshelf__book:hover:active{transform:translateY(-3px) scale(0.98)}
+  .bookshelf.is-ready .bookshelf__book.is-popping{transform:translateY(-10px) scale(1.02)}
 }
-.bookshelf__book--tall{--book-w:122px}
-.bookshelf__book--short{--book-w:112px}
-.bookshelf__cover{width:100%;height:100%;border-radius:3px 6px 4px 2px;border:1px solid color-mix(in srgb, var(--calm-ink) 12%, transparent);box-shadow:inset -8px 0 14px #00000018, inset 0 1px 0 #ffffff66;padding:16px 12px 14px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;background:linear-gradient(160deg, var(--book-a), var(--book-b))}
-.bookshelf__cover::before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:linear-gradient(180deg, #ffffff55, #00000022);border-right:1px solid #00000014}
-.bookshelf__cover::after{content:"";position:absolute;inset:10px 10px auto auto;width:18px;height:18px;border-radius:999px;background:color-mix(in srgb, #fff 35%, transparent);opacity:.55}
-.bookshelf__cover-title{font-family:var(--blume-font-display), ui-serif, Georgia, serif;color:var(--book-fg);letter-spacing:-.03em;font-size:13px;font-weight:650;line-height:1.2;max-width:11ch;position:relative;z-index:1}
-.bookshelf__cover-author{color:color-mix(in srgb, var(--book-fg) 78%, transparent);font-size:10px;font-weight:650;letter-spacing:.04em;text-transform:uppercase;position:relative;z-index:1}
-.bookshelf__book--ink{--book-a:#243047;--book-b:#172033;--book-fg:#f7f3ee}
-.bookshelf__book--blush{--book-a:#f6d7e2;--book-b:#e8b7c8;--book-fg:#2a2030}
-.bookshelf__book--blue{--book-a:#d7e8f7;--book-b:#9fc0df;--book-fg:#172033}
-.bookshelf__book--cream{--book-a:#fff6ea;--book-b:#edd9bf;--book-fg:#2a241c}
-.bookshelf__book--lilac{--book-a:#e6dff5;--book-b:#c9bee6;--book-fg:#241f33}
-.bookshelf__shelf{pointer-events:none;position:absolute;left:0;right:0;bottom:0;opacity:0;transform:translateY(8px);transition:opacity 280ms var(--ease-out), transform 280ms var(--ease-out)}
-.bookshelf.is-ready .bookshelf__shelf{opacity:1;transform:translateY(0);transition-delay:80ms}
-.bookshelf__shelf-top{display:block;height:10px;border-radius:6px 6px 0 0;background:linear-gradient(180deg, #ffffff, #f3efe8);border:1px solid color-mix(in srgb, var(--calm-ink) 8%, transparent);border-bottom:none;box-shadow:0 -1px 0 #ffffffaa inset}
-.bookshelf__shelf-face{display:block;height:14px;border-radius:0 0 10px 10px;background:linear-gradient(180deg, #ebe4da, #d9d0c4);border:1px solid color-mix(in srgb, var(--calm-ink) 10%, transparent);border-top:none;box-shadow:0 14px 28px #4356782e, 0 4px 10px #4356781f}
-.bookshelf__nav{width:40px;height:40px;border-radius:999px;border:1px solid color-mix(in srgb, var(--calm-ink) 10%, transparent);background:color-mix(in srgb, var(--calm-panel, #fff) 88%, transparent);color:var(--calm-muted);display:inline-grid;place-items:center;cursor:pointer;transition:background 160ms var(--ease-out), color 160ms var(--ease-out), opacity 160ms var(--ease-out), transform 160ms var(--ease-out);box-shadow:0 8px 20px #43567814;touch-action:manipulation}
+.bookshelf__book--tall{--book-w:116px;--book-h:176px}
+.bookshelf__book--short{--book-w:108px;--book-h:160px}
+.bookshelf__cover{
+  width:100%;height:100%;
+  border-radius:16px;
+  border:1px solid color-mix(in srgb, var(--calm-ink) 8%, transparent);
+  box-shadow:0 10px 24px #43567818;
+  padding:16px 14px 14px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 18%, color-mix(in srgb, #fff 35%, transparent), transparent 42%),
+    linear-gradient(160deg, var(--book-a), var(--book-b));
+}
+.bookshelf__cover::before{
+  content:"";position:absolute;inset:0 auto 0 0;width:5px;
+  background:linear-gradient(180deg, #ffffff40, #00000010);
+  border-right:1px solid #0000000d;
+}
+.bookshelf__cover-title{font-family:var(--blume-font-display), ui-serif, Georgia, serif;color:var(--book-fg);letter-spacing:-.03em;font-size:13px;font-weight:560;line-height:1.2;max-width:11ch;position:relative;z-index:1}
+.bookshelf__cover-author{color:color-mix(in srgb, var(--book-fg) 72%, transparent);font-size:10px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;position:relative;z-index:1}
+.bookshelf__book--ink{--book-a:#2a3548;--book-b:#172033;--book-fg:#f7f3ee}
+.bookshelf__book--blush{--book-a:#f8dde7;--book-b:#efc2d2;--book-fg:#2a2030}
+.bookshelf__book--blue{--book-a:#dceaf7;--book-b:#b7d0e8;--book-fg:#172033}
+.bookshelf__book--cream{--book-a:#fff7ec;--book-b:#f0dfc8;--book-fg:#2a241c}
+.bookshelf__book--lilac{--book-a:#ebe4f8;--book-b:#d4c8eb;--book-fg:#241f33}
+.bookshelf__shelf{pointer-events:none;position:absolute;left:16px;right:16px;bottom:14px;height:1px;background:var(--calm-line);opacity:0;transform:scaleX(.96);transform-origin:center;transition:opacity 260ms var(--ease-out), transform 260ms var(--ease-out)}
+.bookshelf.is-ready .bookshelf__shelf{opacity:1;transform:scaleX(1);transition-delay:60ms}
+.bookshelf__shelf-top,.bookshelf__shelf-face{display:none}
+.bookshelf__nav{
+  width:40px;height:40px;border-radius:999px;
+  border:1px solid var(--calm-line);
+  background:color-mix(in srgb, var(--calm-panel, #fff) 90%, transparent);
+  color:var(--calm-muted);display:inline-grid;place-items:center;cursor:pointer;
+  transition:background 160ms var(--ease-out), color 160ms var(--ease-out), opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+  touch-action:manipulation;
+}
 .bookshelf__nav:hover{color:var(--calm-ink);background:var(--calm-surface-soft, #fff)}
 @media (hover:hover) and (pointer:fine){.bookshelf__nav:hover{transform:translateY(-1px)}}
 .bookshelf__nav:active:not(:disabled){transform:scale(0.97)}
 .bookshelf__nav:focus-visible{outline:3px solid var(--calm-blue-strong);outline-offset:3px}
 .bookshelf__nav:disabled{opacity:.28;cursor:default;transform:none;pointer-events:none}
 .bookshelf:not(.is-scrollable) .bookshelf__nav{opacity:.28;pointer-events:none}
-:root[data-theme=dark] .bookshelf__shelf-top{background:linear-gradient(180deg, #2a3342, #1d2633)}
-:root[data-theme=dark] .bookshelf__shelf-face{background:linear-gradient(180deg, #1a222e, #121820);box-shadow:0 14px 28px #00000055, 0 4px 10px #00000040}
-:root[data-theme=dark] .bookshelf__nav{background:#161e2acc;border-color:#ffffff14;box-shadow:0 8px 20px #00000040}
-:root[data-theme=dark] .bookshelf__book{filter:drop-shadow(0 10px 16px #00000055)}
-@media (width<=720px){.bookshelf{grid-template-columns:minmax(0,1fr);gap:12px}.bookshelf__nav{display:none}.bookshelf__track{padding-inline:2px}.bookshelf__book{--book-w:104px}}
+:root[data-theme=dark] .bookshelf__nav{background:#161e2acc;border-color:#ffffff14}
+:root[data-theme=dark] .bookshelf__cover{box-shadow:0 10px 24px #00000040}
+@media (width<=720px){
+  .bookshelf{grid-template-columns:minmax(0,1fr);gap:12px}
+  .bookshelf__nav{display:none}
+  .bookshelf__stage{padding:18px 12px 16px;border-radius:24px}
+  .bookshelf__track{padding-inline:2px}
+  .bookshelf__book{--book-w:100px}
+  .bookshelf__shelf{left:12px;right:12px}
+}
 @media (prefers-reduced-motion:reduce){
   .bookshelf__book,.bookshelf__nav,.bookshelf__shelf{transition:none!important;transition-delay:0ms!important}
   .bookshelf__book{transform:none;opacity:1}
-  .bookshelf.is-ready .bookshelf__book:hover,.bookshelf.is-ready .bookshelf__book:active,.bookshelf__nav:hover,.bookshelf__nav:active{transform:none}
+  .bookshelf.is-ready .bookshelf__book:hover,.bookshelf.is-ready .bookshelf__book:active,.bookshelf.is-ready .bookshelf__book.is-popping,.bookshelf__nav:hover,.bookshelf__nav:active{transform:none}
   .bookshelf__shelf{opacity:1;transform:none}
   .bookshelf__track{scroll-behavior:auto}
 }
+
 </style>
 </head>
 <body>
@@ -136,8 +156,8 @@ body{
     <button type="button" id="theme-toggle">Dark</button>
   </div>
 </header>
-<p class="tip">Tap a book — it should lift off the shelf. Use <strong>Replay</strong> for the entrance.</p>
-<div class="home"><section class="home-section home-section--bookshelf" id="bookshelf" aria-labelledby="bookshelf-title"><div class="home-rail"><header class="home-section__head"><p class="calm-eyebrow">Reading</p><h2 id="bookshelf-title">Bookshelf</h2><p>A few books that keep shaping how I think about products, people, and building.</p></header><div class="bookshelf" data-bookshelf><button class="bookshelf__nav bookshelf__nav--prev" type="button" aria-label="Previous books" data-bookshelf-prev><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="bookshelf__stage"><div class="bookshelf__track" data-bookshelf-track tabindex="0" role="list" aria-label="Books on the shelf"><article class="bookshelf__book bookshelf__book--tall bookshelf__book--ink" role="listitem" tabindex="0" style="--book-h:188px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">The Design of Everyday Things</span><span class="bookshelf__cover-author">Don Norman</span></div><h3 class="visually-hidden">The Design of Everyday Things by Don Norman</h3></article><article class="bookshelf__book bookshelf__book--blush" role="listitem" tabindex="0" style="--book-h:176px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Don&#39;t Make Me Think</span><span class="bookshelf__cover-author">Steve Krug</span></div><h3 class="visually-hidden">Don&#39;t Make Me Think by Steve Krug</h3></article><article class="bookshelf__book bookshelf__book--blue bookshelf__book--tall" role="listitem" tabindex="0" style="--book-h:196px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Inspired</span><span class="bookshelf__cover-author">Marty Cagan</span></div><h3 class="visually-hidden">Inspired by Marty Cagan</h3></article><article class="bookshelf__book bookshelf__book--cream" role="listitem" tabindex="0" style="--book-h:182px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Working Backwards</span><span class="bookshelf__cover-author">Bryar &amp; Carr</span></div><h3 class="visually-hidden">Working Backwards by Bryar &amp; Carr</h3></article><article class="bookshelf__book bookshelf__book--ink bookshelf__book--short" role="listitem" tabindex="0" style="--book-h:168px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Staff Engineer</span><span class="bookshelf__cover-author">Will Larson</span></div><h3 class="visually-hidden">Staff Engineer by Will Larson</h3></article><article class="bookshelf__book bookshelf__book--lilac" role="listitem" tabindex="0" style="--book-h:190px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">The Making of a Manager</span><span class="bookshelf__cover-author">Julie Zhuo</span></div><h3 class="visually-hidden">The Making of a Manager by Julie Zhuo</h3></article><article class="bookshelf__book bookshelf__book--blue" role="listitem" tabindex="0" style="--book-h:178px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Creative Selection</span><span class="bookshelf__cover-author">Ken Kocienda</span></div><h3 class="visually-hidden">Creative Selection by Ken Kocienda</h3></article><article class="bookshelf__book bookshelf__book--blush bookshelf__book--tall" role="listitem" tabindex="0" style="--book-h:200px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Range</span><span class="bookshelf__cover-author">David Epstein</span></div><h3 class="visually-hidden">Range by David Epstein</h3></article></div><div class="bookshelf__shelf" aria-hidden="true"><span class="bookshelf__shelf-top"></span><span class="bookshelf__shelf-face"></span></div></div><button class="bookshelf__nav bookshelf__nav--next" type="button" aria-label="Next books" data-bookshelf-next><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></section><script type="module">document.querySelectorAll(`[data-bookshelf]`).forEach(root=>{const track=root.querySelector(`[data-bookshelf-track]`);const prev=root.querySelector(`[data-bookshelf-prev]`);const next=root.querySelector(`[data-bookshelf-next]`);if(!track||!prev||!next)return;const reduce=()=>window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;let revealed=false;const reveal=()=>{if(revealed)return;revealed=true;root.classList.remove(`is-ready`);void root.offsetWidth;requestAnimationFrame(()=>{requestAnimationFrame(()=>root.classList.add(`is-ready`))})};if(reduce()){root.classList.add(`is-ready`);revealed=true}else{let armed=false;const arm=()=>{if(armed)return;armed=true;reveal()};if(`IntersectionObserver` in window){const io=new IntersectionObserver((entries)=>{if(entries.some(e=>e.isIntersecting)){arm();io.disconnect()}},{threshold:0.2,rootMargin:`0px 0px -10% 0px`});io.observe(root)}setTimeout(arm,1200)}const timers=new WeakMap;let tap=null;const popBook=book=>{if(reduce()||!book)return;const prevTimer=timers.get(book);if(prevTimer)clearTimeout(prevTimer);book.classList.remove(`is-popping`);void book.offsetWidth;book.classList.add(`is-popping`);const t=setTimeout(()=>book.classList.remove(`is-popping`),320);timers.set(book,t)};track.addEventListener(`pointerdown`,e=>{const book=e.target.closest(`.bookshelf__book`);if(!book||!track.contains(book))return;if(e.pointerType===`mouse`&&e.button!==0)return;tap={id:e.pointerId,x:e.clientX,y:e.clientY,book}},{passive:true});track.addEventListener(`pointerup`,e=>{if(!tap||tap.id!==e.pointerId)return;const dx=e.clientX-tap.x,dy=e.clientY-tap.y;const book=tap.book;tap=null;if(Math.hypot(dx,dy)>10)return;popBook(book)},{passive:true});track.addEventListener(`pointercancel`,()=>{tap=null},{passive:true});track.addEventListener(`keydown`,e=>{if(e.key!==`Enter`&&e.key!==` `)return;const book=e.target.closest(`.bookshelf__book`);if(!book)return;e.preventDefault();popBook(book)});const step=()=>{const book=track.querySelector(`.bookshelf__book`);return book?Math.round(book.getBoundingClientRect().width*1.6):180};const update=()=>{const max=Math.max(0,track.scrollWidth-track.clientWidth);prev.disabled=track.scrollLeft<=2;next.disabled=track.scrollLeft>=max-2;root.classList.toggle(`is-scrollable`,max>4)};prev.addEventListener(`click`,()=>track.scrollBy({left:-step(),behavior:reduce()?`auto`:`smooth`}));next.addEventListener(`click`,()=>track.scrollBy({left:step(),behavior:reduce()?`auto`:`smooth`}));track.addEventListener(`scroll`,update,{passive:true});addEventListener(`resize`,update);update()});</script></div>
+<p class="tip">Tap a book to lift it. <strong>Replay</strong> for the entrance.</p>
+<div class="home"><section class="home-section home-section--bookshelf" id="bookshelf" aria-labelledby="bookshelf-title"><div class="home-rail"><header class="home-section__head"><p class="calm-eyebrow">Reading</p><h2 id="bookshelf-title">Bookshelf</h2><p>A short shelf of product and management books I keep coming back to.</p></header><div class="bookshelf" data-bookshelf><button class="bookshelf__nav bookshelf__nav--prev" type="button" aria-label="Previous books" data-bookshelf-prev><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="bookshelf__stage"><div class="bookshelf__track" data-bookshelf-track tabindex="0" role="list" aria-label="Books on the shelf"><article class="bookshelf__book bookshelf__book--blue bookshelf__book--tall" role="listitem" tabindex="0" style="--book-h:176px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Inspired</span><span class="bookshelf__cover-author">Marty Cagan</span></div><h3 class="visually-hidden">Inspired by Marty Cagan</h3></article><article class="bookshelf__book bookshelf__book--cream" role="listitem" tabindex="0" style="--book-h:168px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Working Backwards</span><span class="bookshelf__cover-author">Bryar &amp; Carr</span></div><h3 class="visually-hidden">Working Backwards by Bryar &amp; Carr</h3></article><article class="bookshelf__book bookshelf__book--lilac bookshelf__book--tall" role="listitem" tabindex="0" style="--book-h:176px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">The Making of a Manager</span><span class="bookshelf__cover-author">Julie Zhuo</span></div><h3 class="visually-hidden">The Making of a Manager by Julie Zhuo</h3></article><article class="bookshelf__book bookshelf__book--ink" role="listitem" tabindex="0" style="--book-h:164px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">The Manager&#39;s Path</span><span class="bookshelf__cover-author">Camille Fournier</span></div><h3 class="visually-hidden">The Manager&#39;s Path by Camille Fournier</h3></article><article class="bookshelf__book bookshelf__book--blush bookshelf__book--short" role="listitem" tabindex="0" style="--book-h:160px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Empowered</span><span class="bookshelf__cover-author">Marty Cagan</span></div><h3 class="visually-hidden">Empowered by Marty Cagan</h3></article><article class="bookshelf__book bookshelf__book--blue" role="listitem" tabindex="0" style="--book-h:170px"><div class="bookshelf__cover" aria-hidden="true"><span class="bookshelf__cover-title">Creative Selection</span><span class="bookshelf__cover-author">Ken Kocienda</span></div><h3 class="visually-hidden">Creative Selection by Ken Kocienda</h3></article></div><div class="bookshelf__shelf" aria-hidden="true"><span class="bookshelf__shelf-top"></span><span class="bookshelf__shelf-face"></span></div></div><button class="bookshelf__nav bookshelf__nav--next" type="button" aria-label="Next books" data-bookshelf-next><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></section><script type="module">document.querySelectorAll(`[data-bookshelf]`).forEach(root=>{const track=root.querySelector(`[data-bookshelf-track]`);const prev=root.querySelector(`[data-bookshelf-prev]`);const next=root.querySelector(`[data-bookshelf-next]`);if(!track||!prev||!next)return;const reduce=()=>window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;let revealed=false;const reveal=()=>{if(revealed)return;revealed=true;root.classList.remove(`is-ready`);void root.offsetWidth;requestAnimationFrame(()=>{requestAnimationFrame(()=>root.classList.add(`is-ready`))})};if(reduce()){root.classList.add(`is-ready`);revealed=true}else{let armed=false;const arm=()=>{if(armed)return;armed=true;reveal()};if(`IntersectionObserver` in window){const io=new IntersectionObserver((entries)=>{if(entries.some(e=>e.isIntersecting)){arm();io.disconnect()}},{threshold:0.2,rootMargin:`0px 0px -10% 0px`});io.observe(root)}setTimeout(arm,1200)}const timers=new WeakMap;let tap=null;const popBook=book=>{if(reduce()||!book)return;const prevTimer=timers.get(book);if(prevTimer)clearTimeout(prevTimer);book.classList.remove(`is-popping`);void book.offsetWidth;book.classList.add(`is-popping`);const t=setTimeout(()=>book.classList.remove(`is-popping`),320);timers.set(book,t)};track.addEventListener(`pointerdown`,e=>{const book=e.target.closest(`.bookshelf__book`);if(!book||!track.contains(book))return;if(e.pointerType===`mouse`&&e.button!==0)return;tap={id:e.pointerId,x:e.clientX,y:e.clientY,book}},{passive:true});track.addEventListener(`pointerup`,e=>{if(!tap||tap.id!==e.pointerId)return;const dx=e.clientX-tap.x,dy=e.clientY-tap.y;const book=tap.book;tap=null;if(Math.hypot(dx,dy)>10)return;popBook(book)},{passive:true});track.addEventListener(`pointercancel`,()=>{tap=null},{passive:true});track.addEventListener(`keydown`,e=>{if(e.key!==`Enter`&&e.key!==` `)return;const book=e.target.closest(`.bookshelf__book`);if(!book)return;e.preventDefault();popBook(book)});const step=()=>{const book=track.querySelector(`.bookshelf__book`);return book?Math.round(book.getBoundingClientRect().width*1.6):180};const update=()=>{const max=Math.max(0,track.scrollWidth-track.clientWidth);prev.disabled=track.scrollLeft<=2;next.disabled=track.scrollLeft>=max-2;root.classList.toggle(`is-scrollable`,max>4)};prev.addEventListener(`click`,()=>track.scrollBy({left:-step(),behavior:reduce()?`auto`:`smooth`}));next.addEventListener(`click`,()=>track.scrollBy({left:step(),behavior:reduce()?`auto`:`smooth`}));track.addEventListener(`scroll`,update,{passive:true});addEventListener(`resize`,update);update()});</script></div>
 <script>
 document.getElementById('theme-toggle').addEventListener('click',()=>{
   const d=document.documentElement;
