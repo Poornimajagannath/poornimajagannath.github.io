@@ -23,15 +23,7 @@
 .bookshelf__track{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-end;gap:var(--bookshelf-gap);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:8px 4px 20px;outline:none;-webkit-overflow-scrolling:touch}
 .bookshelf__track::-webkit-scrollbar{display:none}
 .bookshelf__book{--book-w:112px;--book-h:168px;flex:0 0 auto;width:var(--book-w);height:var(--book-h);scroll-snap-align:start;position:relative;transform-origin:50% 100%;transform:translateY(0) scale(1);opacity:1;transition:transform 220ms var(--ease-out), opacity 220ms var(--ease-out);touch-action:manipulation;cursor:pointer}
-.bookshelf.is-pending .bookshelf__book{transform:translateY(12px) scale(0.96);opacity:0;transition:none}
 .bookshelf.is-ready .bookshelf__book{transform:translateY(0) scale(1);opacity:1}
-.bookshelf.is-ready .bookshelf__book:nth-child(1){transition-delay:0ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(2){transition-delay:40ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(3){transition-delay:80ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(4){transition-delay:120ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(5){transition-delay:160ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(6){transition-delay:200ms}
-.bookshelf.is-ready .bookshelf__book:nth-child(n+7){transition-delay:240ms}
 .bookshelf.is-ready .bookshelf__book:active{transform:translateY(-3px) scale(0.98);transition-duration:150ms;transition-delay:0ms}
 .bookshelf.is-ready .bookshelf__book.is-popping{
   transform:translateY(-10px) scale(1.02);
@@ -75,7 +67,6 @@
 .bookshelf__book--cream{--book-a:var(--calm-mint);--book-b:#c8eedd;--book-fg:#245247}
 .bookshelf__book--lilac{--book-a:var(--calm-lilac);--book-b:#ddd2f7;--book-fg:#43366a}
 .bookshelf__shelf{pointer-events:none;position:absolute;left:16px;right:16px;bottom:14px;height:1px;background:var(--calm-line);opacity:1;transform:scaleX(1);transform-origin:center;transition:opacity 220ms var(--ease-out), transform 220ms var(--ease-out)}
-.bookshelf.is-pending .bookshelf__shelf{opacity:0;transform:scaleX(.96);transition:none}
 .bookshelf.is-ready .bookshelf__shelf{opacity:1;transform:scaleX(1);transition-delay:50ms}
 .bookshelf__shelf-top,.bookshelf__shelf-face{display:none}
 .bookshelf__nav{
@@ -110,8 +101,7 @@
 }
 @media (prefers-reduced-motion:reduce){
   .bookshelf__book,.bookshelf__nav,.bookshelf__shelf{transition:opacity 160ms ease!important;transition-delay:0ms!important}
-  .bookshelf.is-pending .bookshelf__book{opacity:1;transform:none}
-  .bookshelf.is-ready .bookshelf__book:hover,.bookshelf.is-ready .bookshelf__book.is-popping{transform:none}
+    .bookshelf.is-ready .bookshelf__book:hover,.bookshelf.is-ready .bookshelf__book.is-popping{transform:none}
   .bookshelf.is-ready .bookshelf__book:active,.bookshelf__nav:active:not(:disabled){transform:scale(0.99)}
   .bookshelf__shelf{opacity:1;transform:none}
   .bookshelf__track{scroll-behavior:auto}
