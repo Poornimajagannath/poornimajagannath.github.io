@@ -17,10 +17,27 @@
 .bookshelf.is-ready .bookshelf__book:nth-child(8){transition-delay:350ms}
 .bookshelf.is-ready .bookshelf__book:nth-child(n+9){transition-delay:380ms}
 .bookshelf.is-ready .bookshelf__book:active{transform:translateY(-6px) scale(0.97);transition-duration:140ms;transition-delay:0ms}
+.bookshelf.is-ready .bookshelf__book.is-popping{
+  transform:translateY(-14px) scale(1.03) rotate(-2deg);
+  z-index:3;
+  transition:transform 220ms var(--ease-out);
+  transition-delay:0ms;
+  filter:drop-shadow(0 18px 20px #43567833);
+}
+.bookshelf.is-ready .bookshelf__book.is-popping:nth-child(even){
+  transform:translateY(-14px) scale(1.03) rotate(2deg);
+}
 @media (hover:hover) and (pointer:fine){
   .bookshelf.is-ready .bookshelf__book:hover{transform:translateY(-8px) rotate(-1.2deg);z-index:2;transition-delay:0ms}
   .bookshelf.is-ready .bookshelf__book:nth-child(even):hover{transform:translateY(-8px) rotate(1.1deg)}
   .bookshelf.is-ready .bookshelf__book:hover:active{transform:translateY(-4px) scale(0.97) rotate(-0.6deg)}
+  .bookshelf.is-ready .bookshelf__book.is-popping,
+  .bookshelf.is-ready .bookshelf__book.is-popping:nth-child(even){
+    transform:translateY(-14px) scale(1.03) rotate(-2deg);
+  }
+  .bookshelf.is-ready .bookshelf__book.is-popping:nth-child(even){
+    transform:translateY(-14px) scale(1.03) rotate(2deg);
+  }
 }
 .bookshelf__book--tall{--book-w:122px}
 .bookshelf__book--short{--book-w:112px}
