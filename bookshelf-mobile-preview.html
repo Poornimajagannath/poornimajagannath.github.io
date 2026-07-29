@@ -165,6 +165,7 @@ document.getElementById('theme-toggle').addEventListener('click',()=>{
   d.dataset.theme=next;
   document.getElementById('theme-toggle').textContent=next==='dark'?'Light':'Dark';
 });
+/* boot-ready */setTimeout(()=>{const r=document.querySelector('[data-bookshelf]');if(r){r.classList.add('is-ready')}},80);
 document.getElementById('replay').addEventListener('click',()=>{
   const root=document.querySelector('[data-bookshelf]');
   if(!root)return;
