@@ -5,7 +5,7 @@
 .bookshelf__track{flex-direction:row;flex-wrap:nowrap}
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .home-section--bookshelf{padding-top:clamp(32px,5vw,56px);padding-bottom:clamp(64px,9vw,96px);--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1)}
-.bookshelf{--bookshelf-gap:12px;display:block;position:relative}
+.bookshelf{--bookshelf-gap:28px;display:block;position:relative}
 .bookshelf__book,.bookshelf__book *{box-sizing:border-box}
 .bookshelf__cover-title,.bookshelf__cover-author{display:block}
 .bookshelf__stage{
@@ -26,7 +26,7 @@
 }
 .bookshelf__track{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-end;gap:var(--bookshelf-gap);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:8px 4px 20px;outline:none;-webkit-overflow-scrolling:touch}
 .bookshelf__track::-webkit-scrollbar{display:none}
-.bookshelf__book{--book-w:112px;--book-h:172px;flex:0 0 auto;width:var(--book-w);height:var(--book-h);scroll-snap-align:start;position:relative;transform-origin:50% 100%;transform:translateY(0) scale(1);opacity:1;transition:transform 220ms var(--ease-out), opacity 220ms var(--ease-out);touch-action:manipulation;cursor:pointer}
+.bookshelf__book{--book-w:148px;--book-h:210px;flex:0 0 auto;width:var(--book-w);height:var(--book-h);scroll-snap-align:start;position:relative;transform-origin:50% 100%;transform:translateY(0) scale(1);opacity:1;transition:transform 220ms var(--ease-out), opacity 220ms var(--ease-out);touch-action:manipulation;cursor:pointer}
 .bookshelf.is-ready .bookshelf__book{transform:translateY(0) scale(1);opacity:1}
 .bookshelf.is-ready .bookshelf__book:active{transform:translateY(-3px) scale(0.98);transition-duration:150ms;transition-delay:0ms}
 .bookshelf.is-ready .bookshelf__book.is-popping{
@@ -98,7 +98,7 @@
   .bookshelf__nav{display:none}
   .bookshelf__stage{padding:18px 12px 16px;border-radius:24px}
   .bookshelf__track{padding-inline:2px}
-  .bookshelf__book{--book-w:100px}
+  .bookshelf__book{--book-w:118px;--book-h:168px}
   .bookshelf__shelf{left:12px;right:12px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -234,7 +234,7 @@ header[data-blume-header] {
 
 /* Bookshelf is a single full-width stack; stage is the panel; nav lives inside stage */
 .bookshelf {
-  --bookshelf-gap: 12px;
+  --bookshelf-gap: 28px;
   display: block !important;
   position: relative;
 }
@@ -309,6 +309,152 @@ header[data-blume-header] {
   .bookshelf__nav:hover,
   .bookshelf__nav:active:not(:disabled) {
     transform: translateY(-50%) !important;
+  }
+}
+
+/* === calm atmosphere + shelf spacing === */
+body:has(.home) {
+  background:
+    radial-gradient(ellipse 90% 55% at 8% -5%, color-mix(in srgb, var(--calm-glow-pink) 85%, transparent), transparent 58%),
+    radial-gradient(ellipse 80% 50% at 92% 8%, color-mix(in srgb, var(--calm-glow-blue) 80%, transparent), transparent 55%),
+    radial-gradient(ellipse 70% 48% at 12% 38%, color-mix(in srgb, var(--calm-lilac) 55%, transparent), transparent 62%),
+    radial-gradient(ellipse 80% 50% at 90% 55%, color-mix(in srgb, var(--calm-glow-pink) 55%, transparent), transparent 60%),
+    radial-gradient(ellipse 90% 55% at 20% 88%, color-mix(in srgb, var(--calm-glow-pink) 60%, transparent), transparent 62%),
+    radial-gradient(ellipse 95% 60% at 78% 100%, color-mix(in srgb, var(--calm-glow-blue) 70%, transparent), transparent 64%),
+    var(--calm-cream, #fffaf2) !important;
+}
+
+/* Keep the page wash visible through Blume surface utilities (not the body itself). */
+body:has(.home) .bg-background {
+  background-color: transparent !important;
+  background-image: none;
+}
+
+body:has(.home) main,
+body:has(.home) #blume-content {
+  background: transparent !important;
+}
+
+header[data-blume-header] {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--calm-cream, #fffaf2) 88%, transparent),
+      color-mix(in srgb, var(--calm-cream, #fffaf2) 55%, transparent)
+    ) !important;
+  backdrop-filter: blur(14px);
+}
+
+.home {
+  background: transparent;
+  padding-bottom: 48px;
+}
+
+.home-section--experience,
+.home-section--public-work,
+.home-section--bookshelf,
+.home-section--writing {
+  position: relative;
+}
+
+.home-section--experience .home-rail,
+.home-section--public-work .home-rail,
+.home-section--writing .home-rail {
+  border-radius: 28px;
+  padding: 8px 0;
+}
+
+.experience-item {
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--calm-glow-pink) 35%, white),
+      color-mix(in srgb, var(--calm-panel, #fff) 92%, transparent) 45%,
+      color-mix(in srgb, var(--calm-glow-blue) 28%, white)
+    ) !important;
+  border-color: color-mix(in srgb, var(--calm-line, #e6e0d8) 80%, transparent) !important;
+}
+
+:root[data-theme="dark"] .experience-item {
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--calm-glow-pink) 18%, #121923),
+      #121923b3 50%,
+      color-mix(in srgb, var(--calm-glow-blue) 16%, #121923)
+    ) !important;
+}
+
+.quiet-link-list,
+.essay-index,
+.bookshelf-notes {
+  border-color: color-mix(in srgb, var(--calm-line, #e6e0d8) 90%, transparent);
+}
+
+.quiet-link-list__link:hover,
+.essay-index__link:hover {
+  background: color-mix(in srgb, var(--calm-glow-pink) 22%, transparent) !important;
+}
+
+.bookshelf-notes__item.is-active {
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--calm-glow-pink) 40%, white),
+      color-mix(in srgb, var(--calm-glow-blue) 28%, white)
+    ) !important;
+}
+
+:root[data-theme="dark"] body:has(.home) {
+  background:
+    radial-gradient(ellipse 90% 55% at 8% -5%, color-mix(in srgb, var(--calm-glow-pink) 28%, transparent), transparent 58%),
+    radial-gradient(ellipse 80% 50% at 92% 8%, color-mix(in srgb, var(--calm-glow-blue) 24%, transparent), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 15% 45%, color-mix(in srgb, var(--calm-lilac) 18%, transparent), transparent 60%),
+    radial-gradient(ellipse 75% 40% at 88% 62%, color-mix(in srgb, var(--calm-glow-pink) 16%, transparent), transparent 58%),
+    radial-gradient(ellipse 85% 50% at 40% 100%, color-mix(in srgb, var(--calm-glow-blue) 20%, transparent), transparent 60%),
+    #0f141c !important;
+}
+
+/* Fill the shelf: larger books, more gap, spread when they fit */
+.bookshelf {
+  --bookshelf-gap: 32px !important;
+}
+
+.bookshelf__track {
+  gap: var(--bookshelf-gap) !important;
+}
+
+.bookshelf:not(.is-scrollable) .bookshelf__track {
+  justify-content: space-between;
+}
+
+.bookshelf__book {
+  --book-w: 148px !important;
+  --book-h: 210px !important;
+}
+
+.home-section--bookshelf,
+.home-section--writing {
+  background:
+    radial-gradient(ellipse 70% 80% at 0% 30%, color-mix(in srgb, var(--calm-glow-pink) 40%, transparent), transparent 70%),
+    radial-gradient(ellipse 65% 70% at 100% 70%, color-mix(in srgb, var(--calm-glow-blue) 38%, transparent), transparent 68%);
+}
+
+.bookshelf__cover-title {
+  font-size: 14px !important;
+  max-width: 12ch !important;
+}
+
+@media (width <= 720px) {
+  .bookshelf {
+    --bookshelf-gap: 18px !important;
+  }
+  .bookshelf__book {
+    --book-w: 118px !important;
+    --book-h: 168px !important;
+  }
+  .bookshelf:not(.is-scrollable) .bookshelf__track {
+    justify-content: flex-start;
   }
 }
 
