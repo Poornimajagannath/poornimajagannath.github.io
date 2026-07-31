@@ -1,0 +1,180 @@
+/* Frosted P hero — standalone mark, no card */
+
+.soft-hero--frost {
+  width: 100%;
+  margin: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(420px, 72vh, 640px);
+  background:
+    radial-gradient(ellipse 70% 55% at 78% 42%, color-mix(in srgb, var(--calm-glow-pink, #f3c4d1) 70%, transparent), transparent 70%),
+    radial-gradient(ellipse 55% 50% at 62% 70%, color-mix(in srgb, var(--calm-glow-blue, #c7d8f0) 65%, transparent), transparent 72%),
+    radial-gradient(ellipse 45% 40% at 88% 18%, color-mix(in srgb, var(--calm-lilac, #ddd0ef) 55%, transparent), transparent 68%),
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--calm-cream, #f7f1ea) 88%, white) 0%,
+      var(--blume-background, #faf7f2) 48%,
+      color-mix(in srgb, var(--calm-pink, #f6e4ea) 55%, var(--blume-background, #faf7f2)) 100%
+    );
+}
+
+:root[data-theme="dark"] .soft-hero--frost {
+  background:
+    radial-gradient(ellipse 70% 55% at 78% 42%, color-mix(in srgb, var(--calm-glow-pink, #f3c4d1) 28%, transparent), transparent 70%),
+    radial-gradient(ellipse 55% 50% at 62% 70%, color-mix(in srgb, var(--calm-glow-blue, #c7d8f0) 22%, transparent), transparent 72%),
+    radial-gradient(ellipse 45% 40% at 88% 18%, #2a254059, transparent 68%),
+    linear-gradient(165deg, #121820 0%, var(--blume-background, #0d1117) 55%, #151018 100%);
+}
+
+.soft-hero--frost .soft-hero__compose {
+  width: 100%;
+  max-width: var(--home-max, 72rem);
+  margin: 0 auto;
+  padding:
+    clamp(2rem, 5vw, 3.25rem)
+    var(--home-pad-x, clamp(1.5rem, 4vw, 2.5rem))
+    clamp(2.25rem, 5vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(1.25rem, 4vw, 3rem);
+  align-items: center;
+  min-height: inherit;
+  position: relative;
+  z-index: 1;
+}
+
+.soft-hero--frost .soft-hero__copy {
+  z-index: 2;
+  max-width: 34rem;
+  padding: 0;
+  position: relative;
+  pointer-events: none;
+}
+
+.soft-hero--frost .soft-hero__copy a,
+.soft-hero--frost .soft-hero__copy .calm-btn {
+  pointer-events: auto;
+}
+
+.soft-hero--frost .soft-hero__copy h1 {
+  letter-spacing: -0.05em;
+  max-width: 10ch;
+  color: var(--calm-ink, #1c2430);
+  margin: 0 0 14px;
+  font-size: clamp(40px, 6.4vw, 64px);
+  font-weight: 520;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.soft-hero--frost .soft-hero__lead {
+  max-width: 34ch;
+  color: var(--calm-muted, #5b6573);
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.soft-hero--frost .soft-hero__enter {
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+  transition:
+    opacity 0.52s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.52s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.soft-hero--frost .soft-hero__copy.is-ready .soft-hero__enter {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.soft-hero--frost .soft-hero__copy.is-ready .soft-hero__enter:nth-child(1) {
+  transition-delay: 40ms;
+}
+
+.soft-hero--frost .soft-hero__copy.is-ready .soft-hero__enter:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.soft-hero--frost .soft-hero__copy.is-ready .soft-hero__enter:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+.soft-hero--frost .soft-hero__mark-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  max-height: min(560px, 70vh);
+  margin-inline: auto;
+  pointer-events: none;
+}
+
+.soft-hero--frost .soft-hero__mark-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  pointer-events: auto;
+  cursor: default;
+}
+
+.soft-hero--frost .soft-hero__floor-shadow {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 7%;
+  height: 12%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--calm-ink, #1c2430) 16%, transparent) 0%,
+    transparent 72%
+  );
+  filter: blur(10px);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  transform: translateY(4%);
+}
+
+:root[data-theme="dark"] .soft-hero--frost .soft-hero__floor-shadow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.45) 0%,
+    transparent 72%
+  );
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .soft-hero--frost {
+    min-height: auto;
+  }
+
+  .soft-hero--frost .soft-hero__compose {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding-top: clamp(1.25rem, 4vw, 2rem);
+    padding-bottom: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .soft-hero--frost .soft-hero__mark-stage {
+    order: -1;
+    max-height: min(420px, 52vh);
+    width: min(100%, 420px);
+  }
+
+  .soft-hero--frost .soft-hero__copy h1 {
+    font-size: clamp(34px, 11vw, 48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soft-hero--frost .soft-hero__enter {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
