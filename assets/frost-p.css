@@ -125,6 +125,9 @@
   max-height: min(560px, 70vh);
   margin-inline: auto;
   pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .soft-hero--frost .soft-hero__mark-stage canvas {
@@ -134,6 +137,7 @@
   touch-action: none;
   pointer-events: auto;
   cursor: default;
+  background: transparent;
 }
 
 .soft-hero--frost .soft-hero__floor-shadow {
