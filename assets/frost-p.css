@@ -5,18 +5,33 @@
   margin: 0;
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
+  border-radius: 0;
   min-height: clamp(420px, 72vh, 640px);
   background:
     radial-gradient(ellipse 70% 55% at 78% 42%, color-mix(in srgb, var(--calm-glow-pink, #f3c4d1) 70%, transparent), transparent 70%),
     radial-gradient(ellipse 55% 50% at 62% 70%, color-mix(in srgb, var(--calm-glow-blue, #c7d8f0) 65%, transparent), transparent 72%),
-    radial-gradient(ellipse 45% 40% at 88% 18%, color-mix(in srgb, var(--calm-lilac, #ddd0ef) 55%, transparent), transparent 68%),
+    radial-gradient(ellipse 45% 40% at 88% 18%, color-mix(in srgb, var(--calm-lilac, #eee6ff) 55%, transparent), transparent 68%),
     linear-gradient(
       165deg,
-      color-mix(in srgb, var(--calm-cream, #f7f1ea) 88%, white) 0%,
+      color-mix(in srgb, var(--calm-cream, #fffaf2) 88%, white) 0%,
       var(--blume-background, #faf7f2) 48%,
-      color-mix(in srgb, var(--calm-pink, #f6e4ea) 55%, var(--blume-background, #faf7f2)) 100%
+      color-mix(in srgb, var(--calm-pink, #ffe3ef) 55%, var(--blume-background, #faf7f2)) 100%
     );
+}
+
+/* Let the mark sit on the page plane — no compose-card shell */
+.home-rail:has(> .soft-hero--frost) {
+  width: 100% !important;
+  max-width: none !important;
+  box-shadow: none;
+}
+
+.home:has(.soft-hero--frost) {
+  background:
+    radial-gradient(ellipse 80% 50% at 70% 18%, color-mix(in srgb, var(--calm-pink, #ffe3ef) 55%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 45% at 20% 0%, color-mix(in srgb, var(--calm-blue, #dff0ff) 50%, transparent), transparent 65%),
+    var(--blume-background, #faf7f2);
 }
 
 :root[data-theme="dark"] .soft-hero--frost {
@@ -28,7 +43,7 @@
 }
 
 .soft-hero--frost .soft-hero__compose {
-  width: 100%;
+  width: min(1100px, calc(100% - 24px));
   max-width: var(--home-max, 72rem);
   margin: 0 auto;
   padding:
@@ -42,12 +57,13 @@
   min-height: inherit;
   position: relative;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 .soft-hero--frost .soft-hero__copy {
   z-index: 2;
   max-width: 34rem;
-  padding: 0;
+  padding: 0 !important;
   position: relative;
   pointer-events: none;
 }

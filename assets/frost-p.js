@@ -72,36 +72,35 @@
       return mat2(c, -s, s, c);
     }
 
-    // Rounded tubular letter P in local space.
+    // Rounded tubular uppercase P in local space.
     float sdLetterP(vec3 p) {
-      // Stem
-      float stem = sdCapsule(p, vec3(-0.55, -1.15, 0.0), vec3(-0.55, 1.15, 0.0), 0.34);
+      // Tall stem — clear uppercase proportion
+      float stem = sdCapsule(p, vec3(-0.7, -1.35, 0.0), vec3(-0.7, 1.25, 0.0), 0.33);
 
-      // Bowl as a torus segment on the upper right
-      vec3 q = p - vec3(-0.05, 0.42, 0.0);
-      float bowl = sdTorus(q.xzy, vec2(0.62, 0.34));
+      // Bowl sits on the upper half
+      vec3 q = p - vec3(-0.18, 0.48, 0.0);
+      float bowl = sdTorus(q.xzy, vec2(0.58, 0.33));
 
-      // Keep only the right half of the torus (bowl of P)
-      float halfCut = -q.x + 0.02;
-      bowl = max(bowl, halfCut);
+      // Right half only (open counter of the P)
+      bowl = max(bowl, -q.x);
 
-      // Cap the bowl vertically to the upper body
-      float bowlGate = sdRoundBox(p - vec3(0.05, 0.42, 0.0), vec3(0.95, 0.72, 0.5), 0.08);
+      // Keep bowl in the upper body
+      float bowlGate = sdRoundBox(p - vec3(0.05, 0.48, 0.0), vec3(0.95, 0.7, 0.5), 0.08);
       bowl = max(bowl, bowlGate);
 
-      // Small bridge where stem meets bowl
-      float join = sdRoundBox(p - vec3(-0.28, 0.42, 0.0), vec3(0.28, 0.55, 0.22), 0.18);
+      // Join stem to bowl
+      float join = sdRoundBox(p - vec3(-0.38, 0.48, 0.0), vec3(0.3, 0.58, 0.22), 0.16);
 
-      float d = opSmoothUnion(stem, bowl, 0.12);
+      float d = opSmoothUnion(stem, bowl, 0.11);
       d = opSmoothUnion(d, join, 0.1);
       return d;
     }
 
     float map(vec3 p) {
-      // Idle + pointer tilt
-      p.yz *= rot(-0.18 + u_pointer.y * 0.22);
-      p.xz *= rot(0.55 + u_pointer.x * 0.35 + u_time * 0.18);
-      p.xy *= rot(sin(u_time * 0.31) * 0.05);
+      // Idle + pointer tilt — three-quarter view that keeps the counter open
+      p.yz *= rot(-0.05 + u_pointer.y * 0.16);
+      p.xz *= rot(0.22 + u_pointer.x * 0.26 + u_time * 0.12);
+      p.xy *= rot(sin(u_time * 0.26) * 0.035);
       return sdLetterP(p);
     }
 
@@ -143,20 +142,20 @@
     // Pastel rainbow keyed to letter height / depth.
     vec3 pastelAlbedo(vec3 p, vec3 n) {
       float h = clamp((p.y + 1.25) / 2.5, 0.0, 1.0);
-      float swirl = h + 0.12 * p.x + 0.08 * sin(p.y * 2.2 + u_time * 0.4);
-      vec3 c1 = vec3(0.62, 0.78, 0.98); // soft blue
-      vec3 c2 = vec3(0.78, 0.70, 0.95); // lilac
-      vec3 c3 = vec3(0.96, 0.68, 0.82); // pink
-      vec3 c4 = vec3(0.98, 0.78, 0.62); // peach
-      vec3 c5 = vec3(0.86, 0.92, 0.62); // lime
+      float swirl = fract(h * 0.85 + 0.18 * p.x + 0.1 * p.z + 0.08 * sin(p.y * 2.4 + u_time * 0.55));
+      vec3 c1 = vec3(0.55, 0.78, 1.00); // sky blue
+      vec3 c2 = vec3(0.72, 0.62, 0.98); // lilac
+      vec3 c3 = vec3(0.98, 0.55, 0.78); // pink
+      vec3 c4 = vec3(1.00, 0.72, 0.48); // peach
+      vec3 c5 = vec3(0.78, 0.94, 0.52); // lime
       vec3 col;
       if (swirl < 0.25) col = mix(c1, c2, swirl / 0.25);
       else if (swirl < 0.5) col = mix(c2, c3, (swirl - 0.25) / 0.25);
       else if (swirl < 0.75) col = mix(c3, c4, (swirl - 0.5) / 0.25);
       else col = mix(c4, c5, (swirl - 0.75) / 0.25);
-      // Fresnel lifts edges toward milky glass
-      float fres = pow(1.0 - max(dot(n, vec3(0.0, 0.0, 1.0)), 0.0), 2.2);
-      col = mix(col, vec3(0.95, 0.96, 0.98), 0.22 + 0.35 * fres);
+      // Keep a little frosted milk, but let color stay visible
+      float fres = pow(1.0 - abs(dot(n, normalize(-vec3(p.xy * 0.15, 1.0)))), 2.0);
+      col = mix(col, vec3(0.96, 0.97, 0.99), 0.12 + 0.22 * fres);
       return col;
     }
 
@@ -169,29 +168,29 @@
         0.55 - u_pointer.y * 0.35
       ));
       float wrap = dot(n, lightDir) * 0.5 + 0.5;
-      float diff = pow(wrap, 1.4);
+      float diff = pow(wrap, 1.25);
       float shadow = softShadow(p + n * 0.02, lightDir, 8.0);
-      shadow = mix(0.55, 1.0, shadow);
+      shadow = mix(0.62, 1.0, shadow);
 
       // Specular — broad frosted highlight
       vec3 h = normalize(lightDir - rd);
-      float spec = pow(max(dot(n, h), 0.0), 28.0) * 0.28;
-      float rim = pow(1.0 - max(dot(n, -rd), 0.0), 3.0) * 0.35;
+      float spec = pow(max(dot(n, h), 0.0), 22.0) * 0.34;
+      float rim = pow(1.0 - max(dot(n, -rd), 0.0), 2.4) * 0.42;
 
       vec3 amb = shAmbient(n);
       vec3 lit =
-        albedo * amb * 0.72 +
-        albedo * diff * shadow * mix(vec3(1.0, 0.95, 0.92), vec3(0.9, 0.85, 1.0), u_dark) * 0.85 +
-        vec3(1.0) * spec * shadow +
+        albedo * amb * 0.55 +
+        albedo * diff * shadow * mix(vec3(1.0, 0.96, 0.93), vec3(0.92, 0.88, 1.0), u_dark) * 1.05 +
+        mix(albedo, vec3(1.0), 0.35) * spec * shadow +
         albedo * rim;
 
       // Soft translucency: light bleeding through
       float thickness = clamp(0.55 + 0.45 * p.z, 0.2, 1.0);
-      lit += albedo * 0.18 * (1.0 - thickness) * wrap;
+      lit += albedo * 0.28 * (1.0 - thickness) * wrap;
 
       // Very soft ground contact cue from camera space y
       float floorFade = smoothstep(-1.6, -0.2, p.y);
-      lit *= mix(0.82, 1.0, floorFade);
+      lit *= mix(0.86, 1.0, floorFade);
 
       return lit;
     }
