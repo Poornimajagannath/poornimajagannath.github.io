@@ -1,6 +1,6 @@
 ---
 title: Say hello
-description: A few useful links.
+description: Ways to reach Poornima Jagannath on LinkedIn, plus links to the essays and side projects published on this site.
 ---
 
 LinkedIn is the easiest place to reach me.

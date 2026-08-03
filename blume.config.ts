@@ -3,7 +3,7 @@ import { defineConfig } from "blume";
 export default defineConfig({
   title: "Poornima Jagannath",
   description:
-    "I care about developer experience, APIs, SDKs, AI, and small things I build.",
+    "Personal writing and projects from Poornima Jagannath on developer experience, APIs, SDKs, AI agents, and small things built outside work.",
 
   content: {
     root: "content",

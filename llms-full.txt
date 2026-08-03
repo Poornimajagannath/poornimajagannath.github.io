@@ -1,6 +1,6 @@
 # Poornima Jagannath
 
-> I care about developer experience, APIs, SDKs, AI, and small things I build.
+> Personal writing and projects from Poornima Jagannath on developer experience, APIs, SDKs, AI agents, and small things built outside work.
 
 # Building
 Source: https://poornimajagannath.github.io/building
@@ -54,7 +54,7 @@ Source: https://poornimajagannath.github.io/writing
 
 - [How this site came together](/writing/building-this-site-in-the-ai-era)
 - [Building "What's This in Kannada?"](/building/whats-this-in-kannada)
-- [Buying back time with a fleet of AI agents](/writing/buying-back-time-with-ai-agents)
+- [Buying back time with AI agents](/writing/buying-back-time-with-ai-agents)
 
 ---
 
@@ -99,7 +99,7 @@ Thank you for being here.
 
 ---
 
-# Buying back time with a fleet of AI agents
+# Buying back time with AI agents
 Source: https://poornimajagannath.github.io/writing/buying-back-time-with-ai-agents
 
 It started with a simple question. Where am I losing time, and what would I do with that time if I got it back?

@@ -1,6 +1,6 @@
 ---
-title: Buying back time with a fleet of AI agents
-description: What a small Slack fleet is teaching me about time, presence, and imperfect systems.
+title: Buying back time with AI agents
+description: What a small Slack fleet of AI agents is teaching me about reclaiming time, staying present, and shipping imperfect systems.
 ---
 
 It started with a simple question. Where am I losing time, and what would I do with that time if I got it back?

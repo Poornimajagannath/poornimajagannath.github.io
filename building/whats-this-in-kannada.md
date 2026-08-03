@@ -1,6 +1,6 @@
 ---
 title: Building What's This in Kannada?
-description: A small iOS app I am building for my daughter, and what it taught me about language, product, and AI.
+description: A small iOS app for my daughter that teaches Kannada words through images, voice, and play — and what it taught me about language, product, and AI.
 ---
 
 My daughter asks "what's this?" about everything. The spoon. The dog on the street. The leaf that fell on the car. She is two. The world is a question.
