@@ -1,0 +1,97 @@
+/* Calm palette + Blume token overrides for the personal site */
+
+:root {
+  --blume-background: #fffaf6;
+  --blume-foreground: #172033;
+  --blume-muted: #f3f7fc;
+  --blume-muted-foreground: #5a667a;
+  --blume-border: #1720331f;
+  --blume-accent: #3f8fd9;
+  --blume-accent-foreground: #fff;
+  --blume-action: #172033;
+  --blume-radius: 1rem;
+
+  --calm-ink: #172033;
+  --calm-muted: #5a667a;
+  --calm-line: #1720331f;
+  --calm-blue: #dff0ff;
+  --calm-blue-strong: #3f8fd9;
+  --calm-pink: #ffe3ef;
+  --calm-pink-strong: #d85a8a;
+  --calm-lilac: #eee6ff;
+  --calm-mint: #def8ee;
+  --calm-cream: #fffaf2;
+  --calm-panel: #ffffffd1;
+  --calm-panel-border: #ffffffd9;
+  --calm-shadow: 0 24px 80px #43567829;
+  --calm-surface: #ffffff9e;
+  --calm-surface-soft: #ffffff8c;
+  --calm-tag-fg: #7c6a7b;
+  --calm-num-bg: #dff0ff;
+  --calm-num-fg: #24558c;
+  --calm-btn-fg: #172033;
+  --calm-btn-bg: #ffffffb8;
+  --calm-btn-border: #17203324;
+  --calm-btn-primary-bg: #172033;
+  --calm-btn-primary-fg: #fff;
+  --calm-note-bg: #1720330d;
+  --calm-glow-pink: #ffe3efe6;
+  --calm-glow-blue: #dff0fff2;
+  --calm-canvas-blue: #3f8fd9;
+  --calm-canvas-pink: #d85a8a;
+  --calm-quote-bg: #172033;
+  --calm-quote-fg: #fff;
+  --calm-quote-muted: #ffffffc7;
+  --calm-body-bg:
+    radial-gradient(circle at 12% 0%, #ffe3efd9, transparent 34%),
+    radial-gradient(circle at 88% 8%, #dff0ffe6, transparent 36%),
+    linear-gradient(160deg, #fffaf6, #f7fbff 50%, #fff7fb);
+  --calm-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:root[data-theme="dark"] {
+  --blume-background: #0e141d;
+  --blume-foreground: #f3f6fb;
+  --blume-muted: #1a2330;
+  --blume-muted-foreground: #b7c2d4;
+  --blume-border: #f3f6fb29;
+  --blume-accent: #7eb6f0;
+  --blume-accent-foreground: #0b1017;
+  --blume-action: #f3f6fb;
+
+  --calm-ink: #f3f6fb;
+  --calm-muted: #b7c2d4;
+  --calm-line: #f3f6fb29;
+  --calm-blue: #1d3348;
+  --calm-blue-strong: #8ec0f4;
+  --calm-pink: #3a2432;
+  --calm-pink-strong: #f0a0c0;
+  --calm-lilac: #2a2540;
+  --calm-mint: #1d3430;
+  --calm-cream: #151c27;
+  --calm-panel: #161e2aeb;
+  --calm-panel-border: #f3f6fb1f;
+  --calm-shadow: 0 24px 80px #00000073;
+  --calm-surface: #f3f6fb0f;
+  --calm-surface-soft: #f3f6fb14;
+  --calm-tag-fg: #d0b8c6;
+  --calm-num-bg: #1d3348;
+  --calm-num-fg: #b7d8f8;
+  --calm-btn-fg: #f3f6fb;
+  --calm-btn-bg: #f3f6fb14;
+  --calm-btn-border: #f3f6fb33;
+  --calm-btn-primary-bg: #f3f6fb;
+  --calm-btn-primary-fg: #0e141d;
+  --calm-note-bg: #f3f6fb12;
+  --calm-glow-pink: #a8829412;
+  --calm-glow-blue: #6e8ca812;
+  --calm-canvas-blue: #6a849c;
+  --calm-canvas-pink: #8f7382;
+  --calm-quote-bg: #f3f6fb;
+  --calm-quote-fg: #0e141d;
+  --calm-quote-muted: #0e141db8;
+  --calm-body-bg:
+    radial-gradient(circle at 12% 0%, #a882940f, transparent 36%),
+    radial-gradient(circle at 88% 8%, #6e8ca80f, transparent 38%),
+    linear-gradient(165deg, #0e141d 0%, #121a26 48%, #141018 100%);
+}

@@ -2,11 +2,21 @@
   "name": "poornimajagannath.github.io",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.19.0"
+  },
   "scripts": {
+    "dev": "blume dev",
+    "build": "blume build",
+    "preview": "blume preview",
+    "publish:site": "node scripts/publish-site.mjs",
     "posthog:inject": "node scripts/inject-posthog.mjs",
     "posthog:config": "node scripts/apply-posthog-config.mjs",
     "posthog:dashboard": "node scripts/create-posthog-dashboard.mjs",
     "posthog:report": "node scripts/generate-posthog-report.mjs",
     "posthog:email": "node scripts/subscribe-posthog-email.mjs"
+  },
+  "dependencies": {
+    "blume": "^1.3.1"
   }
 }

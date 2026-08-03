@@ -1,6 +1,6 @@
 ---
 title: How this site came together
-description: Voice notes, Codex, Markdown, Astro, Blume, and a lot of editing.
+description: How voice notes, Codex, Markdown, Astro, and Blume turned into a personal site built for people and AI tools to read.
 ---
 
 Not a resume dump. Not a perfect brand system. Just a place that felt like me. Somewhere I could publish when my mind was clear, not only when I happened to be at a desk.

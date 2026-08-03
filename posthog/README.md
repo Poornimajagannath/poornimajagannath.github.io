@@ -59,16 +59,7 @@ npm run posthog:report
 
 ## Blume rebuilds
 
-If you rebuild from Blume source later:
+PostHog is wired natively in `blume.config.ts` (`analytics.posthog`).
+After `npm run publish:site`, production HTML includes the PostHog snippet automatically — you usually do **not** need `npm run posthog:inject`.
 
-```ts
-analytics: {
-  posthog: {
-    key: "phc_...",
-    host: "https://us.i.posthog.com",
-  },
-}
-```
-
-Keep `/stats`, `/scripts`, and `/posthog` in the published repo. Re-run
-`npm run posthog:inject` if HTML is regenerated without Blume analytics.
+Keep `/stats`, `/scripts`, and `/posthog` in the published repo.
