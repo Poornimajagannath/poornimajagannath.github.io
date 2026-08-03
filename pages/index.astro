@@ -1,0 +1,580 @@
+---
+import PageLayout from "blume/components/layout/PageLayout.astro";
+import data from "blume:data";
+import "./_home/home.css";
+
+const { config } = data;
+const description =
+  config.description ??
+  "I care about developer experience, APIs, SDKs, AI, and small things I build.";
+---
+
+<PageLayout
+  site={{ title: config.title, description }}
+  logo={config.logo}
+  banner={config.banner}
+  analytics={config.analytics}
+  navigation={data.navigation}
+  favicon={config.favicon}
+  fontCssVars={data.fontCssVars}
+  themeMode={config.theme.mode}
+  searchEnabled={config.search.enabled}
+  siteUrl={config.site}
+  ogEnabled={config.og.enabled}
+  page={{
+    title: config.title,
+    description,
+    route: "/",
+  }}
+>
+  <link rel="stylesheet" href="/assets/frost-p.css?v=10" />
+  <div class="home">
+    <div class="home-rail">
+      <section class="soft-hero soft-hero--frost" aria-labelledby="hero-title">
+        <div class="soft-hero__compose">
+          <div class="soft-hero__copy" data-hero-copy>
+            <h1 id="hero-title" class="soft-hero__enter">Poornima Jagannath</h1>
+            <p class="soft-hero__lead soft-hero__enter">
+              I care about developer experience, APIs, SDKs, and AI a little more
+              than I probably need to.
+            </p>
+            <div class="calm-btns soft-hero__enter">
+              <a class="calm-btn calm-btn--primary" href="#writing"
+                >Read the essays</a
+              >
+              <a
+                class="calm-btn"
+                href="https://www.linkedin.com/in/poornima-j"
+                target="_blank"
+                rel="noopener">LinkedIn</a
+              >
+            </div>
+          </div>
+          <div class="soft-hero__mark-stage" aria-hidden="true">
+            <span class="soft-hero__floor-shadow"></span>
+            <canvas data-frost-p width="720" height="760"></canvas>
+          </div>
+        </div>
+      </section>
+      <script is:inline type="module">
+        document.querySelectorAll(`[data-hero-copy]`).forEach((e) => {
+          requestAnimationFrame(() => e.classList.add(`is-ready`));
+        });
+      </script>
+      <script is:inline type="module" src="/assets/frost-p.js?v=10"></script>
+    </div>
+
+    <section
+      class="home-section home-section--experience"
+      data-reveal
+      id="experience"
+      aria-labelledby="experience-title"
+    >
+      <div class="home-rail">
+        <header class="home-section__head">
+          <p class="calm-eyebrow">What I do</p>
+          <h2 id="experience-title">Developer experience in payment tech.</h2>
+          <p>
+            I lead product work and manage people. Most of my work sits at the
+            point where developers meet a platform.
+          </p>
+        </header>
+        <div class="experience-grid">
+          <article class="experience-item">
+            <h3>APIs and SDKs</h3>
+            <p>
+              I work on the paths developers use to understand APIs, choose the
+              right SDK, set up a sandbox, and make their first working call.
+            </p>
+          </article>
+          <article class="experience-item">
+            <h3>Time to integrate</h3>
+            <p>
+              I care about shrinking the time between a developer's first
+              question and a successful integration.
+            </p>
+          </article>
+          <article class="experience-item">
+            <h3>People and product</h3>
+            <p>
+              I have people management experience, and I like building teams that
+              care about clear writing, good systems, and developer trust.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="home-section home-section--public-work"
+      data-reveal
+      id="public-work"
+      aria-labelledby="public-work-title"
+    >
+      <div class="home-rail">
+        <header class="home-section__head">
+          <p class="calm-eyebrow">Public work</p>
+          <h2 id="public-work-title">A few things people can watch or read.</h2>
+          <p>
+            Most of my work happens inside teams. When something is public, I
+            want it to be easy to find.
+          </p>
+        </header>
+        <ul class="quiet-link-list">
+          <li class="quiet-link-list__item">
+            <a
+              class="quiet-link-list__link"
+              href="https://www.youtube.com/playlist?list=PL9qINLsWlhs2fzbdsdEBTMNgasNhbG4er"
+              target="_blank"
+              rel="noopener"
+            >
+              <span>
+                <span class="quiet-link-list__title"
+                  >Cybersource Developer Education Series</span
+                >
+                <span class="quiet-link-list__body"
+                  >A public video series on payments and the developer center.</span
+                >
+              </span>
+              <span class="quiet-link-list__action" aria-hidden="true">Open</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="home-section home-section--bookshelf"
+      data-reveal
+      id="bookshelf"
+      aria-labelledby="bookshelf-title"
+    >
+      <div class="home-rail">
+        <header class="home-section__head">
+          <p class="calm-eyebrow">Reading</p>
+          <h2 id="bookshelf-title">Books I keep returning to</h2>
+          <p>
+            A few books that shaped how I think about products, teams, systems,
+            and work.
+          </p>
+        </header>
+        <div class="bookshelf is-ready" data-bookshelf>
+          <div class="bookshelf__stage">
+            <button
+              class="bookshelf__nav bookshelf__nav--prev"
+              type="button"
+              aria-label="Previous books"
+              data-bookshelf-prev
+            >
+              <svg
+                aria-hidden="true"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 18l-6-6 6-6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <div
+              class="bookshelf__track"
+              data-bookshelf-track
+              tabindex="0"
+              role="list"
+              aria-label="Books on the shelf"
+            >
+              <article
+                class="bookshelf__book bookshelf__book--blue"
+                role="listitem"
+                tabindex="0"
+                style="--book-h:172px"
+                data-book-index="0"
+              >
+                <div class="bookshelf__cover" aria-hidden="true">
+                  <span class="bookshelf__cover-title"
+                    >The Design of Everyday Things</span
+                  >
+                  <span class="bookshelf__cover-author">Don Norman</span>
+                </div>
+                <h3 class="visually-hidden">
+                  The Design of Everyday Things by Don Norman. Made me care about
+                  affordances before I had the word for it.
+                </h3>
+              </article>
+              <article
+                class="bookshelf__book bookshelf__book--blush"
+                role="listitem"
+                tabindex="0"
+                style="--book-h:172px"
+                data-book-index="1"
+              >
+                <div class="bookshelf__cover" aria-hidden="true">
+                  <span class="bookshelf__cover-title">Inspired</span>
+                  <span class="bookshelf__cover-author">Marty Cagan</span>
+                </div>
+                <h3 class="visually-hidden">
+                  Inspired by Marty Cagan. Still the book I hand people when
+                  “product” starts meaning too many things at once.
+                </h3>
+              </article>
+              <article
+                class="bookshelf__book bookshelf__book--cream"
+                role="listitem"
+                tabindex="0"
+                style="--book-h:172px"
+                data-book-index="2"
+              >
+                <div class="bookshelf__cover" aria-hidden="true">
+                  <span class="bookshelf__cover-title">Working Backwards</span>
+                  <span class="bookshelf__cover-author">Bryar &amp; Carr</span>
+                </div>
+                <h3 class="visually-hidden">
+                  Working Backwards by Bryar &amp; Carr. Still the cleanest way I
+                  know to force product clarity.
+                </h3>
+              </article>
+              <article
+                class="bookshelf__book bookshelf__book--lilac"
+                role="listitem"
+                tabindex="0"
+                style="--book-h:172px"
+                data-book-index="3"
+              >
+                <div class="bookshelf__cover" aria-hidden="true">
+                  <span class="bookshelf__cover-title"
+                    >The Making of a Manager</span
+                  >
+                  <span class="bookshelf__cover-author">Julie Zhuo</span>
+                </div>
+                <h3 class="visually-hidden">
+                  The Making of a Manager by Julie Zhuo. Honest about the awkward
+                  middle of learning to lead without losing the work.
+                </h3>
+              </article>
+              <article
+                class="bookshelf__book bookshelf__book--ink"
+                role="listitem"
+                tabindex="0"
+                style="--book-h:172px"
+                data-book-index="4"
+              >
+                <div class="bookshelf__cover" aria-hidden="true">
+                  <span class="bookshelf__cover-title">The Manager's Path</span>
+                  <span class="bookshelf__cover-author">Camille Fournier</span>
+                </div>
+                <h3 class="visually-hidden">
+                  The Manager's Path by Camille Fournier. Useful when people
+                  management stopped being theoretical.
+                </h3>
+              </article>
+              <article
+                class="bookshelf__book bookshelf__book--blush"
+                role="listitem"
+                tabindex="0"
+                style="--book-h:172px"
+                data-book-index="5"
+              >
+                <div class="bookshelf__cover" aria-hidden="true">
+                  <span class="bookshelf__cover-title">Thinking in Systems</span>
+                  <span class="bookshelf__cover-author">Donella Meadows</span>
+                </div>
+                <h3 class="visually-hidden">
+                  Thinking in Systems by Donella Meadows. Changed how I see
+                  platforms, incentives, and the loops developers get stuck in.
+                </h3>
+              </article>
+            </div>
+            <div class="bookshelf__shelf" aria-hidden="true">
+              <span class="bookshelf__shelf-top"></span>
+              <span class="bookshelf__shelf-face"></span>
+            </div>
+            <button
+              class="bookshelf__nav bookshelf__nav--next"
+              type="button"
+              aria-label="Next books"
+              data-bookshelf-next
+            >
+              <svg
+                aria-hidden="true"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 18l6-6-6-6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <ul class="bookshelf-notes" data-bookshelf-notes>
+          <li class="bookshelf-notes__item" data-book-note="0">
+            <span class="bookshelf-notes__title"
+              >The Design of Everyday Things</span
+            >
+            <span class="bookshelf-notes__body"
+              >Made me care about affordances before I had the word for it.</span
+            >
+          </li>
+          <li class="bookshelf-notes__item" data-book-note="1">
+            <span class="bookshelf-notes__title">Inspired</span>
+            <span class="bookshelf-notes__body"
+              >Still the book I hand people when “product” starts meaning too
+              many things at once.</span
+            >
+          </li>
+          <li class="bookshelf-notes__item" data-book-note="2">
+            <span class="bookshelf-notes__title">Working Backwards</span>
+            <span class="bookshelf-notes__body"
+              >Still the cleanest way I know to force product clarity.</span
+            >
+          </li>
+          <li class="bookshelf-notes__item" data-book-note="3">
+            <span class="bookshelf-notes__title">The Making of a Manager</span>
+            <span class="bookshelf-notes__body"
+              >Honest about the awkward middle of learning to lead without losing
+              the work.</span
+            >
+          </li>
+          <li class="bookshelf-notes__item" data-book-note="4">
+            <span class="bookshelf-notes__title">The Manager's Path</span>
+            <span class="bookshelf-notes__body"
+              >Useful when people management stopped being theoretical.</span
+            >
+          </li>
+          <li class="bookshelf-notes__item" data-book-note="5">
+            <span class="bookshelf-notes__title">Thinking in Systems</span>
+            <span class="bookshelf-notes__body"
+              >Changed how I see platforms, incentives, and the loops developers
+              get stuck in.</span
+            >
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <script is:inline type="module">
+      document.querySelectorAll(`[data-bookshelf]`).forEach((root) => {
+        const track = root.querySelector(`[data-bookshelf-track]`);
+        const prev = root.querySelector(`[data-bookshelf-prev]`);
+        const next = root.querySelector(`[data-bookshelf-next]`);
+        const notes = root.parentElement?.querySelector(`[data-bookshelf-notes]`);
+        if (!track || !prev || !next) return;
+        root.classList.add(`is-ready`);
+        const reduce = () =>
+          window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;
+        const setActiveNote = (index) => {
+          if (!notes) return;
+          notes.querySelectorAll(`[data-book-note]`).forEach((el) => {
+            const on = el.getAttribute(`data-book-note`) === String(index);
+            el.classList.toggle(`is-active`, on);
+          });
+          notes.classList.toggle(`has-active`, index != null);
+        };
+        const timers = new WeakMap();
+        let tap = null;
+        const popBook = (book) => {
+          if (!book) return;
+          const index = book.getAttribute(`data-book-index`);
+          setActiveNote(index);
+          if (reduce()) return;
+          const prevTimer = timers.get(book);
+          if (prevTimer) clearTimeout(prevTimer);
+          book.classList.remove(`is-popping`, `is-settling`);
+          void book.offsetWidth;
+          book.classList.add(`is-popping`);
+          const t = setTimeout(() => {
+            book.classList.add(`is-settling`);
+            book.classList.remove(`is-popping`);
+            const t2 = setTimeout(
+              () => book.classList.remove(`is-settling`),
+              160,
+            );
+            timers.set(book, t2);
+          }, 220);
+          timers.set(book, t);
+        };
+        track.addEventListener(
+          `pointerdown`,
+          (e) => {
+            const book = e.target.closest(`.bookshelf__book`);
+            if (!book || !track.contains(book)) return;
+            if (e.pointerType === `mouse` && e.button !== 0) return;
+            tap = { id: e.pointerId, x: e.clientX, y: e.clientY, book };
+          },
+          { passive: true },
+        );
+        track.addEventListener(
+          `pointerup`,
+          (e) => {
+            if (!tap || tap.id !== e.pointerId) return;
+            const dx = e.clientX - tap.x,
+              dy = e.clientY - tap.y;
+            const book = tap.book;
+            tap = null;
+            if (Math.hypot(dx, dy) > 10) return;
+            popBook(book);
+          },
+          { passive: true },
+        );
+        track.addEventListener(
+          `pointercancel`,
+          () => {
+            tap = null;
+          },
+          { passive: true },
+        );
+        track.addEventListener(`focusin`, (e) => {
+          const book = e.target.closest(`.bookshelf__book`);
+          if (book) setActiveNote(book.getAttribute(`data-book-index`));
+        });
+        track.addEventListener(`keydown`, (e) => {
+          if (e.key !== `Enter` && e.key !== ` `) return;
+          const book = e.target.closest(`.bookshelf__book`);
+          if (!book) return;
+          e.preventDefault();
+          popBook(book);
+        });
+        if (window.matchMedia(`(hover: hover) and (pointer: fine)`).matches) {
+          track.addEventListener(
+            `pointerover`,
+            (e) => {
+              const book = e.target.closest(`.bookshelf__book`);
+              if (book) setActiveNote(book.getAttribute(`data-book-index`));
+            },
+            { passive: true },
+          );
+        }
+        const step = () => {
+          const book = track.querySelector(`.bookshelf__book`);
+          return book ? Math.round(book.getBoundingClientRect().width * 1.6) : 180;
+        };
+        const update = () => {
+          const max = Math.max(0, track.scrollWidth - track.clientWidth);
+          prev.disabled = track.scrollLeft <= 2;
+          next.disabled = track.scrollLeft >= max - 2;
+          root.classList.toggle(`is-scrollable`, max > 4);
+        };
+        prev.addEventListener(`click`, () =>
+          track.scrollBy({
+            left: -step(),
+            behavior: reduce() ? `auto` : `smooth`,
+          }),
+        );
+        next.addEventListener(`click`, () =>
+          track.scrollBy({
+            left: step(),
+            behavior: reduce() ? `auto` : `smooth`,
+          }),
+        );
+        track.addEventListener(`scroll`, update, { passive: true });
+        addEventListener(`resize`, update);
+        update();
+        setActiveNote(`0`);
+      });
+    </script>
+
+    <section
+      class="home-section home-section--writing"
+      data-reveal
+      id="writing"
+      aria-labelledby="writing-title"
+    >
+      <div class="home-rail">
+        <header class="home-section__head">
+          <h2 id="writing-title">Essays</h2>
+        </header>
+        <ul class="essay-index">
+          <li class="essay-index__item">
+            <a
+              class="essay-index__link"
+              href="/writing/building-this-site-in-the-ai-era"
+            >
+              <span class="essay-index__date">July 2026</span>
+              <span>
+                <span class="essay-index__title"
+                  >How this site came together</span
+                >
+                <span class="essay-index__body"
+                  >Voice notes, Codex, Markdown, Astro, Blume, and a lot of
+                  editing.</span
+                >
+              </span>
+            </a>
+          </li>
+          <li class="essay-index__item">
+            <a
+              class="essay-index__link"
+              href="/building/whats-this-in-kannada"
+            >
+              <span class="essay-index__date">July 2026</span>
+              <span>
+                <span class="essay-index__title"
+                  >Building What's This in Kannada?</span
+                >
+                <span class="essay-index__body"
+                  >A love letter written in code. A small iOS app for my
+                  daughter.</span
+                >
+              </span>
+            </a>
+          </li>
+          <li class="essay-index__item">
+            <a
+              class="essay-index__link"
+              href="/writing/buying-back-time-with-ai-agents"
+            >
+              <span class="essay-index__date">July 2026</span>
+              <span>
+                <span class="essay-index__title"
+                  >Buying back time with a fleet of AI agents</span
+                >
+                <span class="essay-index__body"
+                  >What a small Slack fleet is teaching me about time and
+                  presence.</span
+                >
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <script is:inline type="module">
+    (() => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
+        .matches;
+
+      document.querySelectorAll("[data-reveal]").forEach((el) => {
+        if (reduce) {
+          el.classList.add("is-revealed");
+          return;
+        }
+        el.classList.add("reveal-ready");
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-revealed");
+              io.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+        );
+        io.observe(el);
+      });
+    })();
+  </script>
+</PageLayout>

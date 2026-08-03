@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "markdown": {
+      "pattern": "https://poornimajagannath.github.io/{route}.md"
+    },
+    "llmsFullTxt": "https://poornimajagannath.github.io/llms-full.txt",
+    "llmsTxt": "https://poornimajagannath.github.io/llms.txt",
+    "sitemap": "https://poornimajagannath.github.io/sitemap.xml"
+  },
+  "description": "I care about developer experience, APIs, SDKs, AI, and small things I build.",
+  "generator": "blume@1.3.1",
+  "name": "Poornima Jagannath",
+  "site": "https://poornimajagannath.github.io",
+  "contentUsage": {
+    "search": true,
+    "ai-input": true,
+    "ai-train": true
+  },
+  "repository": "https://github.com/Poornimajagannath/poornimajagannath.github.io"
+}
