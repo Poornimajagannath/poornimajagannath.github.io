@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Samaya · 2.1 Sound Review</title>
+<style>
+  :root { --green:#d8ecd8; --blue:#3b82f6; --ink:#111; --muted:#6b7280; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; background: #f3f1ea; color: var(--ink);
+    font-family: system-ui, -apple-system, sans-serif; }
+  body { padding: 14px; padding-bottom: 40px; }
+  h1 { font-size: 1.15rem; margin: 0 0 12px; }
+  .panel { background: var(--green); border-radius: 18px; padding: 16px; }
+  .script { background: #fff; border-radius: 18px; padding: 16px; margin-top: 12px; }
+  .script h2 { font-size: .75rem; color: var(--muted); margin: 0 0 8px; letter-spacing: .06em; }
+  .script p { margin: 0 0 6px; color: #2563eb; font-size: 1.05rem; }
+  .note { color: var(--ink) !important; font-size: .95rem !important; margin-top: 10px !important; }
+  .item { margin: 18px 0 22px; text-align: center; }
+  .letter { font-size: 4rem; font-weight: 800; line-height: 1; user-select: none; }
+  .track-wrap {
+    position: relative; height: 52px; margin: 8px 12px 0;
+    touch-action: none; -webkit-user-select: none; user-select: none;
+  }
+  .track {
+    position: absolute; left: 10%; right: 10%; top: 50%; height: 12px;
+    margin-top: -6px; background: #b9d4b9; border-radius: 999px;
+  }
+  .dot {
+    position: absolute; right: 10%; top: 50%; width: 16px; height: 16px;
+    margin: -8px -8px 0 0; background: #111; border-radius: 50%;
+  }
+  .knob {
+    position: absolute; top: 50%; left: 10%; width: 48px; height: 48px;
+    margin: -24px 0 0 -24px; background: var(--blue); border-radius: 50%;
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; box-shadow: 0 3px 10px rgba(59,130,246,.4);
+    z-index: 3;
+  }
+  .knob.ok { background: #16a34a; }
+  .status { min-height: 1.3em; color: var(--muted); font-size: .9rem; margin-top: 4px; }
+  .build { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
+  .chip { background: #fff; border: 2px solid #7fa87f; border-radius: 999px; padding: 8px 14px; font-weight: 700; }
+  .hint { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 12px; }
+</style>
+</head>
+<body>
+  <h1>2.1 Sound Review · Samaya</h1>
+  <div class="panel" id="letters"></div>
+  <div class="build"><span class="chip">sat</span><span class="chip">mat</span><span class="chip">Sam</span></div>
+  <p class="hint">Drag blue circle to black dot. Hold 2 sec while she says the sound.</p>
+  <aside class="script">
+    <h2>TEACHER SCRIPT</h2>
+    <p>We learned this sound before.</p>
+    <p>Read it when I touch under it.</p>
+    <p>Get ready…</p>
+    <p class="note">👉 Quickly slide to the dot, then hold 2 seconds while <strong>Samaya</strong> says the sound. Keep voice on — mmm aaa ttt sss. Then build sat · mat · Sam.</p>
+  </aside>
+<script>
+(function () {
+  var sounds = [
+    { letter: 'm', say: 'mmm' },
+    { letter: 'a', say: 'aaa' },
+    { letter: 't', say: 'ttt' },
+    { letter: 's', say: 'sss' }
+  ];
+  var root = document.getElementById('letters');
+
+  sounds.forEach(function (s) {
+    var item = document.createElement('div');
+    item.className = 'item';
+    item.innerHTML =
+      '<div class="letter">' + s.letter + '</div>' +
+      '<div class="track-wrap">' +
+        '<div class="track"></div><div class="dot"></div>' +
+        '<div class="knob">➜</div>' +
+      '</div>' +
+      '<div class="status">Say <strong>' + s.say + '</strong></div>';
+    root.appendChild(item);
+
+    var wrap = item.querySelector('.track-wrap');
+    var knob = item.querySelector('.knob');
+    var status = item.querySelector('.status');
+    var dragging = false;
+    var holdTimer = null;
+    var startClientX = 0;
+    var startLeft = 0;
+
+    function range() {
+      var w = wrap.clientWidth;
+      var min = w * 0.10;
+      var max = w * 0.90;
+      return { min: min, max: max };
+    }
+    function setLeft(px) {
+      var r = range();
+      var v = Math.max(r.min, Math.min(r.max, px));
+      knob.style.left = v + 'px';
+      return v >= r.max - 1;
+    }
+    function clearHold() {
+      if (holdTimer) clearTimeout(holdTimer);
+      holdTimer = null;
+      knob.classList.remove('ok');
+    }
+    function atEndHold(atEnd) {
+      clearHold();
+      if (!atEnd) {
+        status.innerHTML = 'Say <strong>' + s.say + '</strong>';
+        return;
+      }
+      status.textContent = 'Hold… keep saying ' + s.say;
+      holdTimer = setTimeout(function () {
+        knob.classList.add('ok');
+        status.textContent = 'Nice — ' + s.say + ' ✓';
+      }, 2000);
+    }
+    function clientX(e) {
+      if (e.touches && e.touches[0]) return e.touches[0].clientX;
+      if (e.changedTouches && e.changedTouches[0]) return e.changedTouches[0].clientX;
+      return e.clientX;
+    }
+    function down(e) {
+      e.preventDefault();
+      dragging = true;
+      clearHold();
+      var r = range();
+      startLeft = parseFloat(knob.style.left) || r.min;
+      startClientX = clientX(e);
+    }
+    function move(e) {
+      if (!dragging) return;
+      e.preventDefault();
+      var dx = clientX(e) - startClientX;
+      var atEnd = setLeft(startLeft + dx);
+      atEndHold(atEnd);
+    }
+    function up(e) {
+      if (!dragging) return;
+      e.preventDefault();
+      dragging = false;
+      var r = range();
+      var cur = parseFloat(knob.style.left) || r.min;
+      if (cur < r.max - 1) {
+        clearHold();
+        setLeft(r.min);
+        status.innerHTML = 'Say <strong>' + s.say + '</strong>';
+      }
+    }
+
+    wrap.addEventListener('touchstart', down, { passive: false });
+    wrap.addEventListener('touchmove', move, { passive: false });
+    wrap.addEventListener('touchend', up, { passive: false });
+    wrap.addEventListener('touchcancel', up, { passive: false });
+    wrap.addEventListener('mousedown', down);
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+
+    setLeft(range().min);
+    window.addEventListener('resize', function () { setLeft(range().min); clearHold(); });
+  });
+})();
+</script>
+</body>
+</html>
