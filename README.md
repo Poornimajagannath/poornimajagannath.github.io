@@ -1,6 +1,6 @@
 # poornimajagannath.github.io
 
-Personal site built with [Blume](https://useblume.dev/) 1.3.
+Personal site built with [Blume](https://useblume.dev/) 2.
 
 ## Develop
 

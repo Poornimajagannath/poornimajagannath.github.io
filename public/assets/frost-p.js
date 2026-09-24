@@ -1,10 +1,50 @@
 /**
  * Frosted glass "P" — real display-font glyph with soft iridescent lighting.
  * No procedural letterform guessing; the shape is an actual uppercase P.
+ * Remounts on `astro:page-load` so Blume's client router can recreate the mark
+ * after tabbing away from Home and back.
  */
-(() => {
+let teardown = null;
+
+const fallbackMark = () => {
+  const el = document.createElement("div");
+  el.className = "soft-hero__mark soft-hero__mark--fallback";
+  el.setAttribute("aria-hidden", "true");
+  el.textContent = "P";
+  el.style.cssText = [
+    'font-family: var(--blume-ff-lora), var(--blume-font-display), Lora, Georgia, serif',
+    "font-size: clamp(7rem, 28vw, 13rem)",
+    "font-weight: 600",
+    "letter-spacing: -0.06em",
+    "line-height: 0.85",
+    "display: grid",
+    "place-items: center",
+    "height: 100%",
+    "background: linear-gradient(135deg, #9ec0f0, #c6a8e8, #f0a8c4, #f0c089, #c8d96a)",
+    "-webkit-background-clip: text",
+    "background-clip: text",
+    "color: transparent",
+    "filter: drop-shadow(0 18px 30px rgba(40, 30, 50, 0.18))",
+    "user-select: none",
+  ].join(";");
+  return el;
+};
+
+const mountFrostP = () => {
   const canvas = document.querySelector("[data-frost-p]");
-  if (!canvas) return;
+  if (!canvas) {
+    if (teardown) {
+      teardown();
+      teardown = null;
+    }
+    return;
+  }
+  if (canvas.dataset.frostMounted === "1") return;
+  if (teardown) {
+    teardown();
+    teardown = null;
+  }
+  canvas.dataset.frostMounted = "1";
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const gl =
@@ -179,9 +219,10 @@
       glyphTex = await buildGlyphTexture();
     } catch (err) {
       console.warn("[frost-p]", err);
-      canvas.replaceWith(fallbackMark());
+      if (canvas.isConnected) canvas.replaceWith(fallbackMark());
       return;
     }
+    if (!canvas.isConnected) return;
 
     const vsh = compile(gl.VERTEX_SHADER, vs);
     const fsh = compile(gl.FRAGMENT_SHADER, fs);
@@ -278,67 +319,57 @@
       if (!raf) raf = requestAnimationFrame(frame);
     }
 
-    stage?.addEventListener(
-      "pointermove",
-      (e) => {
-        if (reduceMotion || !stage) return;
-        const r = stage.getBoundingClientRect();
-        target.x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width) * 2 - 1));
-        target.y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height) * 2 - 1));
-        kick();
-      },
-      { passive: true }
-    );
-    stage?.addEventListener(
-      "pointerleave",
-      () => {
-        target.x = 0;
-        target.y = 0;
-        if (stage) stage.style.transform = "";
-      },
-      { passive: true }
-    );
-    window.addEventListener("resize", () => {
+    const onPointerMove = (e) => {
+      if (reduceMotion || !stage) return;
+      const r = stage.getBoundingClientRect();
+      target.x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width) * 2 - 1));
+      target.y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height) * 2 - 1));
+      kick();
+    };
+    const onPointerLeave = () => {
+      target.x = 0;
+      target.y = 0;
+      if (stage) stage.style.transform = "";
+    };
+    const onResize = () => {
       resize();
       kick();
-    });
-    new MutationObserver(() => kick()).observe(document.documentElement, {
+    };
+    stage?.addEventListener("pointermove", onPointerMove, { passive: true });
+    stage?.addEventListener("pointerleave", onPointerLeave, { passive: true });
+    window.addEventListener("resize", onResize);
+    const themeObserver = new MutationObserver(() => kick());
+    themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["data-theme"],
     });
+    let io = null;
     if ("IntersectionObserver" in window) {
-      new IntersectionObserver(
+      io = new IntersectionObserver(
         (entries) => {
           visible = entries.some((en) => en.isIntersecting);
           if (visible) kick();
         },
         { threshold: 0.05 }
-      ).observe(canvas);
+      );
+      io.observe(canvas);
     }
+    teardown = () => {
+      visible = false;
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+      stage?.removeEventListener("pointermove", onPointerMove);
+      stage?.removeEventListener("pointerleave", onPointerLeave);
+      window.removeEventListener("resize", onResize);
+      themeObserver.disconnect();
+      io?.disconnect();
+      if (stage) stage.style.transform = "";
+      const ext = gl.getExtension("WEBGL_lose_context");
+      ext?.loseContext();
+    };
     kick();
   })();
+};
 
-  function fallbackMark() {
-    const el = document.createElement("div");
-    el.className = "soft-hero__mark soft-hero__mark--fallback";
-    el.setAttribute("aria-hidden", "true");
-    el.textContent = "P";
-    el.style.cssText = [
-      'font-family: var(--blume-ff-lora), var(--blume-font-display), Lora, Georgia, serif',
-      "font-size: clamp(7rem, 28vw, 13rem)",
-      "font-weight: 600",
-      "letter-spacing: -0.06em",
-      "line-height: 0.85",
-      "display: grid",
-      "place-items: center",
-      "height: 100%",
-      "background: linear-gradient(135deg, #9ec0f0, #c6a8e8, #f0a8c4, #f0c089, #c8d96a)",
-      "-webkit-background-clip: text",
-      "background-clip: text",
-      "color: transparent",
-      "filter: drop-shadow(0 18px 30px rgba(40, 30, 50, 0.18))",
-      "user-select: none",
-    ].join(";");
-    return el;
-  }
-})();
+mountFrostP();
+document.addEventListener("astro:page-load", mountFrostP);

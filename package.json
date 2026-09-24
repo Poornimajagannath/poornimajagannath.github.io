@@ -17,6 +17,6 @@
     "posthog:email": "node scripts/subscribe-posthog-email.mjs"
   },
   "dependencies": {
-    "blume": "^1.3.1"
+    "blume": "^2.0.1"
   }
 }

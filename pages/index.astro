@@ -27,7 +27,7 @@ const description =
     route: "/",
   }}
 >
-  <link rel="stylesheet" href="/assets/frost-p.css?v=10" />
+  <link rel="stylesheet" href="/assets/frost-p.css?v=11" />
   <div class="home">
     <div class="home-rail">
       <section class="soft-hero soft-hero--frost" aria-labelledby="hero-title">
@@ -58,11 +58,15 @@ const description =
         </div>
       </section>
       <script is:inline type="module">
-        document.querySelectorAll(`[data-hero-copy]`).forEach((e) => {
-          requestAnimationFrame(() => e.classList.add(`is-ready`));
-        });
+        const markReady = () => {
+          document.querySelectorAll(`[data-hero-copy]`).forEach((e) => {
+            requestAnimationFrame(() => e.classList.add(`is-ready`));
+          });
+        };
+        markReady();
+        document.addEventListener("astro:page-load", markReady);
       </script>
-      <script is:inline type="module" src="/assets/frost-p.js?v=10"></script>
+      <script is:inline type="module" src="/assets/frost-p.js?v=11"></script>
     </div>
 
     <section
@@ -366,7 +370,9 @@ const description =
     </section>
 
     <script is:inline type="module">
-      document.querySelectorAll(`[data-bookshelf]`).forEach((root) => {
+      const bindBookshelf = () => document.querySelectorAll(`[data-bookshelf]`).forEach((root) => {
+        if (root.dataset.homeBound === `1`) return;
+        root.dataset.homeBound = `1`;
         const track = root.querySelector(`[data-bookshelf-track]`);
         const prev = root.querySelector(`[data-bookshelf-prev]`);
         const next = root.querySelector(`[data-bookshelf-next]`);
@@ -484,6 +490,8 @@ const description =
         update();
         setActiveNote(`0`);
       });
+      bindBookshelf();
+      document.addEventListener("astro:page-load", bindBookshelf);
     </script>
 
     <section
@@ -554,11 +562,13 @@ const description =
   </div>
 
   <script is:inline type="module">
-    (() => {
+    const bindReveals = () => {
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
         .matches;
 
       document.querySelectorAll("[data-reveal]").forEach((el) => {
+        if (el.dataset.homeBound === "1") return;
+        el.dataset.homeBound = "1";
         if (reduce) {
           el.classList.add("is-revealed");
           return;
@@ -576,6 +586,8 @@ const description =
         );
         io.observe(el);
       });
-    })();
+    };
+    bindReveals();
+    document.addEventListener("astro:page-load", bindReveals);
   </script>
 </PageLayout>
