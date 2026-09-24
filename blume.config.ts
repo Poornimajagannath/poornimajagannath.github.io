@@ -1,4 +1,5 @@
 import { defineConfig } from "blume";
+import { posthog } from "blume/analytics";
 
 export default defineConfig({
   title: "Poornima Jagannath",
@@ -32,17 +33,18 @@ export default defineConfig({
     repo: false,
   },
 
-  ai: {
+  agents: {
     llmsTxt: true,
-    // WebMCP + discovery headers/manifests are on by default in 1.3
+    agentReadability: true,
+    // WebMCP + discovery headers/manifests stay on by default
   },
 
-  analytics: {
-    posthog: {
+  analytics: [
+    posthog({
       key: "phc_rGCfNXQhyzJ7PQC5xWppzpeezrgN69NaFT7RyN5CDNcT",
       host: "https://us.i.posthog.com",
-    },
-  },
+    }),
+  ],
 
   seo: {
     // Source Sans 3's unquoted family name breaks the OG renderer; pin Lora.
@@ -56,11 +58,9 @@ export default defineConfig({
     sitemap: true,
     robots: true,
     structuredData: true,
-    agentReadability: true,
   },
 
   deployment: {
-    output: "static",
     site: "https://poornimajagannath.github.io",
   },
 
