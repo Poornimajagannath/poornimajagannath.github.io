@@ -36,6 +36,8 @@ const preserve = new Set([
   "node_modules",
   "dist",
   "README.md",
+  "e2e.config.ts",
+  "tests",
 ]);
 
 const build = spawnSync("npx", ["blume", "build"], {
