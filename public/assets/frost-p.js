@@ -12,19 +12,10 @@ const fallbackMark = () => {
   el.setAttribute("aria-hidden", "true");
   el.textContent = "P";
   el.style.cssText = [
-    'font-family: var(--blume-ff-lora), var(--blume-font-display), Lora, Georgia, serif',
-    "font-size: clamp(7rem, 28vw, 13rem)",
-    "font-weight: 600",
-    "letter-spacing: -0.06em",
-    "line-height: 0.85",
+    "font-family: var(--blume-ff-lora), var(--blume-font-display), Lora, Georgia, serif",
     "display: grid",
     "place-items: center",
     "height: 100%",
-    "background: linear-gradient(135deg, #9ec0f0, #c6a8e8, #f0a8c4, #f0c089, #c8d96a)",
-    "-webkit-background-clip: text",
-    "background-clip: text",
-    "color: transparent",
-    "filter: drop-shadow(0 18px 30px rgba(40, 30, 50, 0.18))",
     "user-select: none",
   ].join(";");
   return el;
@@ -270,7 +261,8 @@ const mountFrostP = () => {
     let raf = 0;
     let start = performance.now();
     let visible = true;
-    const stage = canvas.closest(".soft-hero__mark-stage") || canvas.parentElement;
+    const stage =
+      canvas.closest(".desk__mascot, .soft-hero__mark-stage") || canvas.parentElement;
 
     function isDark() {
       return document.documentElement.dataset.theme === "dark" ? 1 : 0;
