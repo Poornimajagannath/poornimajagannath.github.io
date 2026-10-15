@@ -2,6 +2,7 @@
 import PageLayout from "blume/components/layout/PageLayout.astro";
 import data from "blume:data";
 import "./_home/home.css";
+import "./_home/desk.css";
 
 const { config } = data;
 const description =
@@ -27,126 +28,239 @@ const description =
     route: "/",
   }}
 >
-  <link rel="stylesheet" href="/assets/frost-p.css?v=11" />
+  <link rel="stylesheet" href="/assets/frost-p.css?v=12" />
   <div class="home">
-    <div class="home-rail">
-      <section class="soft-hero soft-hero--frost" aria-labelledby="hero-title">
-        <div class="soft-hero__compose">
-          <div class="soft-hero__copy" data-hero-copy>
-            <h1 id="hero-title" class="soft-hero__enter">Poornima Jagannath</h1>
-            <p class="soft-hero__lead soft-hero__enter">
-              I care about developer experience, APIs, SDKs, and AI a little more
-              than I probably need to.
-            </p>
-            <div class="calm-btns soft-hero__enter">
-              <a class="calm-btn calm-btn--primary" href="#writing"
-                >Read the essays</a
-              >
-              <a class="calm-btn" href="/connect">Say hello</a>
-              <a
-                class="calm-btn"
-                href="https://www.linkedin.com/in/poornima-j"
-                target="_blank"
-                rel="noopener">LinkedIn</a
-              >
+    <section class="desk" data-desk data-desk-view="desk" id="desk" aria-labelledby="desk-title">
+      <div class="desk__intro">
+        <h1 id="desk-title">Poornima Jagannath</h1>
+        <p>
+          I care about developer experience, APIs, SDKs, and AI a little more
+          than I probably need to. This desk has two computers: the job, and
+          everything I make after hours.
+        </p>
+      </div>
+
+      <div class="desk__room">
+        <div class="desk__window" aria-hidden="true"></div>
+        <div class="desk__table">
+          <div class="desk__surface">
+            <div class="desk__machines">
+            <article class="machine machine--work" id="work">
+              <p class="machine__name">Work</p>
+              <div class="machine__chassis">
+                <div class="machine__lid">
+                  <div class="machine__bezel">
+                    <span class="machine__camera" aria-hidden="true"></span>
+                    <a class="machine__enter" href="#work" data-desk-enter="work">
+                      <span>Open the work computer</span>
+                    </a>
+                    <button class="machine__back" type="button" data-desk-leave>
+                      Back to the desk
+                    </button>
+                    <div class="machine__screen">
+                      <div class="machine__idle" aria-hidden="true">
+                        <strong>Developer experience in payments</strong>
+                        <span>APIs, SDKs, and the first working call</span>
+                      </div>
+                      <div class="machine__inside">
+                        <h2>The work computer</h2>
+                        <p>
+                          I lead product work and manage people. Most of my work
+                          sits at the point where developers meet a payments
+                          platform.
+                        </p>
+                        <ul class="machine__list">
+                          <li>
+                            <span class="machine__list-title">APIs and SDKs</span>
+                            <span class="machine__list-body"
+                              >The paths developers use to understand an API,
+                              pick an SDK, set up a sandbox, and make a first
+                              call.</span
+                            >
+                          </li>
+                          <li>
+                            <span class="machine__list-title">Time to integrate</span>
+                            <span class="machine__list-body"
+                              >Shrinking the time between a first question and a
+                              successful integration.</span
+                            >
+                          </li>
+                          <li>
+                            <a
+                              href="https://www.youtube.com/playlist?list=PL9qINLsWlhs2fzbdsdEBTMNgasNhbG4er"
+                              target="_blank"
+                              rel="noopener"
+                            >
+                              <span class="machine__list-title"
+                                >Cybersource Developer Education Series</span
+                              >
+                              <span class="machine__list-body"
+                                >A public video series on payments and the
+                                developer center.</span
+                              >
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="machine__deck" aria-hidden="true">
+                  <div class="machine__trackpad"></div>
+                </div>
+              </div>
+            </article>
+
+            <div class="desk__mascot soft-hero__mark-stage" aria-hidden="true">
+              <span class="soft-hero__floor-shadow"></span>
+              <canvas data-frost-p width="240" height="260"></canvas>
             </div>
-          </div>
-          <div class="soft-hero__mark-stage" aria-hidden="true">
-            <span class="soft-hero__floor-shadow"></span>
-            <canvas data-frost-p width="720" height="760"></canvas>
+
+            <article class="machine machine--personal" id="personal">
+              <p class="machine__name">Personal</p>
+              <div class="machine__chassis">
+                <div class="machine__lid">
+                  <div class="machine__bezel">
+                    <span class="machine__camera" aria-hidden="true"></span>
+                    <a class="machine__enter" href="#personal" data-desk-enter="personal">
+                      <span>Open the personal computer</span>
+                    </a>
+                    <button class="machine__back" type="button" data-desk-leave>
+                      Back to the desk
+                    </button>
+                    <div class="machine__screen">
+                      <div class="machine__idle" aria-hidden="true">
+                        <strong>Essays, a Kannada app, hello</strong>
+                        <span>Writing, building, and how to reach me</span>
+                      </div>
+                      <div class="machine__inside">
+                        <h2>The personal computer</h2>
+                        <p>
+                          Essays, a small iOS app for my daughter, and the
+                          places I am easy to find.
+                        </p>
+                        <ul class="machine__list">
+                          <li>
+                            <a href="/writing/building-this-site-in-the-ai-era">
+                              <span class="machine__list-title"
+                                >How this site came together</span
+                              >
+                              <span class="machine__list-body"
+                                >Voice notes, Codex, Markdown, Astro, Blume, and
+                                a lot of editing.</span
+                              >
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/writing/buying-back-time-with-ai-agents">
+                              <span class="machine__list-title"
+                                >Buying back time with AI agents</span
+                              >
+                              <span class="machine__list-body"
+                                >What a small Slack fleet is teaching me about
+                                time and presence.</span
+                              >
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/building/whats-this-in-kannada">
+                              <span class="machine__list-title"
+                                >What&apos;s This in Kannada?</span
+                              >
+                              <span class="machine__list-body"
+                                >A love letter written in code. A small iOS app
+                                for my daughter.</span
+                              >
+                            </a>
+                          </li>
+                          <li>
+                            <a href="/connect">
+                              <span class="machine__list-title">Say hello</span>
+                              <span class="machine__list-body"
+                                >LinkedIn, and the rest of this site.</span
+                              >
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="machine__deck" aria-hidden="true">
+                  <div class="machine__trackpad"></div>
+                </div>
+              </div>
+            </article>
+            </div>
+
+            <div class="desk__prop desk__prop--cup" aria-hidden="true"></div>
+            <div class="desk__prop desk__prop--notebook" aria-hidden="true"></div>
+            <div class="desk__top" aria-hidden="true"></div>
           </div>
         </div>
-      </section>
-      <script is:inline type="module">
-        const markReady = () => {
-          document.querySelectorAll(`[data-hero-copy]`).forEach((e) => {
-            requestAnimationFrame(() => e.classList.add(`is-ready`));
-          });
+      </div>
+      <p class="desk__hint">Click a screen to sit down at that computer.</p>
+    </section>
+
+    <script is:inline type="module">
+      const bindDesk = () => {
+        const root = document.querySelector(`[data-desk]`);
+        if (!root || root.dataset.homeBound === `1`) return;
+        root.dataset.homeBound = `1`;
+
+        const hint = root.querySelector(`.desk__hint`);
+        const fallback = () =>
+          window.matchMedia(`(max-width: 860px), (prefers-reduced-motion: reduce)`)
+            .matches;
+
+        const setView = (view, { hash = true } = {}) => {
+          const next = view === `work` || view === `personal` ? view : `desk`;
+          root.dataset.deskView = next;
+          if (hint) hint.hidden = next !== `desk`;
+          if (!hash) return;
+          const url = new URL(location.href);
+          if (next === `desk`) url.hash = ``;
+          else url.hash = next;
+          history.replaceState(null, ``, url);
         };
-        markReady();
-        document.addEventListener("astro:page-load", markReady);
-      </script>
-      <script is:inline type="module" src="/assets/frost-p.js?v=11"></script>
-    </div>
 
-    <section
-      class="home-section home-section--experience"
-      data-reveal
-      id="experience"
-      aria-labelledby="experience-title"
-    >
-      <div class="home-rail">
-        <header class="home-section__head">
-          <p class="calm-eyebrow">What I do</p>
-          <h2 id="experience-title">Developer experience in payment tech.</h2>
-          <p>
-            I lead product work and manage people. Most of my work sits at the
-            point where developers meet a platform.
-          </p>
-        </header>
-        <div class="experience-grid">
-          <article class="experience-item">
-            <h3>APIs and SDKs</h3>
-            <p>
-              I work on the paths developers use to understand APIs, choose the
-              right SDK, set up a sandbox, and make their first working call.
-            </p>
-          </article>
-          <article class="experience-item">
-            <h3>Time to integrate</h3>
-            <p>
-              I care about shrinking the time between a developer's first
-              question and a successful integration.
-            </p>
-          </article>
-          <article class="experience-item">
-            <h3>People and product</h3>
-            <p>
-              I have people management experience, and I like building teams that
-              care about clear writing, good systems, and developer trust.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
+        const fromHash = () => {
+          const id = location.hash.replace(`#`, ``);
+          if (id === `work` || id === `personal`) setView(id, { hash: false });
+          else setView(`desk`, { hash: false });
+        };
 
-    <section
-      class="home-section home-section--public-work"
-      data-reveal
-      id="public-work"
-      aria-labelledby="public-work-title"
-    >
-      <div class="home-rail">
-        <header class="home-section__head">
-          <p class="calm-eyebrow">Public work</p>
-          <h2 id="public-work-title">A few things people can watch or read.</h2>
-          <p>
-            Most of my work happens inside teams. When something is public, I
-            want it to be easy to find.
-          </p>
-        </header>
-        <ul class="quiet-link-list">
-          <li class="quiet-link-list__item">
-            <a
-              class="quiet-link-list__link"
-              href="https://www.youtube.com/playlist?list=PL9qINLsWlhs2fzbdsdEBTMNgasNhbG4er"
-              target="_blank"
-              rel="noopener"
-            >
-              <span>
-                <span class="quiet-link-list__title"
-                  >Cybersource Developer Education Series</span
-                >
-                <span class="quiet-link-list__body"
-                  >A public video series on payments and the developer center.</span
-                >
-              </span>
-              <span class="quiet-link-list__action" aria-hidden="true">Open</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
+        root.querySelectorAll(`[data-desk-enter]`).forEach((el) => {
+          el.addEventListener(`click`, (e) => {
+            if (fallback()) return;
+            e.preventDefault();
+            const view = el.getAttribute(`data-desk-enter`);
+            setView(view);
+            const back = root.querySelector(
+              `.machine--${view} [data-desk-leave]`,
+            );
+            back?.focus();
+          });
+        });
+
+        root.querySelectorAll(`[data-desk-leave]`).forEach((el) => {
+          el.addEventListener(`click`, () => {
+            const side = root.dataset.deskView;
+            setView(`desk`);
+            const enter = root.querySelector(
+              `.machine--${side} [data-desk-enter]`,
+            );
+            enter?.focus();
+          });
+        });
+
+        addEventListener(`hashchange`, fromHash);
+        fromHash();
+      };
+      bindDesk();
+      document.addEventListener(`astro:page-load`, bindDesk);
+    </script>
+    <script is:inline type="module" src="/assets/frost-p.js?v=12"></script>
 
     <section
       class="home-section home-section--bookshelf"
@@ -156,7 +270,6 @@ const description =
     >
       <div class="home-rail">
         <header class="home-section__head">
-          <p class="calm-eyebrow">Reading</p>
           <h2 id="bookshelf-title">Books I keep returning to</h2>
           <p>
             A few books that shaped how I think about products, teams, systems,
@@ -236,7 +349,8 @@ const description =
                 data-book-index="2"
               >
                 <div class="bookshelf__cover" aria-hidden="true">
-                  <span class="bookshelf__cover-title">Working Backwards</span>
+                  <span class="bookshelf__cover-title">Working Backwards</span
+                  >
                   <span class="bookshelf__cover-author">Bryar &amp; Carr</span>
                 </div>
                 <h3 class="visually-hidden">
@@ -493,72 +607,6 @@ const description =
       bindBookshelf();
       document.addEventListener("astro:page-load", bindBookshelf);
     </script>
-
-    <section
-      class="home-section home-section--writing"
-      data-reveal
-      id="writing"
-      aria-labelledby="writing-title"
-    >
-      <div class="home-rail">
-        <header class="home-section__head">
-          <h2 id="writing-title">Essays</h2>
-        </header>
-        <ul class="essay-index">
-          <li class="essay-index__item">
-            <a
-              class="essay-index__link"
-              href="/writing/building-this-site-in-the-ai-era"
-            >
-              <span class="essay-index__date">July 2026</span>
-              <span>
-                <span class="essay-index__title"
-                  >How this site came together</span
-                >
-                <span class="essay-index__body"
-                  >Voice notes, Codex, Markdown, Astro, Blume, and a lot of
-                  editing.</span
-                >
-              </span>
-            </a>
-          </li>
-          <li class="essay-index__item">
-            <a
-              class="essay-index__link"
-              href="/building/whats-this-in-kannada"
-            >
-              <span class="essay-index__date">July 2026</span>
-              <span>
-                <span class="essay-index__title"
-                  >Building What's This in Kannada?</span
-                >
-                <span class="essay-index__body"
-                  >A love letter written in code. A small iOS app for my
-                  daughter.</span
-                >
-              </span>
-            </a>
-          </li>
-          <li class="essay-index__item">
-            <a
-              class="essay-index__link"
-              href="/writing/buying-back-time-with-ai-agents"
-            >
-              <span class="essay-index__date">July 2026</span>
-              <span>
-                <span class="essay-index__title"
-                  >Buying back time with AI agents</span
-                >
-                <span class="essay-index__body"
-                  >What a small Slack fleet is teaching me about time and
-                  presence.</span
-                >
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
   </div>
 
   <script is:inline type="module">

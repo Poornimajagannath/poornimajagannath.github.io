@@ -1,0 +1,784 @@
+/* Homepage desk: two machines on a morning table. Not a WebGL room. */
+
+.home {
+  --desk-wood: #c49a6c;
+  --desk-wood-deep: #9a7348;
+  --desk-wood-light: #e2c49a;
+  --desk-plaster: #f4eee6;
+  --desk-sky: #c9dff2;
+  --desk-ink: var(--calm-ink, #172033);
+  --desk-muted: var(--calm-muted, #5a667a);
+  --home-max: 1100px;
+  --home-gutter: 24px;
+  padding: 8px 0 48px;
+}
+
+body:has(.desk) {
+  background:
+    linear-gradient(180deg, #d7e8f5 0%, #e8eef4 28%, #f3ebe0 52%, #efe4d4 100%) !important;
+}
+
+body:has(.desk) .bg-background,
+body:has(.desk) main,
+body:has(.desk) #blume-content {
+  background: transparent !important;
+}
+
+body:has(.desk) header[data-blume-header] {
+  background: linear-gradient(180deg, #d7e8f5e6, #d7e8f58c) !important;
+  backdrop-filter: blur(12px);
+}
+
+:root[data-theme="dark"] body:has(.desk) {
+  background:
+    linear-gradient(180deg, #1a2430 0%, #1c222c 36%, #241c18 100%) !important;
+}
+
+:root[data-theme="dark"] body:has(.desk) header[data-blume-header] {
+  background: linear-gradient(180deg, #1a2430e6, #1a24308c) !important;
+}
+
+.desk {
+  width: min(var(--home-max), calc(100% - var(--home-gutter)));
+  margin: 0 auto;
+  color: var(--desk-ink);
+}
+
+.desk ::selection {
+  background: #3f8fd94d;
+  color: var(--desk-ink);
+}
+
+.desk__intro {
+  max-width: 36rem;
+  padding: 12px 4px 20px;
+}
+
+.desk__intro h1 {
+  letter-spacing: -0.045em;
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 520;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.desk__intro p {
+  color: var(--desk-muted);
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.desk__hint {
+  color: var(--desk-muted);
+  margin: 14px 4px 0;
+  font-size: 0.95rem;
+}
+
+.desk__hint[hidden] {
+  display: none;
+}
+
+.desk__room {
+  position: relative;
+  isolation: isolate;
+  border-radius: 28px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 50% 70% at 8% 18%, #fff6e8cc, transparent 58%),
+    linear-gradient(180deg, #e7eef5 0%, var(--desk-plaster) 46%, #eadcc8 100%);
+  box-shadow: 0 28px 64px #3a2a181f;
+  min-height: 520px;
+}
+
+:root[data-theme="dark"] .desk__room {
+  background:
+    radial-gradient(ellipse 45% 55% at 12% 12%, #3a2e2240, transparent 60%),
+    linear-gradient(180deg, #1b2430 0%, #1e222a 48%, #2a221c 100%);
+  box-shadow: 0 28px 64px #00000066;
+}
+
+.desk__window {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: min(22%, 160px);
+  height: 42%;
+  border: 8px solid #f7f2ea;
+  border-radius: 4px 4px 2px 2px;
+  background:
+    linear-gradient(180deg, #f7fbff 0%, var(--desk-sky) 42%, #e7f0c9 100%);
+  box-shadow: 10px 16px 40px #8aa4bc33;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.desk__window::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(#f7f2ea, #f7f2ea) 50% 0 / 6px 100% no-repeat,
+    linear-gradient(#f7f2ea, #f7f2ea) 0 46% / 100% 6px no-repeat;
+}
+
+.desk__window::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 18%;
+  bottom: 8%;
+  height: 28%;
+  background: radial-gradient(ellipse at 40% 80%, #6f9a4e 0%, #6f9a4e00 70%);
+  opacity: 0.45;
+}
+
+:root[data-theme="dark"] .desk__window {
+  border-color: #2a3038;
+  background: linear-gradient(180deg, #2a3544, #1c2430 70%);
+  box-shadow: 8px 12px 28px #00000055;
+}
+
+:root[data-theme="dark"] .desk__window::before {
+  background:
+    linear-gradient(#2a3038, #2a3038) 50% 0 / 6px 100% no-repeat,
+    linear-gradient(#2a3038, #2a3038) 0 46% / 100% 6px no-repeat;
+}
+
+.desk__table {
+  position: relative;
+  z-index: 1;
+  padding: 72px 28px 0;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.desk__surface {
+  position: relative;
+  padding: 0 8px 0;
+}
+
+.desk__machines {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 12px 8px;
+}
+
+.machine__list li {
+  padding: 10px 0;
+}
+
+.machine__list li:has(> a) {
+  padding: 0;
+}
+
+.desk__top {
+  height: 86px;
+  margin: 0 -36px;
+  background:
+    linear-gradient(180deg, #0000 0 18%, #00000014 18% 22%, #0000 22%),
+    repeating-linear-gradient(
+      90deg,
+      #d7b384 0 14px,
+      #c49a6c 14px 22px,
+      #e0c297 22px 28px,
+      #b88854 28px 31px,
+      #d2ae7c 31px 46px
+    );
+  box-shadow:
+    inset 0 10px 18px #fff6e64d,
+    inset 0 -16px 20px #6a452418,
+    0 -1px 0 #efe0c8;
+  border-radius: 0 0 28px 28px;
+}
+
+:root[data-theme="dark"] .desk__top {
+  background:
+    linear-gradient(180deg, #0000 0 18%, #00000040 18% 22%, #0000 22%),
+    repeating-linear-gradient(
+      90deg,
+      #5a4030 0 14px,
+      #4a3428 14px 22px,
+      #6a4a34 22px 28px,
+      #3a281e 28px 31px,
+      #533828 31px 46px
+    );
+  box-shadow: inset 0 10px 18px #ffffff0d, inset 0 -16px 20px #00000066;
+}
+
+.desk__prop {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.desk__prop--cup {
+  left: 7%;
+  bottom: 78px;
+  width: 28px;
+  height: 24px;
+  background: linear-gradient(180deg, #f4efe8, #e4d4c4);
+  border-radius: 3px 3px 10px 10px;
+  box-shadow: 4px 8px 12px #3a2a181a;
+}
+
+.desk__prop--cup::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #e4d4c4;
+  border-radius: 50%;
+}
+
+.desk__prop--notebook {
+  right: 8%;
+  bottom: 80px;
+  width: 54px;
+  height: 38px;
+  background: linear-gradient(135deg, #f7e7d6, #e8c9a8);
+  border-radius: 2px;
+  box-shadow: 3px 6px 10px #3a2a1814;
+  transform: rotate(8deg);
+}
+
+:root[data-theme="dark"] .desk__prop--cup {
+  background: linear-gradient(180deg, #3a322c, #2a241e);
+}
+
+:root[data-theme="dark"] .desk__prop--notebook {
+  background: linear-gradient(135deg, #3a3028, #2a221c);
+}
+
+.desk__mascot {
+  position: relative;
+  width: 108px;
+  height: 118px;
+  margin-bottom: 78px;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+  z-index: 3;
+}
+
+.desk__mascot canvas,
+.desk__mascot .soft-hero__mark--fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.soft-hero__mark--fallback {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-family: var(--blume-ff-lora), var(--blume-font-display), Lora, Georgia, serif;
+  font-size: 4.4rem;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  color: #8a6bb0;
+  filter: drop-shadow(0 10px 16px rgba(40, 30, 50, 0.18));
+  user-select: none;
+}
+
+.desk__mascot .soft-hero__floor-shadow {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 2%;
+  height: 14%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #1c243028, transparent 72%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.machine {
+  position: relative;
+  z-index: 3;
+  min-width: 0;
+}
+
+.machine__name {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5a4634;
+  pointer-events: none;
+}
+
+:root[data-theme="dark"] .machine__name {
+  color: #d8c8b4;
+}
+
+.machine__chassis {
+  position: relative;
+}
+
+.machine__lid {
+  border-radius: 14px 14px 6px 6px;
+  padding: 10px 10px 8px;
+  transform-origin: 50% 100%;
+}
+
+.machine--work .machine__lid {
+  background: linear-gradient(180deg, #6d7580, #4a5160);
+  box-shadow: 0 18px 28px #1c243033, inset 0 1px 0 #ffffff33;
+}
+
+.machine--personal .machine__lid {
+  background: linear-gradient(180deg, #e8d8c8, #c8b09a);
+  box-shadow: 0 18px 28px #3a2a1826, inset 0 1px 0 #ffffff88;
+}
+
+:root[data-theme="dark"] .machine--work .machine__lid {
+  background: linear-gradient(180deg, #3a404a, #222830);
+}
+
+:root[data-theme="dark"] .machine--personal .machine__lid {
+  background: linear-gradient(180deg, #4a3c34, #2e2620);
+}
+
+.machine__bezel {
+  position: relative;
+  border-radius: 8px;
+  background: #11151c;
+  padding: 14px 10px 10px;
+}
+
+.machine--personal .machine__bezel {
+  background: #1a1414;
+}
+
+.machine__camera {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: #2a313c;
+  box-shadow: inset 0 0 0 1.5px #0c0e12;
+}
+
+.machine__screen {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 3px;
+  overflow: hidden;
+  color: #e8eef6;
+}
+
+.machine--work .machine__screen {
+  background:
+    linear-gradient(180deg, #1b2838 0%, #15202c 100%);
+}
+
+.machine--personal .machine__screen {
+  background:
+    linear-gradient(180deg, #3a2430 0%, #2a1c24 100%);
+}
+
+.machine__enter {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: 3px;
+}
+
+.machine__enter:focus-visible {
+  outline: 3px solid var(--calm-blue-strong, #3f8fd9);
+  outline-offset: 3px;
+}
+
+.machine__enter span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.machine__back {
+  display: none;
+  position: absolute;
+  top: 18px;
+  right: 14px;
+  z-index: 5;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff22;
+  color: inherit;
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.machine__back:focus-visible {
+  outline: 3px solid var(--calm-blue-strong, #3f8fd9);
+  outline-offset: 2px;
+}
+
+.machine__idle,
+.machine__inside {
+  position: absolute;
+  inset: 0;
+  padding: 16px 16px 14px;
+  overflow: auto;
+}
+
+.machine__idle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.machine__idle strong {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.machine__idle span {
+  font-size: 13px;
+  opacity: 0.78;
+  line-height: 1.4;
+}
+
+.machine__inside {
+  display: none;
+  color: inherit;
+}
+
+.machine__inside h2 {
+  letter-spacing: -0.035em;
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  font-weight: 560;
+  line-height: 1.15;
+  text-wrap: balance;
+  padding-right: 7rem;
+}
+
+.machine__inside > p {
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  opacity: 0.86;
+  max-width: 46ch;
+}
+
+.machine__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.machine__list li + li {
+  border-top: 1px solid #ffffff22;
+}
+
+.machine__list a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding: 10px 0;
+}
+
+.machine__list a:hover .machine__list-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.machine__list a:focus-visible {
+  outline: 3px solid var(--calm-blue-strong, #3f8fd9);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.machine__list-title {
+  display: block;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.machine__list-body {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  opacity: 0.78;
+  line-height: 1.4;
+}
+
+.machine__deck {
+  height: 18px;
+  margin: 0 10px;
+  border-radius: 0 0 10px 10px;
+  transform: perspective(240px) rotateX(58deg);
+  transform-origin: 50% 0;
+}
+
+.machine--work .machine__deck {
+  background: linear-gradient(180deg, #8a919c, #5c6470);
+}
+
+.machine--personal .machine__deck {
+  background: linear-gradient(180deg, #f0e0d0, #c8b09a);
+}
+
+.machine__trackpad {
+  width: 28%;
+  height: 7px;
+  margin: 4px auto 0;
+  border-radius: 2px;
+  background: #00000022;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .desk[data-desk-view="desk"] .machine__chassis {
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .desk[data-desk-view="desk"] .machine:hover .machine__chassis {
+    transform: translateY(-6px);
+  }
+}
+
+.desk[data-desk-view="work"] .machine--work .machine__idle,
+.desk[data-desk-view="personal"] .machine--personal .machine__idle {
+  display: none;
+}
+
+.desk[data-desk-view="work"] .machine--work .machine__inside,
+.desk[data-desk-view="personal"] .machine--personal .machine__inside {
+  display: block;
+}
+
+.desk[data-desk-view="work"] .machine--work .machine__enter,
+.desk[data-desk-view="personal"] .machine--personal .machine__enter {
+  display: none;
+}
+
+.desk[data-desk-view="work"] .machine--work .machine__back,
+.desk[data-desk-view="personal"] .machine--personal .machine__back {
+  display: inline-flex;
+}
+
+.desk[data-desk-view="work"] .machine--work .machine__screen,
+.desk[data-desk-view="personal"] .machine--personal .machine__screen {
+  aspect-ratio: auto;
+  min-height: min(62vh, 520px);
+}
+
+.desk[data-desk-view="work"] .machine--personal,
+.desk[data-desk-view="personal"] .machine--work,
+.desk[data-desk-view="work"] .desk__mascot,
+.desk[data-desk-view="personal"] .desk__mascot,
+.desk[data-desk-view="work"] .desk__prop,
+.desk[data-desk-view="personal"] .desk__prop,
+.desk[data-desk-view="work"] .desk__window,
+.desk[data-desk-view="personal"] .desk__window {
+  opacity: 0.28;
+}
+
+.desk[data-desk-view="work"] .machine--work,
+.desk[data-desk-view="personal"] .machine--personal {
+  z-index: 5;
+}
+
+.desk[data-desk-view="work"] .machine--work .machine__name,
+.desk[data-desk-view="personal"] .machine--personal .machine__name {
+  opacity: 0;
+}
+
+/* Narrow and reduced-motion: two readable screens, no 3D room. */
+@media (width <= 860px) {
+  .desk {
+    --home-gutter: 20px;
+  }
+
+  .desk__room {
+    min-height: 0;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .desk__window,
+  .desk__prop,
+  .desk__top,
+  .machine__deck,
+  .machine__name,
+  .machine__idle,
+  .machine__enter,
+  .machine__back,
+  .machine__camera {
+    display: none !important;
+  }
+
+  .desk__table {
+    padding: 0;
+    min-height: 0;
+  }
+
+  .desk__surface,
+  .desk__machines {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 0;
+  }
+
+  .desk__mascot {
+    order: -1;
+    width: 88px;
+    height: 96px;
+    margin: 0 auto 4px;
+  }
+
+  .machine__lid {
+    padding: 0;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0;
+  }
+
+  .machine__bezel {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .machine__screen {
+    aspect-ratio: auto;
+    min-height: 0;
+    border-radius: 22px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .machine__inside {
+    position: static;
+    display: block !important;
+    padding: 22px 22px 20px;
+    border-radius: 22px;
+  }
+
+  .machine--work .machine__inside {
+    background: #1b2838;
+    color: #e8eef6;
+  }
+
+  .machine--personal .machine__inside {
+    background: #3a2430;
+    color: #f6e8ee;
+  }
+
+  .machine__inside h2 {
+    padding-right: 0;
+    font-size: 1.45rem;
+  }
+
+  .desk__hint {
+    display: none;
+  }
+}
+
+@media (width <= 860px) {
+  .desk[data-desk-view="work"] .machine--personal,
+  .desk[data-desk-view="personal"] .machine--work,
+  .desk[data-desk-view="work"] .desk__mascot,
+  .desk[data-desk-view="personal"] .desk__mascot {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desk__room {
+    min-height: 0;
+  }
+
+  .desk__window,
+  .desk__prop,
+  .machine__deck {
+    display: none;
+  }
+
+  .desk__surface {
+    align-items: stretch;
+  }
+
+  .machine__idle {
+    display: none !important;
+  }
+
+  .machine__inside {
+    position: static;
+    display: block !important;
+  }
+
+  .machine__screen {
+    aspect-ratio: auto;
+    min-height: 280px;
+  }
+
+  .machine__enter {
+    display: none !important;
+  }
+
+  .machine__back {
+    display: none !important;
+  }
+
+  .desk__hint {
+    display: none;
+  }
+
+  .desk[data-desk-view="work"] .machine--personal,
+  .desk[data-desk-view="personal"] .machine--work,
+  .desk[data-desk-view="work"] .desk__mascot,
+  .desk[data-desk-view="personal"] .desk__mascot,
+  .desk[data-desk-view="work"] .desk__window,
+  .desk[data-desk-view="personal"] .desk__window {
+    opacity: 1;
+  }
+
+  .machine__chassis,
+  .desk__mascot {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (width > 860px) {
+  .desk__top {
+    display: block;
+  }
+
+  .desk__machines {
+    display: grid;
+  }
+
+  .machine__lid {
+    transform: none;
+  }
+}
