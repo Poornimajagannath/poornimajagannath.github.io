@@ -426,6 +426,7 @@ body:has(.desk) header[data-blume-header] {
   font: inherit;
   font-size: 12px;
   font-weight: 650;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -585,7 +586,7 @@ body:has(.desk) header[data-blume-header] {
 .desk[data-desk-view="work"] .machine--work .machine__screen,
 .desk[data-desk-view="personal"] .machine--personal .machine__screen {
   aspect-ratio: auto;
-  min-height: min(62vh, 520px);
+  min-height: min(42vh, 360px);
 }
 
 .desk[data-desk-view="work"] .machine--personal,

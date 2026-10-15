@@ -53,9 +53,9 @@ const description =
                     <a class="machine__enter" href="#work" data-desk-enter="work">
                       <span>Open the work computer</span>
                     </a>
-                    <button class="machine__back" type="button" data-desk-leave>
+                    <a class="machine__back" href="#desk" data-desk-leave>
                       Back to the desk
-                    </button>
+                    </a>
                     <div class="machine__screen">
                       <div class="machine__idle" aria-hidden="true">
                         <strong>Developer experience in payments</strong>
@@ -124,9 +124,9 @@ const description =
                     <a class="machine__enter" href="#personal" data-desk-enter="personal">
                       <span>Open the personal computer</span>
                     </a>
-                    <button class="machine__back" type="button" data-desk-leave>
+                    <a class="machine__back" href="#desk" data-desk-leave>
                       Back to the desk
-                    </button>
+                    </a>
                     <div class="machine__screen">
                       <div class="machine__idle" aria-hidden="true">
                         <strong>Essays, a Kannada app, hello</strong>
@@ -244,7 +244,8 @@ const description =
         });
 
         root.querySelectorAll(`[data-desk-leave]`).forEach((el) => {
-          el.addEventListener(`click`, () => {
+          el.addEventListener(`click`, (e) => {
+            e.preventDefault();
             const side = root.dataset.deskView;
             setView(`desk`);
             const enter = root.querySelector(
