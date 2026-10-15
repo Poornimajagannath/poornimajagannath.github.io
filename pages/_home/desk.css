@@ -259,9 +259,9 @@ body:has(.desk) header[data-blume-header] {
 
 .desk__mascot {
   position: relative;
-  width: 108px;
-  height: 118px;
-  margin-bottom: 78px;
+  width: 128px;
+  height: 140px;
+  margin-bottom: 72px;
   pointer-events: none;
   transform-style: preserve-3d;
   will-change: transform;
@@ -593,10 +593,8 @@ body:has(.desk) header[data-blume-header] {
 .desk[data-desk-view="work"] .desk__mascot,
 .desk[data-desk-view="personal"] .desk__mascot,
 .desk[data-desk-view="work"] .desk__prop,
-.desk[data-desk-view="personal"] .desk__prop,
-.desk[data-desk-view="work"] .desk__window,
-.desk[data-desk-view="personal"] .desk__window {
-  opacity: 0.28;
+.desk[data-desk-view="personal"] .desk__prop {
+  opacity: 0.38;
 }
 
 .desk[data-desk-view="work"] .machine--work,

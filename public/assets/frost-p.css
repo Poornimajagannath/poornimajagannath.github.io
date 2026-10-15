@@ -3,8 +3,8 @@
 .desk__mascot.soft-hero__mark-stage,
 .soft-hero__mark-stage {
   position: relative;
-  width: 108px;
-  height: 118px;
+  width: 128px;
+  height: 140px;
   pointer-events: none;
   transform-style: preserve-3d;
   will-change: transform;
