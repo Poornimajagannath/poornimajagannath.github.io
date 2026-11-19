@@ -3,7 +3,7 @@ import { defineConfig } from "blume";
 export default defineConfig({
   title: "Poornima Jagannath",
   description:
-    "Personal writing and projects from Poornima Jagannath on developer experience, APIs, SDKs, AI agents, and small things built outside work.",
+    "Poornima Jagannath leads developer experience for Visa Acceptance Platform (VAP). Selected work, essays, and small things built outside work.",
 
   content: {
     root: "content",
@@ -25,6 +25,7 @@ export default defineConfig({
   navigation: {
     tabs: [
       { label: "Home", path: "/", href: "/" },
+      { label: "Work", path: "/work" },
       { label: "Writing", path: "/writing" },
       { label: "Building", path: "/building" },
       { label: "Connect", path: "/connect" },

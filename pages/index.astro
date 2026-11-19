@@ -6,7 +6,7 @@ import "./_home/home.css";
 const { config } = data;
 const description =
   config.description ??
-  "Personal writing and projects from Poornima Jagannath on developer experience, APIs, SDKs, AI agents, and small things built outside work.";
+  "Poornima Jagannath leads developer experience for Visa Acceptance Platform (VAP). Selected work, essays, and small things built outside work.";
 ---
 
 <PageLayout
@@ -27,7 +27,7 @@ const description =
     route: "/",
   }}
 >
-  <link rel="stylesheet" href="/assets/frost-p.css?v=10" />
+  <link rel="stylesheet" href="/assets/frost-p.css?v=11" />
   <div class="home">
     <div class="home-rail">
       <section class="soft-hero soft-hero--frost" aria-labelledby="hero-title">
@@ -35,20 +35,16 @@ const description =
           <div class="soft-hero__copy" data-hero-copy>
             <h1 id="hero-title" class="soft-hero__enter">Poornima Jagannath</h1>
             <p class="soft-hero__lead soft-hero__enter">
-              I care about developer experience, APIs, SDKs, and AI a little more
-              than I probably need to.
+              I lead developer experience for Visa Acceptance Platform (VAP). I
+              work on the APIs, SDKs, docs, and agent tools that help a developer
+              or an AI agent get to a first successful test payment.
             </p>
             <div class="calm-btns soft-hero__enter">
-              <a class="calm-btn calm-btn--primary" href="#writing"
-                >Read the essays</a
+              <a class="calm-btn calm-btn--primary" href="#selected-work"
+                >See selected work</a
               >
+              <a class="calm-btn" href="#writing">Read the essays</a>
               <a class="calm-btn" href="/connect">Say hello</a>
-              <a
-                class="calm-btn"
-                href="https://www.linkedin.com/in/poornima-j"
-                target="_blank"
-                rel="noopener">LinkedIn</a
-              >
             </div>
           </div>
           <div class="soft-hero__mark-stage" aria-hidden="true">
@@ -74,35 +70,112 @@ const description =
       <div class="home-rail">
         <header class="home-section__head">
           <p class="calm-eyebrow">What I do</p>
-          <h2 id="experience-title">Developer experience in payment tech.</h2>
+          <h2 id="experience-title">
+            Developer experience for Visa Acceptance Platform (VAP).
+          </h2>
           <p>
-            I lead product work and manage people. Most of my work sits at the
-            point where developers meet a platform.
+            I lead the product work for how developers, partners, and AI agents
+            integrate with a payment platform. I also manage the PM team that
+            owns that path.
           </p>
         </header>
         <div class="experience-grid">
           <article class="experience-item">
             <h3>APIs and SDKs</h3>
             <p>
-              I work on the paths developers use to understand APIs, choose the
-              right SDK, set up a sandbox, and make their first working call.
+              I work on the path a developer takes to understand an API, pick an
+              SDK, set up a sandbox, and make a first successful test payment.
             </p>
+            <a class="experience-item__link" href="/work/visa-acceptance-platform"
+              >See the VAP developer platform</a
+            >
           </article>
           <article class="experience-item">
             <h3>Time to integrate</h3>
             <p>
-              I care about shrinking the time between a developer's first
-              question and a successful integration.
+              I care about shrinking the time between a first question and a
+              working integration, for people and for agents.
             </p>
+            <a class="experience-item__link" href="/work/agent-ready-docs"
+              >See docs and verification</a
+            >
           </article>
           <article class="experience-item">
             <h3>People and product</h3>
             <p>
-              I have people management experience, and I like building teams that
-              care about clear writing, good systems, and developer trust.
+              I lead a PM team on this work. I care about clear writing, good
+              systems, and developer trust.
             </p>
+            <a class="experience-item__link" href="/work/leading-the-platform"
+              >See how the work is led</a
+            >
           </article>
         </div>
+      </div>
+    </section>
+
+    <section
+      class="home-section home-section--selected"
+      data-reveal
+      id="selected-work"
+      aria-labelledby="selected-work-title"
+    >
+      <div class="home-rail">
+        <header class="home-section__head">
+          <p class="calm-eyebrow">Selected work</p>
+          <h2 id="selected-work-title">These are the pieces I can show.</h2>
+          <p>
+            Most of my day job happens inside a team, so I only publish what is
+            public-safe.
+          </p>
+        </header>
+        <ul class="quiet-link-list">
+          <li class="quiet-link-list__item">
+            <a class="quiet-link-list__link" href="/work/visa-acceptance-platform">
+              <span>
+                <span class="quiet-link-list__title"
+                  >A first successful test payment</span
+                >
+                <span class="quiet-link-list__body"
+                  >For developers, partners, and AI agents on Visa Acceptance
+                  Platform (VAP). The path was too slow and too hard to follow. I
+                  lead that product work. Status: shipped, and still changing.</span
+                >
+              </span>
+              <span class="quiet-link-list__action" aria-hidden="true">Read</span>
+            </a>
+          </li>
+          <li class="quiet-link-list__item">
+            <a class="quiet-link-list__link" href="/work/agent-ready-docs">
+              <span>
+                <span class="quiet-link-list__title"
+                  >Docs a person or an agent can follow</span
+                >
+                <span class="quiet-link-list__body"
+                  >For developers and coding agents. A link check is not a
+                  finished integration. I lead that direction. Public proof:
+                  docs-evals and code-verifier. Status: public tools. The company
+                  launch is not on this site.</span
+                >
+              </span>
+              <span class="quiet-link-list__action" aria-hidden="true">Read</span>
+            </a>
+          </li>
+          <li class="quiet-link-list__item">
+            <a class="quiet-link-list__link" href="/work/leading-the-platform">
+              <span>
+                <span class="quiet-link-list__title">Leading the platform work</span>
+                <span class="quiet-link-list__body"
+                  >Visa Acceptance Platform (VAP) is a high-trust payment
+                  platform. I lead the PM team for this path. I care about clear
+                  writing, good systems, and developer trust. Status:
+                  ongoing.</span
+                >
+              </span>
+              <span class="quiet-link-list__action" aria-hidden="true">Read</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -115,10 +188,10 @@ const description =
       <div class="home-rail">
         <header class="home-section__head">
           <p class="calm-eyebrow">Public work</p>
-          <h2 id="public-work-title">A few things people can watch or read.</h2>
+          <h2 id="public-work-title">Public pieces I can point to.</h2>
           <p>
-            Most of my work happens inside teams. When something is public, I
-            want it to be easy to find.
+            Most of my day job stays inside the team. These are the public pieces
+            I can point to.
           </p>
         </header>
         <ul class="quiet-link-list">
@@ -134,10 +207,123 @@ const description =
                   >Cybersource Developer Education Series</span
                 >
                 <span class="quiet-link-list__body"
-                  >A public video series on payments and the developer center.</span
+                  >A public video series I hosted on payments and the developer
+                  center.</span
                 >
               </span>
               <span class="quiet-link-list__action" aria-hidden="true">Open</span>
+            </a>
+          </li>
+          <li class="quiet-link-list__item">
+            <a
+              class="quiet-link-list__link"
+              href="https://github.com/Poornimajagannath/docs-evals"
+              target="_blank"
+              rel="noopener"
+            >
+              <span>
+                <span class="quiet-link-list__title">docs-evals</span>
+                <span class="quiet-link-list__body"
+                  >A public tool that tests whether generated docs can answer a
+                  question and complete a task.</span
+                >
+              </span>
+              <span class="quiet-link-list__action" aria-hidden="true">Open</span>
+            </a>
+          </li>
+          <li class="quiet-link-list__item">
+            <a
+              class="quiet-link-list__link"
+              href="https://github.com/Poornimajagannath/code-verifier"
+              target="_blank"
+              rel="noopener"
+            >
+              <span>
+                <span class="quiet-link-list__title">code-verifier</span>
+                <span class="quiet-link-list__body"
+                  >A public demo that scans and sandboxes AI-generated code before
+                  anyone relies on it.</span
+                >
+              </span>
+              <span class="quiet-link-list__action" aria-hidden="true">Open</span>
+            </a>
+          </li>
+          <li class="quiet-link-list__item">
+            <a class="quiet-link-list__link" href="/building/whats-this-in-kannada">
+              <span>
+                <span class="quiet-link-list__title">What's This in Kannada?</span>
+                <span class="quiet-link-list__body"
+                  >A small iOS app, still in progress, that I am building for my
+                  daughter.</span
+                >
+              </span>
+              <span class="quiet-link-list__action" aria-hidden="true">Read</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="home-section home-section--writing"
+      data-reveal
+      id="writing"
+      aria-labelledby="writing-title"
+    >
+      <div class="home-rail">
+        <header class="home-section__head">
+          <h2 id="writing-title">Essays</h2>
+        </header>
+        <ul class="essay-index">
+          <li class="essay-index__item">
+            <a
+              class="essay-index__link"
+              href="/writing/building-this-site-in-the-ai-era"
+            >
+              <span class="essay-index__date">July 2026</span>
+              <span>
+                <span class="essay-index__title"
+                  >How this site came together</span
+                >
+                <span class="essay-index__body"
+                  >Voice notes, Codex, Markdown, Astro, Blume, and a lot of
+                  editing.</span
+                >
+              </span>
+            </a>
+          </li>
+          <li class="essay-index__item">
+            <a
+              class="essay-index__link"
+              href="/building/whats-this-in-kannada"
+            >
+              <span class="essay-index__date">July 2026</span>
+              <span>
+                <span class="essay-index__title"
+                  >Building What's This in Kannada?</span
+                >
+                <span class="essay-index__body"
+                  >A love letter written in code. A small iOS app for my
+                  daughter.</span
+                >
+              </span>
+            </a>
+          </li>
+          <li class="essay-index__item">
+            <a
+              class="essay-index__link"
+              href="/writing/buying-back-time-with-ai-agents"
+            >
+              <span class="essay-index__date">July 2026</span>
+              <span>
+                <span class="essay-index__title"
+                  >Buying back time with AI agents</span
+                >
+                <span class="essay-index__body"
+                  >What a small Slack fleet is teaching me about time and
+                  presence.</span
+                >
+              </span>
             </a>
           </li>
         </ul>
@@ -485,72 +671,6 @@ const description =
         setActiveNote(`0`);
       });
     </script>
-
-    <section
-      class="home-section home-section--writing"
-      data-reveal
-      id="writing"
-      aria-labelledby="writing-title"
-    >
-      <div class="home-rail">
-        <header class="home-section__head">
-          <h2 id="writing-title">Essays</h2>
-        </header>
-        <ul class="essay-index">
-          <li class="essay-index__item">
-            <a
-              class="essay-index__link"
-              href="/writing/building-this-site-in-the-ai-era"
-            >
-              <span class="essay-index__date">July 2026</span>
-              <span>
-                <span class="essay-index__title"
-                  >How this site came together</span
-                >
-                <span class="essay-index__body"
-                  >Voice notes, Codex, Markdown, Astro, Blume, and a lot of
-                  editing.</span
-                >
-              </span>
-            </a>
-          </li>
-          <li class="essay-index__item">
-            <a
-              class="essay-index__link"
-              href="/building/whats-this-in-kannada"
-            >
-              <span class="essay-index__date">July 2026</span>
-              <span>
-                <span class="essay-index__title"
-                  >Building What's This in Kannada?</span
-                >
-                <span class="essay-index__body"
-                  >A love letter written in code. A small iOS app for my
-                  daughter.</span
-                >
-              </span>
-            </a>
-          </li>
-          <li class="essay-index__item">
-            <a
-              class="essay-index__link"
-              href="/writing/buying-back-time-with-ai-agents"
-            >
-              <span class="essay-index__date">July 2026</span>
-              <span>
-                <span class="essay-index__title"
-                  >Buying back time with AI agents</span
-                >
-                <span class="essay-index__body"
-                  >What a small Slack fleet is teaching me about time and
-                  presence.</span
-                >
-              </span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </section>
   </div>
 
   <script is:inline type="module">
