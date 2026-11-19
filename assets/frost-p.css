@@ -85,7 +85,7 @@
 }
 
 .soft-hero--frost .soft-hero__lead {
-  max-width: 34ch;
+  max-width: 38rem;
   color: var(--calm-muted, #5b6573);
   margin: 0;
   font-size: 17px;
@@ -180,14 +180,23 @@
     padding-bottom: clamp(1.75rem, 5vw, 2.5rem);
   }
 
+  .soft-hero--frost .soft-hero__compose {
+    align-items: start;
+  }
+
   .soft-hero--frost .soft-hero__mark-stage {
-    order: -1;
-    max-height: min(420px, 52vh);
-    width: min(100%, 420px);
+    order: 2;
+    max-height: min(200px, 26vh);
+    width: min(68%, 220px);
+    margin-top: 12px;
   }
 
   .soft-hero--frost .soft-hero__copy h1 {
-    font-size: clamp(34px, 11vw, 48px);
+    font-size: clamp(34px, 10vw, 46px);
+  }
+
+  .soft-hero--frost .soft-hero__lead {
+    font-size: 16px;
   }
 }
 

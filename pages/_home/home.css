@@ -290,6 +290,34 @@ header[data-blume-header] {
   box-sizing: border-box;
 }
 
+.experience-item__link {
+  color: var(--calm-ink);
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.95rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.experience-item__link:hover {
+  text-underline-offset: 3px;
+  text-decoration: underline;
+}
+
+.experience-item__link:focus-visible {
+  outline: 3px solid var(--calm-blue-strong);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+#selected-work,
+#writing,
+#experience,
+#public-work,
+#bookshelf {
+  scroll-margin-top: 5.5rem;
+}
+
 @media (width <= 720px) {
   .home {
     --home-gutter: 20px;
@@ -352,6 +380,7 @@ header[data-blume-header] {
 }
 
 .home-section--experience,
+.home-section--selected,
 .home-section--public-work,
 .home-section--bookshelf,
 .home-section--writing {
@@ -359,6 +388,7 @@ header[data-blume-header] {
 }
 
 .home-section--experience .home-rail,
+.home-section--selected .home-rail,
 .home-section--public-work .home-rail,
 .home-section--writing .home-rail {
   border-radius: 28px;

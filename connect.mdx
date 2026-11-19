@@ -1,14 +1,14 @@
 ---
 title: Say hello
-description: Ways to reach Poornima Jagannath on LinkedIn, plus links to the essays and side projects published on this site.
+description: How to reach Poornima Jagannath, and where to read the selected work and essays.
 ---
 
 LinkedIn is the easiest place to reach me.
 
+I lead developer experience for Visa Acceptance Platform (VAP).
+
 [Open LinkedIn](https://www.linkedin.com/in/poornima-j/)
 
-If we met at an event, this is also where I keep the things I am writing and building.
-
+- [See selected work](/work)
 - [Read the essays](/writing)
-- [See what I am building](/building)
 - [Open the LinkedIn QR page](/linkedin-qr.html)
